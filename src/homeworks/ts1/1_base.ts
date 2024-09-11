@@ -70,10 +70,6 @@ export const getNumberedArray = <T>(arr: T[]): NumberedValue<T>[] =>
   arr.map((value, number) => ({ value, number }));
 export const toStringArray = <T>(arr: NumberedValue<T>[]): string[] =>
   arr.map(({ value, number }) => `${value}_${number}`);
-// export const getNumberedArray = <T = unknown>(arr: T[]): NumberedValue<T>[] =>
-//   arr.map((value, number) => ({ value, number }));
-// export const toStringArray = <T = unknown>(arr: NumberedValue<T>[]): string[] =>
-//   arr.map(({ value, number }) => `${value}_${number}`);
 
 type Customer = {
   id: number;
