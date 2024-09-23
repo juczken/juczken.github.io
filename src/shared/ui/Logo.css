@@ -1,0 +1,15 @@
+.wrapper {
+    width: fit-content;
+    max-width: 100px;
+    height: fit-content;
+    border: 2px solid rgb(134, 133, 133);
+    margin-top: auto;
+    margin-left: 10px;
+    background: white;
+    text-align: left;
+    border-radius: 50%;
+}
+
+.caption {
+    margin: 4px;
+}
