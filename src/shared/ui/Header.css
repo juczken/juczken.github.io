@@ -1,0 +1,9 @@
+.header {
+    padding: 5px 40px;
+    background-color: #fdfdfd;
+    color: #737373;
+    position: sticky;
+    top: 0;
+    border-bottom: 1px solid #d8dbdf;
+    z-index: 1;
+}
