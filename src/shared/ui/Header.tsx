@@ -1,11 +1,11 @@
 import React from 'react';
-import './Header.css';
+import style from './Header.module.css';
 // import './Header.module.css';
 import { Logo } from './Logo';
 
 export const Header: React.FC = (): React.ReactElement => {
   return (
-    <div className='header'>
+    <div className={style.header}>
       <Logo />
     </div>
   );

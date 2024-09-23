@@ -5,11 +5,13 @@ import '../homeworks/ts1/1_base';
 import '../homeworks/ts1/3_write';
 import { createRandomOperation, createRandomProduct } from '../homeworks/ts1/3_write';
 import { getNumberedArray, toStringArray, transformCustomers } from '../homeworks/ts1/1_base';
+import { Layout } from 'src/shared/ui/Layout';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
+      <Layout/>
+      {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>-------------------------------------------------------------</p>
         <p> {JSON.stringify(getNumberedArray([1,2,3,4,5]))} </p>
@@ -37,7 +39,7 @@ function App() {
         <p> {JSON.stringify(createRandomProduct('2024-09-11T20:20'))} </p>
         <p> {JSON.stringify(createRandomProduct('2024-09-11T20:20'))} </p>
         <p>-------------------------------------------------------------</p>
-      </header>
+      </header> */}
     </div>
   );
 }
