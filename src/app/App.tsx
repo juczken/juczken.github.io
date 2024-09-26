@@ -6,11 +6,15 @@ import '../homeworks/ts1/3_write';
 import { createRandomOperation, createRandomProduct } from '../homeworks/ts1/3_write';
 import { getNumberedArray, toStringArray, transformCustomers } from '../homeworks/ts1/1_base';
 import { Layout } from 'src/shared/ui/Layout';
+import { TestCart } from 'src/test/TestCart';
+
 
 function App() {
   return (
     <div className="App">
+      {/* <TestCart/> */}
       <Layout/>
+      
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>-------------------------------------------------------------</p>

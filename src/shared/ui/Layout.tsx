@@ -13,13 +13,13 @@ export const Layout: React.FC = () => {
     <div className='layout'>
       <Header />
       {/* <ItemCard /> */}
-      {/* <Modal /> */}
+      <Modal />
       {/* <ButtonIntoCart count={2} /> */}
       {/* <ButtonIntoCart count={0} /> */}
       {/* <SimpleButton /> */}
       {/* <ItemCardFull /> */}
       {/* <ItemCardInCart /> */}
-      <Test />
+      {/* <Test /> */}
     </div>
   );
 };

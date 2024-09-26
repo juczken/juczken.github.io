@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import './test.css';
+import './TestCart.css';
 
 export const TestCart: React.FC = () => {
   return (

@@ -5,7 +5,7 @@ export const Test: React.FC = () => {
     return (
       <ul title="qwe">
         {list.map((item, index) =>
-          <li key={index.toString()}>{item}</li>
+          <li key={index.toString()} style={{textAlign:"left"}}>{item}</li>
         )}
       </ul>
     );
