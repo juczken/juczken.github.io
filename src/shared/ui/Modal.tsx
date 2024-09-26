@@ -1,5 +1,5 @@
 import React from 'react';
-import './Modal.css';
+import style from './Modal.module.css';
 // import './Modal.module.css';
 
 type ModalProps = {
@@ -9,9 +9,10 @@ type ModalProps = {
 
 export const Modal = ({ visible = false, children }: ModalProps) => {
   return (
-    <div className='modal-overlay'>
-      <div className='modal-box'>
-        {children}
+    <div className={style.modal_overlay}>
+      <div className={style.modal_box}>
+      <div className={style.close} ></div>
+      {children}
       </div>
     </div>
   );

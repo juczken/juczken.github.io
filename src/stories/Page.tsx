@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header } from './Header';
+import { Header_exmpl } from './Header_exmpl';
 import './page.css';
 
 type User = {
@@ -11,7 +11,7 @@ export const Page: React.FC = () => {
 
   return (
     <article>
-      <Header
+      <Header_exmpl
         user={user}
         onLogin={() => setUser({ name: 'Jane Doe' })}
         onLogout={() => setUser(undefined)}

@@ -1,20 +1,20 @@
 import React from 'react';
 
 import { Button } from './Button';
-import './header.css';
+import './header_exmpl.css';
 
 type User = {
   name: string;
 };
 
-interface HeaderProps {
+interface HeaderExmplProps {
   user?: User;
   onLogin: () => void;
   onLogout: () => void;
   onCreateAccount: () => void;
 }
 
-export function Header({ user, onLogin, onLogout, onCreateAccount }: HeaderProps) {
+export function Header_exmpl({ user, onLogin, onLogout, onCreateAccount }: HeaderExmplProps) {
   return (
     <header>
       <div className="storybook-header">

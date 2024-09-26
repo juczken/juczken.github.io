@@ -1,11 +1,11 @@
 import React from 'react';
-import './Logo.css';
+import style from './Logo.module.css';
 // import './Logo.module.css';
 
 export const Logo: React.FC = () => {
   return (
-    <div className="wrapper">
-      <div className='caption'>
+    <div className={style.wrapper}>
+      <div className={style.caption}>
         <span>Logo</span>
       </div>
     </div>
