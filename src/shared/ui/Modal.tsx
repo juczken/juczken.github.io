@@ -1,19 +1,19 @@
-import React from 'react';
+import React, { FC, ReactNode } from 'react';
 import style from './Modal.module.css';
 // import './Modal.module.css';
 
 type ModalProps = {
   visible?: boolean;
-  children?: JSX.Element;
+  children?: ReactNode;
 };
 
-export const Modal = ({ visible = false, children }: ModalProps) => {
-  return (
+export const Modal: FC<ModalProps> = ({ visible = false, children }) => {
+  return visible ? (
     <div className={style.modal_overlay}>
       <div className={style.modal_box}>
-      <div className={style.close} ></div>
-      {children}
+        <div className={style.close}></div>
+        {children}
       </div>
     </div>
-  );
+  ) : null;
 };
