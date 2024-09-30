@@ -1,0 +1,38 @@
+.wrapper{
+    display: flex;
+}
+
+.imageWrapper{
+    display: flex;
+}
+
+.image{
+    
+}
+
+.infoWrapper{
+    display: flex;
+    align-items: center;
+}
+
+.title{
+    
+}
+
+.cartWrapper{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.counter{
+
+}
+
+.price{
+
+}
+
+.remove{
+
+}
