@@ -14,7 +14,7 @@
 
 .price {
     text-align: right;
-
+    white-space: nowrap;
 }
 
 .description {

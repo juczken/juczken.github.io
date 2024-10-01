@@ -1,0 +1,27 @@
+.wrapper{
+    display: flex;
+    gap: 5%;
+}
+
+.namesWrapper{
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+}
+
+.name{
+
+}
+
+.categoryName{
+    font-size: 90%;
+}
+
+.description{
+
+}
+
+.amount{
+    white-space: nowrap;
+    text-align: right;
+}
