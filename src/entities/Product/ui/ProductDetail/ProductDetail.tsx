@@ -10,7 +10,7 @@ type ProductDetailProps = {
   categoryName: string;
 };
 
-export const ProductDetail: FC<ProductDetailProps> = ({ name, photos, desc, price, categoryName }) => {
+const ProductDetail: FC<ProductDetailProps> = ({ name, photos, desc, price, categoryName }) => {
   return (
     <>
       <div className={style.wrapper}>
@@ -36,3 +36,5 @@ export const ProductDetail: FC<ProductDetailProps> = ({ name, photos, desc, pric
     </>
   );
 };
+
+export default ProductDetail

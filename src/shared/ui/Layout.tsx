@@ -1,8 +1,8 @@
 
 import React from 'react';
-import { Header } from './Header';
-import { Modal } from './Modal';
-import { ProductItem } from 'src/entities/Product/ui/ProductItem/ProductItem';
+import Header from './Header';
+import Modal from './Modal';
+import ProductItem from 'src/entities/Product/ui/ProductItem/ProductItem';
 import { Test } from './Test';
 
 export const Layout: React.FC = () => {

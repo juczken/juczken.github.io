@@ -3,11 +3,10 @@ import cn from 'clsx';
 import style from './ProductItem.module.css';
 import CartButton from '../../../../features/Cart/ui/CartButton/CartButton';
 import cutStringHelper from '../../../../shared/lib/cutStringHelper';
-// import CartButton from 'src/features/Cart/ui/CartButton/CartButton';
 
 type ProductItemProps = Pick<Product, 'price' | 'photo' | 'name' | 'desc'>;
 
-export const ProductItem: FC<ProductItemProps> = ({ price, photo, name, desc }) => {
+const ProductItem: FC<ProductItemProps> = ({ price, photo, name, desc }) => {
   return (
     <div className={cn(style.wrapper)}>
       <div>
@@ -28,3 +27,5 @@ export const ProductItem: FC<ProductItemProps> = ({ price, photo, name, desc }) 
     </div>
   );
 };
+
+export default ProductItem
