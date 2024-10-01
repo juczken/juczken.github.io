@@ -9,7 +9,7 @@ const meta: Meta<typeof CartItem> = {
     },
     argTypes: {
         count: { control: 'number', },
-        name: { control: 'text,' },
+        name: { control: 'text', },
         price: { control: 'number', },
         photo: { control: 'text', },
     },

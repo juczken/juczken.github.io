@@ -11,7 +11,7 @@ const meta: Meta<typeof OperationItem> = {
     amount: { control: 'number', },
     categoryName: { control: 'text', },
     desc: { control: 'text', },
-    name: { control: 'text,' },
+    name: { control: 'text', },
   },
 };
 
@@ -43,4 +43,3 @@ export const CutDescriptionOperationItem: Story = {
     name: 'Lorem ipsum',
   }
 };
-

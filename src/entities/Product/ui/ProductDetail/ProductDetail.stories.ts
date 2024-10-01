@@ -10,7 +10,7 @@ const meta: Meta<typeof ProductDetail> = {
     argTypes: {
         categoryName: { control: 'text', },
         desc: { control: 'text', },
-        name: { control: 'text,' },
+        name: { control: 'text', },
         price: { control: 'number', },
         photos: { control: 'array', },
     },

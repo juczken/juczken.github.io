@@ -9,7 +9,7 @@ const meta: Meta<typeof ProductItem> = {
   },
   argTypes: {
     desc: { control: 'text', },
-    name: { control: 'text,' },
+    name: { control: 'text', },
     price: { control: 'number', },
     photo: { control: 'text', },
   },
