@@ -30,7 +30,7 @@ export const ProductDetail: FC<ProductDetailProps> = ({ name, photos, desc, pric
           <div className={style.button}>
             <CartButton count={0} />
           </div>
-          <div className={style.price}>{price}</div>
+          <div className={style.price}>{price} руб.</div>
         </div>
       </div>
     </>

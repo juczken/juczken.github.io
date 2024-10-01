@@ -1,6 +1,7 @@
 import React, { FC } from "react"
 import style from './CartItem.module.css'
 import { Counter } from "../../../../shared/ui/Counter"
+import Button from "../../../../shared/ui/Button"
 
 type CartItemProps = Pick<Product, 'price' | 'photo' | 'name'> & {
     count: number,
@@ -19,11 +20,11 @@ export const CartItem: FC<CartItemProps> = ({ name, count, photo, price}) => {
                 </div>
                 <div className={style.cartWrapper}>
                     <div className={style.counter}>
-                        <Counter count={1} />
+                        <Counter count={count} />
                     </div>
                     <div className={style.price}>{count * price} руб.</div>
-                    <div className={style.remove}>
-                        <button>Удалить</button>
+                    <div className={style.removeWrapper}>
+                        <Button className={style.remove} caption="Удалить" />
                     </div>
                 </div>
             </div>

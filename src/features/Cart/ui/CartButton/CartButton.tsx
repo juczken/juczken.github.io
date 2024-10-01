@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import cn from 'clsx'
 import style from './CartButton.module.css'
 import { Counter } from "../../../../shared/ui/Counter";
+import Button from "../../../../shared/ui/Button";
 
 type CartButtonProps = {
     count: number,
@@ -11,7 +12,7 @@ const CartButton: FC<CartButtonProps> = ({ count }) => {
     return (
         <div className={cn(style.wrapper)} >
             {count === 0
-                ? <button className={cn(style.wrapper, style.button)} >В корзину</button>
+                ? <Button className={cn(style.wrapper, style.button)} caption="В корзину" />
                 : <Counter count={count} min={0} />
             }
         </div>
