@@ -15,7 +15,7 @@ const OperationItem: FC<OperationItemProps> = ({ amount, categoryName, name, des
                 <div className={cn(style.name)}>{name}</div>
                 <div className={cn(style.categoryName)}>{categoryName}</div>
             </div>
-            <div className={cn(style.desc)}>{cutStringHelper(desc,100)}</div>
+            <div className={cn(style.description)}>{cutStringHelper(desc,100)}</div>
             <div className={cn(style.amount)}>{amount} руб.</div>
         </div>
     )
