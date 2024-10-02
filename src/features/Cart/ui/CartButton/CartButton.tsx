@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import cn from 'clsx'
 import style from './CartButton.module.css'
-import { Counter } from "../../../../shared/ui/Counter";
+import Counter from "../../../../shared/ui/Counter";
 import Button from "../../../../shared/ui/Button";
 
 type CartButtonProps = {

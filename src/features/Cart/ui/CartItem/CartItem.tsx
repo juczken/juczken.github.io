@@ -1,13 +1,13 @@
 import React, { FC } from "react"
 import style from './CartItem.module.css'
-import { Counter } from "../../../../shared/ui/Counter"
+import Counter from "../../../../shared/ui/Counter"
 import Button from "../../../../shared/ui/Button"
 
 type CartItemProps = Pick<Product, 'price' | 'photo' | 'name'> & {
     count: number,
 }
 
-export const CartItem: FC<CartItemProps> = ({ name, count, photo, price}) => {
+const CartItem: FC<CartItemProps> = ({ name, count, photo, price}) => {
 
     return (
         <>
@@ -31,3 +31,5 @@ export const CartItem: FC<CartItemProps> = ({ name, count, photo, price}) => {
         </>
     )
 }
+
+export default CartItem

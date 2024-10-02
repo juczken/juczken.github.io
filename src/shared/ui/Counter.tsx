@@ -8,10 +8,12 @@ type CounterProps = {
     max?: number,
 }
 
-export const Counter: FC<CounterProps> = ({count, min, max }) => {
+const Counter: FC<CounterProps> = ({count, min, max }) => {
     return (<div className={cn(style.wrapper)}>
         <button className={cn(style.counter)} >-</button>
         <input className={cn(style.input)} type="number" value={count} />
         <button className={cn(style.counter)}>+</button>
     </div>)
 }
+
+export default Counter

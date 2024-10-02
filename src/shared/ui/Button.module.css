@@ -10,7 +10,7 @@
     height: 100%;
     border-style: none;
     color: #000000;
-    background-color: #ffd700;
+    /* background-color: #ffd700; */
 }
 
 .button:active {
