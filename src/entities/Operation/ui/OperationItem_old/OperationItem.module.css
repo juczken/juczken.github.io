@@ -1,0 +1,29 @@
+.wrapper{
+    display: flex;
+    gap: 5%;
+}
+
+.namesWrapper{
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+    border: 1px  solid #000;
+}
+
+.name{
+    font-weight: bolder;
+}
+
+.categoryName{
+    font-size: 90%;
+}
+
+.description{
+    border: 1px  solid #000;
+}
+
+.amount{
+    white-space: nowrap;
+    text-align: right;
+    border: 1px  solid #000;
+}

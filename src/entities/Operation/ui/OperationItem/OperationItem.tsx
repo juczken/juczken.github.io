@@ -1,24 +1,30 @@
-import React, { FC } from "react"
+import React from 'react';
 import cn from 'clsx'
-import cutStringHelper from "../../../../shared/lib/cutStringHelper"
-import style from './OperationItem.module.css'
+import styles from './OperationItem.module.css';
+import cutStringHelper from '../../../../shared/lib/cutStringHelper';
 
-type OperationItemProps = Pick<Operation, 'name' | 'amount' | 'desc'> &{
-    categoryName:string,
+interface OperationItemProps {
+  name: string;
+  categoryName: string;
+  desc?: string;
+  amount: number;
 }
 
-const OperationItem: FC<OperationItemProps> = ({ amount, categoryName, name, desc }) => {
+const OperationItem: React.FC<OperationItemProps> = ({ name, categoryName: category, desc, amount}) => {
+  return (
+    <div className={cn(styles.wrapper)}>
+      <div className={cn(styles.infoWrapper)}>
+        <span className={cn(styles.name)}>{name}</span>
+        <span className={cn(styles.category)}>{category}</span>
+      </div>
+      <div className={cn(styles.description)}>
+        {cutStringHelper(desc,100)}
+      </div>
+      <div className={cn(styles.total)} style={{ color: amount >= 0 ? 'green' : 'red' }}>
+        {amount.toFixed(2)}&nbsp;руб.
+      </div>
+    </div>
+  );
+};
 
-    return (
-        <div className={cn(style.wrapper)}>
-            <div className={cn(style.namesWrapper)}>
-                <div className={cn(style.name)}>{name}</div>
-                <div className={cn(style.categoryName)}>{categoryName}</div>
-            </div>
-            <div className={cn(style.description)}>{cutStringHelper(desc,100)}</div>
-            <div className={cn(style.amount)}>{amount} руб.</div>
-        </div>
-    )
-}
-
-export default OperationItem
+export default OperationItem;
