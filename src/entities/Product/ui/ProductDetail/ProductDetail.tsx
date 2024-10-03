@@ -1,14 +1,11 @@
 import React, { FC } from 'react';
 import CartButton from '../../../../features/Cart/ui/CartButton/CartButton';
-import style from './ProductDetail.module.css'
+import style from './ProductDetail.module.css';
 
-type ProductDetailProps = {
-  name: string;
-  photos: string[];
-  desc?: string;
-  price: number;
-  categoryName: string;
-};
+type ProductDetailProps = Pick<
+  Product& MutatePropertyToArray<Product> & AddPropertyPrefix<Category, 'category'>,
+  'categoryName' | 'desc' | 'name' | 'photos' | 'price'
+>;
 
 const ProductDetail: FC<ProductDetailProps> = ({ name, photos, desc, price, categoryName }) => {
   return (
@@ -18,7 +15,9 @@ const ProductDetail: FC<ProductDetailProps> = ({ name, photos, desc, price, cate
           {photos.length === 0 ? (
             <img className={style.image} src="undefined.png" alt={`Product ${name}`} />
           ) : (
-            photos.map((photo, index) => <img className={style.image} src={photo} alt={`Product ${name}`} key={index} />)
+            photos.map((photo, index) => (
+              <img className={style.image} src={photo} alt={`Product ${name}`} key={index} />
+            ))
           )}
         </div>
         <div className={style.infoWrapper}>
@@ -37,4 +36,4 @@ const ProductDetail: FC<ProductDetailProps> = ({ name, photos, desc, price, cate
   );
 };
 
-export default ProductDetail
+export default ProductDetail;
