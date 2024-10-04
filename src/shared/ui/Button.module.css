@@ -9,11 +9,19 @@
     width: 100%;
     height: 100%;
     border-style: none;
-    color: #000000;
     /* background-color: #ffd700; */
 }
 
-.button:active {
+.button_disable{
+    background-color: light-dark(rgba(239, 239, 239, 0.3), rgba(19, 1, 1, 0.3));
+    color: light-dark(rgba(16, 16, 16, 0.3), rgba(255, 255, 255, 0.3));
+    border-color: light-dark(rgba(118, 118, 118, 0.3), rgba(195, 195, 195, 0.3));}
+
+.button_active{
+    color: #000000;
+}
+
+.button_active:active {
     background: #e5e5e5;
     outline: none;
 }

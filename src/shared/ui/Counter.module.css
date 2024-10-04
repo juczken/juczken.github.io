@@ -10,7 +10,7 @@
     border-style: none;
 }
 
-.counter:active {
+.counter_active:active {
     background: #e5e5e5;
     outline: none;
 }

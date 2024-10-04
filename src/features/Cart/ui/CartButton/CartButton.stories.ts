@@ -15,11 +15,13 @@ type Story = StoryObj<typeof meta>;
 export const WithoutProductCartButton:Story={
   args:{
     count:0,
+    disabled:false,
   }
 }
 
 export const WithProductCartButton:Story={
   args:{
     count:1,
+    disabled:false,
   }
 }

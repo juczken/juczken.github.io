@@ -1,23 +1,25 @@
-import React, { FC } from "react";
-import cn from 'clsx'
-import style from './CartButton.module.css'
-import Counter from "../../../../shared/ui/Counter";
-import Button from "../../../../shared/ui/Button";
+import React, { FC } from 'react';
+import cn from 'clsx';
+import style from './CartButton.module.css';
+import Counter from '../../../../shared/ui/Counter';
+import Button from '../../../../shared/ui/Button';
 
 type CartButtonProps = {
-    count: number,
-}
+  count: number;
+  disabled?: boolean;
+};
 
-const CartButton: FC<CartButtonProps> = ({ count }) => {
-    return (
-        <div className={cn(style.wrapper)} >
-            {count === 0
-                ? <Button className={cn(style.wrapper, style.button)} caption="В корзину" />
-                : <Counter count={count} min={0} />
-            }
-        </div>
-    );
-}
+const CartButton: FC<CartButtonProps> = ({ count, disabled }) => {
+  return (
+    <div className={cn(style.wrapper)}>
+      {count === 0 ? (
+        <Button className={cn(style.wrapper, style.button)} caption="В корзину" disabled={disabled} />
+      ) : (
+        <Counter count={count} min={0} disabled={disabled} />
+      )}
+    </div>
+  );
+};
 // const CartButton: FC<CartButtonProps> = ({ count }) => {
 //     return (
 //         <div className="cart_container">
@@ -29,4 +31,4 @@ const CartButton: FC<CartButtonProps> = ({ count }) => {
 //             </div>
 //         </div>)
 // }
-export default CartButton
+export default CartButton;
