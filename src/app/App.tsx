@@ -1,50 +1,115 @@
 import React from 'react';
+import cn from 'clsx'
 import logo from './logo.svg';
-import './App.css';
-import '../homeworks/ts1/1_base';
-import '../homeworks/ts1/3_write';
-import { createRandomOperation, createRandomProduct } from '../homeworks/ts1/3_write';
-import { getNumberedArray, toStringArray, transformCustomers } from '../homeworks/ts1/1_base';
-import Layout from 'src/shared/ui/Layout';
-import { TestCart } from 'src/test/TestCart';
-
+import style from './App.css';
+// import './App.css';
+// import { ThemeProvider } from '../shared/providers/ThemeProvider/ThemeProvider';
+import { ThemeProvider } from '../shared/contexts/TempContext';
+import Layout from '../shared/ui/Layout/Layout';
+import ProductDetail from '../entities/Product/ui/ProductDetail/ProductDetail';
+import ProductItem from '../entities/Product/ui/ProductItem/ProductItem';
+import CartItem from '../features/Cart/ui/CartItem/CartItem';
+import OperationItem from '../entities/Operation/ui/OperationItem/OperationItem';
+import OperationDetail from '../entities/Operation/ui/OperationDetail/OperationDetail';
+import CartButton from '../features/Cart/ui/CartButton/CartButton';
+import Counter from '../shared/ui/Counter/Counter';
+import Button from '../shared/ui/Button/Button';
 
 function App() {
   return (
-    <div className="App">
-      {/* <TestCart/> */}
-      <Layout/>
-      
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>-------------------------------------------------------------</p>
-        <p> {JSON.stringify(getNumberedArray([1,2,3,4,5]))} </p>
-        <p> {JSON.stringify(toStringArray([{"value":1,"number":0},{"value":2,"number":1},{"value":3,"number":2},{"value":4,"number":3},{"value":5,"number":4}]))} </p>
-        <p> {JSON.stringify(toStringArray(getNumberedArray([1,2,3,4,5])))} </p>
-        <p> {JSON.stringify(getNumberedArray(['1','2','3','4','5']))} </p>
-        <p> {JSON.stringify(toStringArray([{"value":'1',"number":0},{"value":'2',"number":1},{"value":'3',"number":2},{"value":'4',"number":3},{"value":'5',"number":4}]))} </p>
-        <p> {JSON.stringify(toStringArray(getNumberedArray(['1','2','3','4','5'])))} </p>
-        <p>-------------------------------------------------------------</p>
-        <p> {JSON.stringify(transformCustomers([{age:11,id:1,isSubscribed:true,name:'1'},{age:22,id:2,isSubscribed:true,name:'2'},{age:33,id:3,isSubscribed:false,name:'3'}]))} </p>
-        <p>-------------------------------------------------------------</p>
-        <p> {JSON.stringify(createRandomOperation('2024-09-11T20:20'))} </p>
-        <p> {JSON.stringify(createRandomOperation('2024-09-11T20:20'))} </p>
-        <p> {JSON.stringify(createRandomOperation('2024-09-11T20:20'))} </p>
-        <p> {JSON.stringify(createRandomOperation('2024-09-11T20:20'))} </p>
-        <p> {JSON.stringify(createRandomOperation('2024-09-11T20:20'))} </p>
-        <p> {JSON.stringify(createRandomOperation('2024-09-11T20:20'))} </p>
-        <p> {JSON.stringify(createRandomOperation('2024-09-11T20:20'))} </p>
-        <p>-------------------------------------------------------------</p>
-        <p> {JSON.stringify(createRandomProduct('2024-09-11T20:20'))} </p>
-        <p> {JSON.stringify(createRandomProduct('2024-09-11T20:20'))} </p>
-        <p> {JSON.stringify(createRandomProduct('2024-09-11T20:20'))} </p>
-        <p> {JSON.stringify(createRandomProduct('2024-09-11T20:20'))} </p>
-        <p> {JSON.stringify(createRandomProduct('2024-09-11T20:20'))} </p>
-        <p> {JSON.stringify(createRandomProduct('2024-09-11T20:20'))} </p>
-        <p> {JSON.stringify(createRandomProduct('2024-09-11T20:20'))} </p>
-        <p>-------------------------------------------------------------</p>
-      </header> */}
-    </div>
+    <ThemeProvider>
+      <div className={cn(style.App, style.D)}>
+        {/* <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <p>
+            Привет, я Семён, инженер, backend-C#-developer.
+          </p>
+          <p>
+            На работе понадобился фронт, а я не успел шагнуть назад, по этому теперь с вами. Позаботьтесь обо мне:)
+          </p>
+          <p>
+            К глубокому моему сожалению, вот вообще совсем ничего не знаю о frontend,  потому присоединюсь к вечеру странных вопросов.
+          </p>
+          <p>telegram: @juczken</p>
+        </header> */}
+        <Layout>
+          {/* {'Lorem ipsum dolor sit, amet consectetur. Sem viverra magna fusce mus torquent metus dictumst suspendisse lectus quis, laoreet natoque at tempus turpis orci maecenas egestas gravida sociis morbi, scelerisque tortor iaculis ante nunc a malesuada facilisis aptent. Pharetra integer senectus malesuada ridiculus sollicitudin fusce cum commodo purus rhoncus suscipit, diam nisi suspendisse dictumst litora quisque tellus duis vitae porta, sed cras scelerisque id praesent platea nam mollis phasellus non. Fusce molestie fringilla scelerisque ullamcorper justo auctor accumsan, quisque enim nibh vehicula aliquam. Lorem ipsum dolor sit, amet consectetur. Sem viverra magna fusce mus torquent metus dictumst suspendisse lectus quis, laoreet natoque at tempus turpis orci maecenas egestas gravida sociis morbi, scelerisque tortor iaculis ante nunc a malesuada facilisis aptent. Pharetra integer senectus malesuada ridiculus sollicitudin fusce cum commodo purus rhoncus suscipit, diam nisi suspendisse dictumst litora quisque tellus duis vitae porta, sed cras scelerisque id praesent platea nam mollis phasellus non. Fusce molestie fringilla scelerisque ullamcorper justo auctor accumsan, quisque enim nibh vehicula aliquam. Lorem ipsum dolor sit, amet consectetur. Sem viverra magna fusce mus torquent metus dictumst suspendisse lectus quis, laoreet natoque at tempus turpis orci maecenas egestas gravida sociis morbi, scelerisque tortor iaculis ante nunc a malesuada facilisis aptent. Pharetra integer senectus malesuada ridiculus sollicitudin fusce cum commodo purus rhoncus suscipit, diam nisi suspendisse dictumst litora quisque tellus duis vitae porta, sed cras scelerisque id praesent platea nam mollis phasellus non. Fusce molestie fringilla scelerisque ullamcorper justo auctor accumsan, quisque enim nibh vehicula aliquam. Lorem ipsum dolor sit, amet consectetur. Sem viverra magna fusce mus torquent metus dictumst suspendisse lectus quis, laoreet natoque at tempus turpis orci maecenas egestas gravida sociis morbi, scelerisque tortor iaculis ante nunc a malesuada facilisis aptent. Pharetra integer senectus malesuada ridiculus sollicitudin fusce cum commodo purus rhoncus suscipit, diam nisi suspendisse dictumst litora quisque tellus duis vitae porta, sed cras scelerisque id praesent platea nam mollis phasellus non. Fusce molestie fringilla scelerisque ullamcorper justo auctor accumsan, quisque enim nibh vehicula aliquam. Lorem ipsum dolor sit, amet consectetur. Sem viverra magna fusce mus torquent metus dictumst suspendisse lectus quis, laoreet natoque at tempus turpis orci maecenas egestas gravida sociis morbi, scelerisque tortor iaculis ante nunc a malesuada facilisis aptent. Pharetra integer senectus malesuada ridiculus sollicitudin fusce cum commodo purus rhoncus suscipit, diam nisi suspendisse dictumst litora quisque tellus duis vitae porta, sed cras scelerisque id praesent platea nam mollis phasellus non. Fusce molestie fringilla scelerisque ullamcorper justo auctor accumsan, quisque enim nibh vehicula aliquam. Lorem ipsum dolor sit, amet consectetur. Sem viverra magna fusce mus torquent metus dictumst suspendisse lectus quis, laoreet natoque at tempus turpis orci maecenas egestas gravida sociis morbi, scelerisque tortor iaculis ante nunc a malesuada facilisis aptent. Pharetra integer senectus malesuada ridiculus sollicitudin fusce cum commodo purus rhoncus suscipit, diam nisi suspendisse dictumst litora quisque tellus duis vitae porta, sed cras scelerisque id praesent platea nam mollis phasellus non. Fusce molestie fringilla scelerisque ullamcorper justo auctor accumsan, quisque enim nibh vehicula aliquam. Lorem ipsum dolor sit, amet consectetur. Sem viverra magna fusce mus torquent metus dictumst suspendisse lectus quis, laoreet natoque at tempus turpis orci maecenas egestas gravida sociis morbi, scelerisque tortor iaculis ante nunc a malesuada facilisis aptent. Pharetra integer senectus malesuada ridiculus sollicitudin fusce cum commodo purus rhoncus suscipit, diam nisi suspendisse dictumst litora quisque tellus duis vitae porta, sed cras scelerisque id praesent platea nam mollis phasellus non. Fusce molestie fringilla scelerisque ullamcorper justo auctor accumsan, quisque enim nibh vehicula aliquam. Lorem ipsum dolor sit, amet consectetur. Sem viverra magna fusce mus torquent metus dictumst suspendisse lectus quis, laoreet natoque at tempus turpis orci maecenas egestas gravida sociis morbi, scelerisque tortor iaculis ante nunc a malesuada facilisis aptent. Pharetra integer senectus malesuada ridiculus sollicitudin fusce cum commodo purus rhoncus suscipit, diam nisi suspendisse dictumst litora quisque tellus duis vitae porta, sed cras scelerisque id praesent platea nam mollis phasellus non. Fusce molestie fringilla scelerisque ullamcorper justo auctor accumsan, quisque enim nibh vehicula aliquam. Lorem ipsum dolor sit, amet consectetur. Sem viverra magna fusce mus torquent metus dictumst suspendisse lectus quis, laoreet natoque at tempus turpis orci maecenas egestas gravida sociis morbi, scelerisque tortor iaculis ante nunc a malesuada facilisis aptent. Pharetra integer senectus malesuada ridiculus sollicitudin fusce cum commodo purus rhoncus suscipit, diam nisi suspendisse dictumst litora quisque tellus duis vitae porta, sed cras scelerisque id praesent platea nam mollis phasellus non. Fusce molestie fringilla scelerisque ullamcorper justo auctor accumsan, quisque enim nibh vehicula aliquam.'} */}
+          <>
+            <ProductDetail
+              categoryName='Cat I'
+              name='Best PRODUCT'
+              photos={['http://via.placeholder.com/500.png?text=Lorem+ipsum+1', 'http://via.placeholder.com/500.png?text=Lorem+ipsum+2', 'http://via.placeholder.com/500.png?text=Lorem+ipsum+3', 'http://via.placeholder.com/500.png?text=Lorem+ipsum+4', 'http://via.placeholder.com/500.png?text=Lorem+ipsum+5']}
+              price={19.95}
+              desc='Lorem ipsum dolor sit, amet consectetur. Sem viverra magna fusce mus torquent metus dictumst suspendisse lectus quis, laoreet natoque at tempus turpis orci maecenas egestas gravida sociis morbi, scelerisque tortor iaculis ante nunc a malesuada facilisis aptent. Pharetra integer senectus malesuada ridiculus sollicitudin fusce cum commodo purus rhoncus suscipit, diam nisi suspendisse dictumst litora quisque tellus duis vitae porta, sed cras scelerisque id praesent platea nam mollis phasellus non. Fusce molestie fringilla scelerisque ullamcorper justo auctor accumsan, quisque enim nibh vehicula aliquam. Lorem ipsum dolor sit, amet consectetur. Sem viverra magna fusce mus torquent metus dictumst suspendisse lectus quis, laoreet natoque at tempus turpis orci maecenas egestas gravida sociis morbi, scelerisque tortor iaculis ante nunc a malesuada facilisis aptent. Pharetra integer senectus malesuada ridiculus sollicitudin fusce cum commodo purus rhoncus suscipit, diam nisi suspendisse dictumst litora quisque tellus duis vitae porta, sed cras scelerisque id praesent platea nam mollis phasellus non. Fusce molestie fringilla scelerisque ullamcorper justo auctor accumsan, quisque enim nibh vehicula aliquam. Lorem ipsum dolor sit, amet consectetur. Sem viverra magna fusce mus torquent metus dictumst suspendisse lectus quis, laoreet natoque at tempus turpis orci maecenas egestas gravida sociis morbi, scelerisque tortor iaculis ante nunc a malesuada facilisis aptent. Pharetra integer senectus malesuada ridiculus sollicitudin fusce cum commodo purus rhoncus suscipit, diam nisi suspendisse dictumst litora quisque tellus duis vitae porta, sed cras scelerisque id praesent platea nam mollis phasellus non. Fusce molestie fringilla scelerisque ullamcorper justo auctor accumsan, quisque enim nibh vehicula aliquam. Lorem ipsum dolor sit, amet consectetur. Sem viverra magna fusce mus torquent metus dictumst suspendisse lectus quis, laoreet natoque at tempus turpis orci maecenas egestas gravida sociis morbi, scelerisque tortor iaculis ante nunc a malesuada facilisis aptent. Pharetra integer senectus malesuada ridiculus sollicitudin fusce cum commodo purus rhoncus suscipit, diam nisi suspendisse dictumst litora quisque tellus duis vitae porta, sed cras scelerisque id praesent platea nam mollis phasellus non. Fusce molestie fringilla scelerisque ullamcorper justo auctor accumsan, quisque enim nibh vehicula aliquam. Lorem ipsum dolor sit, amet consectetur. Sem viverra magna fusce mus torquent metus dictumst suspendisse lectus quis, laoreet natoque at tempus turpis orci maecenas egestas gravida sociis morbi, scelerisque tortor iaculis ante nunc a malesuada facilisis aptent. Pharetra integer senectus malesuada ridiculus sollicitudin fusce cum commodo purus rhoncus suscipit, diam nisi suspendisse dictumst litora quisque tellus duis vitae porta, sed cras scelerisque id praesent platea nam mollis phasellus non. Fusce molestie fringilla scelerisque ullamcorper justo auctor accumsan, quisque enim nibh vehicula aliquam. Lorem ipsum dolor sit, amet consectetur. Sem viverra magna fusce mus torquent metus dictumst suspendisse lectus quis, laoreet natoque at tempus turpis orci maecenas egestas gravida sociis morbi, scelerisque tortor iaculis ante nunc a malesuada facilisis aptent. Pharetra integer senectus malesuada ridiculus sollicitudin fusce cum commodo purus rhoncus suscipit, diam nisi suspendisse dictumst litora quisque tellus duis vitae porta, sed cras scelerisque id praesent platea nam mollis phasellus non. Fusce molestie fringilla scelerisque ullamcorper justo auctor accumsan, quisque enim nibh vehicula aliquam. Lorem ipsum dolor sit, amet consectetur. Sem viverra magna fusce mus torquent metus dictumst suspendisse lectus quis, laoreet natoque at tempus turpis orci maecenas egestas gravida sociis morbi, scelerisque tortor iaculis ante nunc a malesuada facilisis aptent. Pharetra integer senectus malesuada ridiculus sollicitudin fusce cum commodo purus rhoncus suscipit, diam nisi suspendisse dictumst litora quisque tellus duis vitae porta, sed cras scelerisque id praesent platea nam mollis phasellus non. Fusce molestie fringilla scelerisque ullamcorper justo auctor accumsan, quisque enim nibh vehicula aliquam. Lorem ipsum dolor sit, amet consectetur. Sem viverra magna fusce mus torquent metus dictumst suspendisse lectus quis, laoreet natoque at tempus turpis orci maecenas egestas gravida sociis morbi, scelerisque tortor iaculis ante nunc a malesuada facilisis aptent. Pharetra integer senectus malesuada ridiculus sollicitudin fusce cum commodo purus rhoncus suscipit, diam nisi suspendisse dictumst litora quisque tellus duis vitae porta, sed cras scelerisque id praesent platea nam mollis phasellus non. Fusce molestie fringilla scelerisque ullamcorper justo auctor accumsan, quisque enim nibh vehicula aliquam. Lorem ipsum dolor sit, amet consectetur. Sem viverra magna fusce mus torquent metus dictumst suspendisse lectus quis, laoreet natoque at tempus turpis orci maecenas egestas gravida sociis morbi, scelerisque tortor iaculis ante nunc a malesuada facilisis aptent. Pharetra integer senectus malesuada ridiculus sollicitudin fusce cum commodo purus rhoncus suscipit, diam nisi suspendisse dictumst litora quisque tellus duis vitae porta, sed cras scelerisque id praesent platea nam mollis phasellus non. Fusce molestie fringilla scelerisque ullamcorper justo auctor accumsan, quisque enim nibh vehicula aliquam.'
+            />
+            <ProductItem
+              name='Best PRODUCT'
+              photo='http://via.placeholder.com/500.png?text=Lorem+ipsum+1'
+              price={19.95}
+            />
+            <CartItem
+              name='Best PRODUCT'
+              photo='http://via.placeholder.com/500.png?text=Lorem+ipsum+1'
+              price={19.95}
+              count={5}
+            />
+            <OperationItem
+            amount={19.95}
+            categoryName='Category Name'
+            name='Simple operation'
+            desc='Lorem ipsum dolor sit, amet consectetur. Sem viverra magna fusce mus torquent metus dictumst suspendisse lectus quis, laoreet natoque at tempus turpis orci maecenas egestas gravida sociis morbi, scelerisque tortor iaculis ante nunc a malesuada facilisis aptent. Pharetra integer senectus malesuada ridiculus sollicitudin fusce cum commodo purus rhoncus suscipit, diam nisi suspendisse dictumst litora quisque tellus duis vitae porta, sed cras scelerisque id praesent platea nam mollis phasellus non. Fusce molestie fringilla scelerisque ullamcorper justo auctor accumsan, quisque enim nibh vehicula aliquam. Lorem ipsum dolor sit, amet consectetur. Sem viverra magna fusce mus torquent metus dictumst suspendisse lectus quis, laoreet natoque at tempus turpis orci maecenas egestas gravida sociis morbi, scelerisque tortor iaculis ante nunc a malesuada facilisis aptent. Pharetra integer senectus malesuada ridiculus sollicitudin fusce cum commodo purus rhoncus suscipit, diam nisi suspendisse dictumst litora quisque tellus duis vitae porta, sed cras scelerisque id praesent platea nam mollis phasellus non. Fusce molestie fringilla scelerisque ullamcorper justo auctor accumsan, quisque enim nibh vehicula aliquam. Lorem ipsum dolor sit, amet consectetur. Sem viverra magna fusce mus torquent metus dictumst suspendisse lectus quis, laoreet natoque at tempus turpis orci maecenas egestas gravida sociis morbi, scelerisque tortor iaculis ante nunc a malesuada facilisis aptent. Pharetra integer senectus malesuada ridiculus sollicitudin fusce cum commodo purus rhoncus suscipit, diam nisi suspendisse dictumst litora quisque tellus duis vitae porta, sed cras scelerisque id praesent platea nam mollis phasellus non. Fusce molestie fringilla scelerisque ullamcorper justo auctor accumsan, quisque enim nibh vehicula aliquam. Lorem ipsum dolor sit, amet consectetur. Sem viverra magna fusce mus torquent metus dictumst suspendisse lectus quis, laoreet natoque at tempus turpis orci maecenas egestas gravida sociis morbi, scelerisque tortor iaculis ante nunc a malesuada facilisis aptent. Pharetra integer senectus malesuada ridiculus sollicitudin fusce cum commodo purus rhoncus suscipit, diam nisi suspendisse dictumst litora quisque tellus duis vitae porta, sed cras scelerisque id praesent platea nam mollis phasellus non. Fusce molestie fringilla scelerisque ullamcorper justo auctor accumsan, quisque enim nibh vehicula aliquam. Lorem ipsum dolor sit, amet consectetur. Sem viverra magna fusce mus torquent metus dictumst suspendisse lectus quis, laoreet natoque at tempus turpis orci maecenas egestas gravida sociis morbi, scelerisque tortor iaculis ante nunc a malesuada facilisis aptent. Pharetra integer senectus malesuada ridiculus sollicitudin fusce cum commodo purus rhoncus suscipit, diam nisi suspendisse dictumst litora quisque tellus duis vitae porta, sed cras scelerisque id praesent platea nam mollis phasellus non. Fusce molestie fringilla scelerisque ullamcorper justo auctor accumsan, quisque enim nibh vehicula aliquam. Lorem ipsum dolor sit, amet consectetur. Sem viverra magna fusce mus torquent metus dictumst suspendisse lectus quis, laoreet natoque at tempus turpis orci maecenas egestas gravida sociis morbi, scelerisque tortor iaculis ante nunc a malesuada facilisis aptent. Pharetra integer senectus malesuada ridiculus sollicitudin fusce cum commodo purus rhoncus suscipit, diam nisi suspendisse dictumst litora quisque tellus duis vitae porta, sed cras scelerisque id praesent platea nam mollis phasellus non. Fusce molestie fringilla scelerisque ullamcorper justo auctor accumsan, quisque enim nibh vehicula aliquam. Lorem ipsum dolor sit, amet consectetur. Sem viverra magna fusce mus torquent metus dictumst suspendisse lectus quis, laoreet natoque at tempus turpis orci maecenas egestas gravida sociis morbi, scelerisque tortor iaculis ante nunc a malesuada facilisis aptent. Pharetra integer senectus malesuada ridiculus sollicitudin fusce cum commodo purus rhoncus suscipit, diam nisi suspendisse dictumst litora quisque tellus duis vitae porta, sed cras scelerisque id praesent platea nam mollis phasellus non. Fusce molestie fringilla scelerisque ullamcorper justo auctor accumsan, quisque enim nibh vehicula aliquam. Lorem ipsum dolor sit, amet consectetur. Sem viverra magna fusce mus torquent metus dictumst suspendisse lectus quis, laoreet natoque at tempus turpis orci maecenas egestas gravida sociis morbi, scelerisque tortor iaculis ante nunc a malesuada facilisis aptent. Pharetra integer senectus malesuada ridiculus sollicitudin fusce cum commodo purus rhoncus suscipit, diam nisi suspendisse dictumst litora quisque tellus duis vitae porta, sed cras scelerisque id praesent platea nam mollis phasellus non. Fusce molestie fringilla scelerisque ullamcorper justo auctor accumsan, quisque enim nibh vehicula aliquam. Lorem ipsum dolor sit, amet consectetur. Sem viverra magna fusce mus torquent metus dictumst suspendisse lectus quis, laoreet natoque at tempus turpis orci maecenas egestas gravida sociis morbi, scelerisque tortor iaculis ante nunc a malesuada facilisis aptent. Pharetra integer senectus malesuada ridiculus sollicitudin fusce cum commodo purus rhoncus suscipit, diam nisi suspendisse dictumst litora quisque tellus duis vitae porta, sed cras scelerisque id praesent platea nam mollis phasellus non. Fusce molestie fringilla scelerisque ullamcorper justo auctor accumsan, quisque enim nibh vehicula aliquam.'
+            />
+            <OperationDetail
+            amount={19.95}
+            categoryName='Category Name'
+            createdAt='01.01.2024 10:00'
+            desc='Lorem ipsum dolor sit, amet consectetur. Sem viverra magna fusce mus torquent metus dictumst suspendisse lectus quis, laoreet natoque at tempus turpis orci maecenas egestas gravida sociis morbi, scelerisque tortor iaculis ante nunc a malesuada facilisis aptent. Pharetra integer senectus malesuada ridiculus sollicitudin fusce cum commodo purus rhoncus suscipit, diam nisi suspendisse dictumst litora quisque tellus duis vitae porta, sed cras scelerisque id praesent platea nam mollis phasellus non. Fusce molestie fringilla scelerisque ullamcorper justo auctor accumsan, quisque enim nibh vehicula aliquam. Lorem ipsum dolor sit, amet consectetur. Sem viverra magna fusce mus torquent metus dictumst suspendisse lectus quis, laoreet natoque at tempus turpis orci maecenas egestas gravida sociis morbi, scelerisque tortor iaculis ante nunc a malesuada facilisis aptent. Pharetra integer senectus malesuada ridiculus sollicitudin fusce cum commodo purus rhoncus suscipit, diam nisi suspendisse dictumst litora quisque tellus duis vitae porta, sed cras scelerisque id praesent platea nam mollis phasellus non. Fusce molestie fringilla scelerisque ullamcorper justo auctor accumsan, quisque enim nibh vehicula aliquam. Lorem ipsum dolor sit, amet consectetur. Sem viverra magna fusce mus torquent metus dictumst suspendisse lectus quis, laoreet natoque at tempus turpis orci maecenas egestas gravida sociis morbi, scelerisque tortor iaculis ante nunc a malesuada facilisis aptent. Pharetra integer senectus malesuada ridiculus sollicitudin fusce cum commodo purus rhoncus suscipit, diam nisi suspendisse dictumst litora quisque tellus duis vitae porta, sed cras scelerisque id praesent platea nam mollis phasellus non. Fusce molestie fringilla scelerisque ullamcorper justo auctor accumsan, quisque enim nibh vehicula aliquam. Lorem ipsum dolor sit, amet consectetur. Sem viverra magna fusce mus torquent metus dictumst suspendisse lectus quis, laoreet natoque at tempus turpis orci maecenas egestas gravida sociis morbi, scelerisque tortor iaculis ante nunc a malesuada facilisis aptent. Pharetra integer senectus malesuada ridiculus sollicitudin fusce cum commodo purus rhoncus suscipit, diam nisi suspendisse dictumst litora quisque tellus duis vitae porta, sed cras scelerisque id praesent platea nam mollis phasellus non. Fusce molestie fringilla scelerisque ullamcorper justo auctor accumsan, quisque enim nibh vehicula aliquam. Lorem ipsum dolor sit, amet consectetur. Sem viverra magna fusce mus torquent metus dictumst suspendisse lectus quis, laoreet natoque at tempus turpis orci maecenas egestas gravida sociis morbi, scelerisque tortor iaculis ante nunc a malesuada facilisis aptent. Pharetra integer senectus malesuada ridiculus sollicitudin fusce cum commodo purus rhoncus suscipit, diam nisi suspendisse dictumst litora quisque tellus duis vitae porta, sed cras scelerisque id praesent platea nam mollis phasellus non. Fusce molestie fringilla scelerisque ullamcorper justo auctor accumsan, quisque enim nibh vehicula aliquam. Lorem ipsum dolor sit, amet consectetur. Sem viverra magna fusce mus torquent metus dictumst suspendisse lectus quis, laoreet natoque at tempus turpis orci maecenas egestas gravida sociis morbi, scelerisque tortor iaculis ante nunc a malesuada facilisis aptent. Pharetra integer senectus malesuada ridiculus sollicitudin fusce cum commodo purus rhoncus suscipit, diam nisi suspendisse dictumst litora quisque tellus duis vitae porta, sed cras scelerisque id praesent platea nam mollis phasellus non. Fusce molestie fringilla scelerisque ullamcorper justo auctor accumsan, quisque enim nibh vehicula aliquam. Lorem ipsum dolor sit, amet consectetur. Sem viverra magna fusce mus torquent metus dictumst suspendisse lectus quis, laoreet natoque at tempus turpis orci maecenas egestas gravida sociis morbi, scelerisque tortor iaculis ante nunc a malesuada facilisis aptent. Pharetra integer senectus malesuada ridiculus sollicitudin fusce cum commodo purus rhoncus suscipit, diam nisi suspendisse dictumst litora quisque tellus duis vitae porta, sed cras scelerisque id praesent platea nam mollis phasellus non. Fusce molestie fringilla scelerisque ullamcorper justo auctor accumsan, quisque enim nibh vehicula aliquam. Lorem ipsum dolor sit, amet consectetur. Sem viverra magna fusce mus torquent metus dictumst suspendisse lectus quis, laoreet natoque at tempus turpis orci maecenas egestas gravida sociis morbi, scelerisque tortor iaculis ante nunc a malesuada facilisis aptent. Pharetra integer senectus malesuada ridiculus sollicitudin fusce cum commodo purus rhoncus suscipit, diam nisi suspendisse dictumst litora quisque tellus duis vitae porta, sed cras scelerisque id praesent platea nam mollis phasellus non. Fusce molestie fringilla scelerisque ullamcorper justo auctor accumsan, quisque enim nibh vehicula aliquam. Lorem ipsum dolor sit, amet consectetur. Sem viverra magna fusce mus torquent metus dictumst suspendisse lectus quis, laoreet natoque at tempus turpis orci maecenas egestas gravida sociis morbi, scelerisque tortor iaculis ante nunc a malesuada facilisis aptent. Pharetra integer senectus malesuada ridiculus sollicitudin fusce cum commodo purus rhoncus suscipit, diam nisi suspendisse dictumst litora quisque tellus duis vitae porta, sed cras scelerisque id praesent platea nam mollis phasellus non. Fusce molestie fringilla scelerisque ullamcorper justo auctor accumsan, quisque enim nibh vehicula aliquam.'
+            name='Simple operation'
+            />
+            <CartButton
+            count={0}
+            />
+            <CartButton
+            count={1}
+            />
+            <CartButton
+            count={0}
+            disabled={false}
+            />
+            <CartButton
+            count={1}
+            disabled={false}
+            />
+            <Counter
+            count={1}
+            />
+            <Counter
+            count={1}
+            disabled={false}
+            />
+            <Button
+            lable='button'
+            className=''
+            />
+            <Button
+            lable='button'
+            className=''
+            disabled
+            />
+            <Button
+            lable='button'
+            className=''
+            disabled={true}
+            />
+            <Button
+            lable='button'
+            className=''
+            disabled={false}
+            />
+          </>
+        </Layout>
+      </div>
+    </ThemeProvider>
   );
 }
 

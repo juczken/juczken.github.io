@@ -2,10 +2,14 @@ import React, { FC } from 'react';
 import CartButton from '../../../../features/Cart/ui/CartButton/CartButton';
 import style from './ProductDetail.module.css';
 
-type ProductDetailProps = Pick<
-  Product& MutatePropertyToArray<Product> & AddPropertyPrefix<Category, 'category'>,
-  'categoryName' | 'desc' | 'name' | 'photos' | 'price'
->;
+// type ProductDetailProps = Pick<
+//   Product& MutatePropertyToArray<Product> & AddPropertyPrefix<Category, 'category'>,
+//   'categoryName' | 'desc' | 'name' | 'photos' | 'price'
+// >;
+type ProductDetailProps = Pick<Product, 'desc' | 'name' | 'price'> & {
+  photos: Product['photo'][],
+  categoryName: Category['name'],
+};
 
 const ProductDetail: FC<ProductDetailProps> = ({ name, photos, desc, price, categoryName }) => {
   return (
@@ -29,7 +33,7 @@ const ProductDetail: FC<ProductDetailProps> = ({ name, photos, desc, price, cate
           <div className={style.button}>
             <CartButton count={0} />
           </div>
-          <div className={style.price}>{price} руб.</div>
+          <div className={style.price}>{price.toFixed(2)}&nbsp;руб.</div>
         </div>
       </div>
     </>

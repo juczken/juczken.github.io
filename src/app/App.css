@@ -32,7 +32,30 @@
     from {
         transform: rotate(0deg);
     }
+
     to {
         transform: rotate(360deg);
     }
+}
+
+/* Светлая тема */
+:root {
+    --background-color: #ffffff;
+    --text-color: #000000;
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+
+    --disable-background-color:#EFEFEF4C;
+    --disable-color:#1616164C;
+}
+
+/* Тёмная тема */
+[data-theme="dark"] {
+    --background-color: #333333;
+    --text-color: #f0f0f0;
+    --primary-color: #17a2b8;
+    --secondary-color: #adb5bd;
+
+    --disable-background-color:#1901014C;
+    --disable-color:#FFFFFF4C;
 }

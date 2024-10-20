@@ -16,10 +16,10 @@ const ProductItem: FC<ProductItemProps> = ({ price, photo, name, desc }) => {
         <h3>{name}</h3>
       </div>
       <div className={cn(style.price)}>
-        <span>{price} руб.</span>
+        <span>{price.toFixed(2)}&nbsp;руб.</span>
       </div>
       <div className={cn(style.description)}>
-        <p>{cutStringHelper(desc,100)}</p>
+        <p>{cutStringHelper(desc, 100)}</p>
       </div>
       <div className={cn(style.button)}>
         <CartButton count={0} />

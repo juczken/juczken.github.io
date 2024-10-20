@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import cn from 'clsx';
 import style from './CartButton.module.css';
-import Counter from '../../../../shared/ui/Counter';
-import Button from '../../../../shared/ui/Button';
+import Counter from '../../../../shared/ui/Counter/Counter';
+import Button from '../../../../shared/ui/Button/Button';
 
 type CartButtonProps = {
   count: number;
@@ -13,7 +13,8 @@ const CartButton: FC<CartButtonProps> = ({ count, disabled }) => {
   return (
     <div className={cn(style.wrapper)}>
       {count === 0 ? (
-        <Button className={cn(style.wrapper, style.button)} caption="В корзину" disabled={disabled} />
+        <Button className={cn(style.button)} lable="В корзину" disabled={disabled} />
+        // <Button className={cn(style.wrapper, style.button)} caption="В корзину" disabled={disabled} />
       ) : (
         <Counter count={count} min={0} disabled={disabled} />
       )}

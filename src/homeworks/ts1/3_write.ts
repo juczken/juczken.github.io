@@ -11,8 +11,15 @@
  * - id (строка)
  * - name (строка)
  * - photo (строка, необязательно)
- *
- * Продукт (Product) содержит
+ **/
+
+type Category = {
+  id: string;
+  name: string;
+  photo?: string;
+};
+
+/** Продукт (Product) содержит
  * - id (строка)
  * - name (строка)
  * - photo (строка)
@@ -21,8 +28,20 @@
  * - oldPrice (число, необязательно)
  * - price (число)
  * - category (Категория)
- *
- * Операция (Operation) может быть либо тратой (Cost), либо доходом (Profit)
+ **/
+
+type Product = {
+  id: string;
+  name: string;
+  photo: string;
+  desc?: string;
+  createdAt: string;
+  category: Category;
+  price: number;
+  oldPrice?: number;
+};
+
+/** Операция (Operation) может быть либо тратой (Cost), либо доходом (Profit)
  *
  * Трата (Cost) содержит
  * - id (строка)
@@ -43,35 +62,6 @@
  * - type ('Profit')
  * */
 
-/**
- * Создает случайный продукт (Product).
- * Принимает дату создания (строка)
- * */
-// export const createRandomProduct = (createdAt: string) => {};
-
-/**
- * Создает случайную операцию (Operation).
- * Принимает дату создания (строка)
- * */
-// export const createRandomOperation = (createdAt: string) => {};
-
-type Category = {
-  id: string;
-  name: string;
-  photo?: string;
-};
-
-type Product = {
-  id: string;
-  name: string;
-  photo: string;
-  desc?: string;
-  createdAt: string;
-  category: Category;
-  price: number;
-  oldPrice?: number;
-};
-
 type BaseOperation = {
   id: string;
   name: string;
@@ -91,6 +81,10 @@ type Profit = BaseOperation & {
 
 type Operation = Cost | Profit;
 
+/**
+ * Создает случайный продукт (Product).
+ * Принимает дату создания (строка)
+ * */
 export const createRandomProduct = (createdAt: string): Product => {
   const id = getRandomId();
   const category = getRandomCategory();
@@ -108,6 +102,10 @@ export const createRandomProduct = (createdAt: string): Product => {
   };
 };
 
+/**
+ * Создает случайную операцию (Operation).
+ * Принимает дату создания (строка)
+ * */
 export const createRandomOperation = (createdAt: string): Operation => {
   const id = getRandomId();
   const category = getRandomCategory();
@@ -153,7 +151,7 @@ const getRandomCategory = (): Category => {
     },
     {
       id: '5',
-      name: 'Вроде никуда, а жаль',
+      name: 'Вроде некуда, а жаль',
     },
   ];
 

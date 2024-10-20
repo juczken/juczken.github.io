@@ -66,8 +66,7 @@ export const hex2rgb = (color: string): ColorRGB => {
 
 type NumberedValue<T> = { value: T; number: number };
 
-export const getNumberedArray = <T>(arr: T[]): NumberedValue<T>[] =>
-  arr.map((value, number) => ({ value, number }));
+export const getNumberedArray = <T>(arr: T[]): NumberedValue<T>[] => arr.map((value, number) => ({ value, number }));
 export const toStringArray = <T>(arr: NumberedValue<T>[]): string[] =>
   arr.map(({ value, number }) => `${value}_${number}`);
 

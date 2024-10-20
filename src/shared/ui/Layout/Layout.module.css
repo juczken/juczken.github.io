@@ -1,0 +1,14 @@
+/* .Dark{
+    color: #f0f0f0;
+    background-color: #333333;
+}
+
+.Light{
+    color: #333333;
+    background-color: #f0f0f0;
+} */
+
+.Layout{
+    color: var(--text-color);
+    background-color: var(--background-color);
+}
