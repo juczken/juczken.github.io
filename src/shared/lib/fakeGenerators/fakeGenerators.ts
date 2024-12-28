@@ -56,31 +56,35 @@ const getRandom = (min: number, max: number, digits: number): number => {
   return Math.round((min + Math.random() * (max - min)) * 10 ** digits) / 10 ** digits;
 };
 
-const getRandomCategory = (): Category => {
-  const categories: Category[] = [
-    {
-      id: '1',
-      name: 'Прям вот очень нужное',
-    },
-    {
-      id: '2',
-      name: 'Не так, что бы нужное',
-      photo: 'store/photos/categories/2.jpeg',
-    },
-    {
-      id: '3',
-      name: 'Совсем выбрось',
-      photo: 'store/photos/categories/3.jpeg',
-    },
-    {
-      id: '4',
-      name: 'Необходимое',
-    },
-    {
-      id: '5',
-      name: 'Вроде некуда, а жаль',
-    },
-  ];
+const categories: Category[] = [
+  {
+    id: '1',
+    name: 'Прям вот очень нужное',
+  },
+  {
+    id: '2',
+    name: 'Не так, что бы нужное',
+    photo: 'store/photos/categories/2.jpeg',
+  },
+  {
+    id: '3',
+    name: 'Совсем выбрось',
+    photo: 'store/photos/categories/3.jpeg',
+  },
+  {
+    id: '4',
+    name: 'Необходимое',
+  },
+  {
+    id: '5',
+    name: 'Вроде некуда, а жаль',
+  },
+];
 
+const getRandomCategory = (): Category => {
   return categories[Math.trunc(Math.random() * categories.length)];
+};
+
+export const getCategories = (): Category[] => {
+  return categories;
 };

@@ -7,6 +7,7 @@ type ButtonProps = {
   className: string;
   onClick?: () => void;
   disabled?: boolean;
+  type?: 'button' | 'reset' | 'submit';
 };
 
 const Button: FC<ButtonProps> = ({
@@ -16,6 +17,7 @@ const Button: FC<ButtonProps> = ({
   onClick = () => {
     /* do nothing */
   },
+  type = 'button',
 }) => {
   return (
     <div className={style.wrapper}>
@@ -27,7 +29,8 @@ const Button: FC<ButtonProps> = ({
           [style.button]: true,
         })}
         disabled={disabled}
-        onClick={onClick}
+        type={type}
+        onClick={type === 'button' ? onClick : undefined}
       >
         {lable}
       </button>
