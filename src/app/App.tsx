@@ -6,6 +6,11 @@ import './localization';
 import { profileMenuItems, authMenuItems, shopMenuItems, adminMenuItems } from 'src/shared/ui/Layout/menuItems';
 import { Route, Routes } from 'react-router-dom';
 import { WithAuthenticationState } from '../shared/hocs/withAuthenticationState';
+import ThemeProvider from '../shared/providers/ThemeProvider/ThemeProvider';
+import { LanguageProvider } from '../shared/providers/LanguageProvider/LanguageProvider';
+import AuthProvider from '../shared/providers/AuthProvider/AuthProvider';
+import ProductsProvider from '../shared/providers/ProductsProvider/ProductsProvider';
+import CartProvider from '../shared/providers/CartProvider/CartProvider';
 
 function App() {
   const [menuItems] = useState([...shopMenuItems, ...profileMenuItems, ...adminMenuItems, ...authMenuItems]);
@@ -49,13 +54,23 @@ function App() {
   };
 
   return (
-    <div className={cn(style.App)}>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          {generateRoutes(menuItems)}
-        </Route>
-      </Routes>
-    </div>
+    <ThemeProvider>
+      <LanguageProvider>
+        <AuthProvider>
+          <ProductsProvider>
+            <CartProvider>
+              <div className={cn(style.App)}>
+                <Routes>
+                  <Route path="/" element={<Layout />}>
+                    {generateRoutes(menuItems)}
+                  </Route>
+                </Routes>
+              </div>
+            </CartProvider>
+          </ProductsProvider>
+        </AuthProvider>
+      </LanguageProvider>
+    </ThemeProvider>
   );
 }
 
