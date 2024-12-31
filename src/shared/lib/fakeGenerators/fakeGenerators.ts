@@ -8,7 +8,9 @@ export const createRandomProduct = (createdAt: string): Product => {
   return {
     id: id,
     name: `Продукт ${id}`,
-    photo: `store/photos/products/${id}.jpeg`,
+    photo: `https://dummyimage.com/500x500/cccccc/000000&text=Lorem+ipsum+${id}`,
+    // photo: `https://via.placeholder.com/500.png?text=Lorem+ipsum+${id}`,
+    // photo: `store/photos/products/${id}.jpeg`,
     createdAt: createdAt,
     category: category,
     price: price,
@@ -87,4 +89,8 @@ const getRandomCategory = (): Category => {
 
 export const getCategories = (): Category[] => {
   return categories;
+};
+
+export const getAuth = (): string => {
+  return uuidv4();
 };

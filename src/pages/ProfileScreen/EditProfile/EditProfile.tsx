@@ -7,7 +7,7 @@ import Button from '../../../shared/ui/Button/Button';
 
 export type EditProfileFields = {
   userName: string;
-  about: string;
+  about: string | null;
 };
 
 type EditProfileProps = {

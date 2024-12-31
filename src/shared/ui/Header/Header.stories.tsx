@@ -6,7 +6,7 @@ import { LanguageProvider } from '../../providers/LanguageProvider/LanguageProvi
 import '../../../app/localization';
 
 const meta: Meta<typeof Header> = {
-  title: 'Shared/Header',
+  title: 'Features/Header',
   component: Header,
   tags: ['autodocs'],
   parameters: {

@@ -17,11 +17,13 @@ type ProductEditFormFields = {
 
 type ProductEditFormProps = {
   onSubmit: (data: ProductEditFormFields) => void;
+  defaultValues?: ProductEditFormFields;
+  categories?: string[];
 };
 
-const categories = ['Electronics', 'Books', 'Clothing', 'Food', 'Toys'];
+// const categories = ['Electronics', 'Books', 'Clothing', 'Food', 'Toys'];
 
-const ProductEditForm: React.FC<ProductEditFormProps> = ({ onSubmit }) => {
+const ProductEditForm: React.FC<ProductEditFormProps> = ({ onSubmit, defaultValues, categories }) => {
   const { t } = useTranslation();
   const {
     register,
@@ -29,14 +31,7 @@ const ProductEditForm: React.FC<ProductEditFormProps> = ({ onSubmit }) => {
     control,
     formState: { errors },
   } = useForm({
-    defaultValues: {
-      name: '',
-      description: undefined,
-      price: 0,
-      oldPrice: undefined,
-      category: '',
-      photos: [{ url: '' }],
-    },
+    defaultValues,
   });
 
   const { fields, append, remove } = useFieldArray({

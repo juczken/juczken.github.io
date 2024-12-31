@@ -6,9 +6,12 @@ import { useTranslation } from 'react-i18next';
 
 type CartItemProps = Pick<Product, 'price' | 'photo' | 'name'> & {
   count: number;
+  onIncrement: () => void;
+  onDecrement: () => void;
+  onInputChange: (value: number) => void;
 };
 
-const CartItem: FC<CartItemProps> = ({ name, count, photo, price }) => {
+const CartItem: FC<CartItemProps> = ({ name, count, photo, price, onIncrement, onDecrement, onInputChange }) => {
   const { t } = useTranslation();
 
   return (
@@ -22,12 +25,25 @@ const CartItem: FC<CartItemProps> = ({ name, count, photo, price }) => {
         </div>
         <div className={style.cartWrapper}>
           <div className={style.counter}>
-            <Counter count={count} />
+            <Counter
+              count={count}
+              min={1}
+              onIncrement={onIncrement}
+              onDecrement={onDecrement}
+              onInputChange={onInputChange}
+            />
           </div>
           <div className={style.price}>{t('product.price', { price: count * price })}</div>
           {/* <div className={style.price}>{(count * price).toFixed(2)}&nbsp;руб.</div> */}
           <div className={style.removeWrapper}>
-            <Button className={style.remove} lable={t('CartItem.button')} />
+            <Button
+              className={style.remove}
+              lable={t('CartItem.button')}
+              onClick={() => {
+                onInputChange(0);
+              }}
+              disabled={count === 0}
+            />
           </div>
         </div>
       </div>
