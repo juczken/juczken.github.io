@@ -106,5 +106,34 @@
       "categoryRequired": "Category is required"
     },
     "button": "Save"
+  },
+  "AuthScreen": {
+    "signOut": "Sign Out"
+  },
+  "Routes": {
+    "Profile": {
+      "label": "Profile"
+    },
+    "Auth": {
+      "label": "Authorization",
+      "SignIn": {
+        "label": "Sign In"
+      },
+      "SignUp": {
+        "label": "Sign Up"
+      },
+      "SignOut": {
+        "label": "Sign Out"
+      }
+    },
+    "Catalog": {
+      "label": "Catalog"
+    },
+    "Cart": {
+      "label": "Cart"
+    },
+    "Products": {
+      "label": "Products"
+    }
   }
 }

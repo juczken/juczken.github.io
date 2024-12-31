@@ -106,5 +106,34 @@
       "categoryRequired": "Категория обязательна"
     },
     "button": "Сохранить"
+  },
+  "AuthScreen": {
+    "signOut": "Выйти"
+  },
+  "Routes": {
+    "Profile": {
+      "label": "Профиль"
+    },
+    "Auth": {
+      "label": "Авторизация",
+      "SignIn": {
+        "label": "Вход"
+      },
+      "SignUp": {
+        "label": "Регистрация"
+      },
+      "SignOut": {
+        "label": "Выход"
+      }
+    },
+    "Catalog": {
+      "label": "Каталог"
+    },
+    "Cart": {
+      "label": "Корзина"
+    },
+    "Products": {
+      "label": "Товары"
+    }
   }
 }

@@ -4,16 +4,18 @@ import ChangePassword, { ChangePasswordFields } from './ChangePassword/ChangePas
 import cn from 'clsx';
 import styles from './ProfileScreen.module.css';
 import { useTranslation } from 'react-i18next';
+import useAuth from '../../shared/contexts/AuthContext/AuthContext';
 
 const ProfileScreen: React.FC = () => {
   const { t } = useTranslation();
+  const { handleChangePassword, handleUpdateProfile } = useAuth();
 
   const handleEditProfileSubmit = (data: EditProfileFields) => {
-    console.log('onEditProfileSubmit', data);
+    handleUpdateProfile({ name: data.userName, about: data.about });
   };
 
   const handleChangePasswordSubmit = (data: ChangePasswordFields) => {
-    console.log('onChangePasswordSubmit', data);
+    handleChangePassword({ password: data.oldPassword, newPassword: data.newPassword });
   };
 
   return (

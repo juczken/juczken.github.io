@@ -1,36 +1,56 @@
 import React from 'react';
 import { NavItem } from '../NavigationBar/NavigationBar';
+import AuthScreen, { AuthAction } from '../../../pages/AuthScreen/AuthScreen';
+import ProfileScreen from '../../../pages/ProfileScreen/ProfileScreen';
+import CatalogScreen from '../../../pages/CatalogScreen/CatalogScreen';
+import { AuthenticationState } from '../../hocs/withAuthenticationState';
+import ProductsEditScreen from '../../../pages/ProductsScreen/ProductsEditScreen';
+import CartScreen from '../../../pages/CartScreen/CartScreen';
 
-const Home = () => <div>Home Page</div>;
-const About = () => <div>About Page</div>;
-const Services = () => <div>Services Page</div>;
-const WebDevelopment = () => <div>Web Development Page</div>;
-const MobileApps = () => <div>Mobile Apps Page</div>;
-const Contact = () => <div>Contact Page</div>;
-const ReactDevelopment = () => <div>React Development Page</div>;
-const VanillaJSDevelopment = () => <div>Vanilla JS Development Page</div>;
+export const shopMenuItems: NavItem[] = [
+  { label: 'Routes.Catalog.label', path: '/catalog', element: <CatalogScreen /> },
+  { label: 'Routes.Cart.label', path: '/cart', element: <CartScreen /> },
+];
 
-export const menuItems: NavItem[] = [
-  { label: 'Home', path: '/', element: <Home /> },
+export const adminMenuItems: NavItem[] = [
+  { label: 'Routes.Products.label', path: '/products', element: <ProductsEditScreen /> },
+];
+
+export const authMenuItems: NavItem[] = [
   {
-    label: 'Services',
-    // path: null,
-    // element: null,
-    // path: "/services",
-    // element: <Services />,
+    label: 'Routes.Auth.label',
     dropdown: [
       {
-        label: 'Web Development',
-        path: '/services/web',
-        element: <WebDevelopment />,
-        dropdown: [
-          { label: 'React Development', path: '/services/web/react', element: <ReactDevelopment /> },
-          { label: 'Vanilla JS Development', path: '/services/web/js', element: <VanillaJSDevelopment /> },
-        ],
+        label: 'Routes.Auth.SignIn.label',
+        authenticationState: AuthenticationState.Unauthenticated,
+        path: '/auth/SignIn',
+        element: <AuthScreen authAction={AuthAction.SignIn} />,
       },
-      { label: 'Mobile Apps', path: '/services/mobile', element: <MobileApps /> },
+      {
+        label: 'Routes.Auth.SignUp.label',
+        authenticationState: AuthenticationState.Unauthenticated,
+        path: '/auth/SignUp',
+        element: <AuthScreen authAction={AuthAction.SignUp} />,
+      },
+      {
+        label: 'Routes.Auth.SignOut.label',
+        authenticationState: AuthenticationState.Authenticated,
+        path: '/auth/SignOut',
+        element: <AuthScreen authAction={AuthAction.SignOut} />,
+      },
     ],
   },
-  { label: 'About', path: '/about', element: <About /> },
-  { label: 'Contact', path: '/contact', element: <Contact /> },
+];
+
+export const profileMenuItems: NavItem[] = [
+  {
+    label: 'Routes.Profile.label',
+    authenticationState: AuthenticationState.Authenticated,
+    path: '/profile',
+    element: <ProfileScreen />,
+  },
+];
+
+export const testMenuItems: NavItem[] = [
+  // { label: 'Routes.test.label', path: '/test', element: <Modal visible={true} setVisible={() => { }} >{Array.from({ length: 100 }).map((_, index) => <div key={index}>{`text ${index}`}</div>)}</Modal> },
 ];
