@@ -4,7 +4,9 @@ import SignUp, { SignUpFields } from './SignUp/SignUp';
 import cn from 'clsx';
 import styles from './AuthScreen.module.css';
 import { useTranslation } from 'react-i18next';
-import useAuth from '../../shared/contexts/AuthContext/AuthContext';
+import { AppDispatch } from '../../app/store/store';
+import { useDispatch } from 'react-redux';
+import { signout, signin, signup } from '../../features/Auth/model/thunks';
 
 export enum AuthAction {
   SignIn = 'signIn',
@@ -18,17 +20,17 @@ type AuthScreenProps = {
 
 const AuthScreen: React.FC<AuthScreenProps> = ({ authAction }) => {
   const { t } = useTranslation();
-  const { handleSignIn, handleSignOut, handleSignUp } = useAuth();
+  const dispatch: AppDispatch = useDispatch();
 
   const handleSignInSubmit = (data: SignInFields) => {
-    handleSignIn({ email: data.email, password: data.password });
+    dispatch(signin({ email: data.email, password: data.password }));
   };
   const handleSignUpSubmit = (data: SignUpFields) => {
-    handleSignUp({ email: data.email, password: data.password });
+    dispatch(signup({ email: data.email, password: data.password }));
   };
 
   if (authAction === AuthAction.SignOut) {
-    handleSignOut();
+    dispatch(signout());
     return <div>{t('AuthScreen.signOut')}</div>;
   }
 

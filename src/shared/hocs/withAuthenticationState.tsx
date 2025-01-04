@@ -1,6 +1,7 @@
 import React, { ComponentType, FC } from 'react';
-import useAuth from '../contexts/AuthContext/AuthContext';
 import { Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../app/store/store';
 
 export enum AuthenticationState {
   Authenticated = 'Authenticated',
@@ -21,7 +22,9 @@ export const WithAuthenticationState: FC<WithAuthenticationStateProps> = ({
   authenticationState,
   routes,
 }) => {
-  const { isAuthenticated } = useAuth();
+  const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
+  console.log('isAuthenticated', isAuthenticated);
+  console.log('AuthenticationState', authenticationState);
 
   return (
     <>
@@ -42,7 +45,7 @@ const withAuthenticationState = <P extends object>(
   WrappedComponent: ComponentType<P>
 ): ComponentType<P & withAuthenticationStateProps> | null => {
   const HOC: React.FC<P & withAuthenticationStateProps> = (props) => {
-    const { isAuthenticated } = useAuth();
+    const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
     const { authenticationState, ...restProps } = props;
 
     return (

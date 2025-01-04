@@ -11,6 +11,8 @@ import { LanguageProvider } from '../shared/providers/LanguageProvider/LanguageP
 import AuthProvider from '../shared/providers/AuthProvider/AuthProvider';
 import ProductsProvider from '../shared/providers/ProductsProvider/ProductsProvider';
 import CartProvider from '../shared/providers/CartProvider/CartProvider';
+import { Provider } from 'react-redux';
+import { store } from './store/store';
 
 function App() {
   const [menuItems] = useState([...shopMenuItems, ...profileMenuItems, ...adminMenuItems, ...authMenuItems]);
@@ -54,23 +56,25 @@ function App() {
   };
 
   return (
-    <ThemeProvider>
-      <LanguageProvider>
-        <AuthProvider>
-          <ProductsProvider>
-            <CartProvider>
-              <div className={cn(style.App)}>
-                <Routes>
-                  <Route path="/" element={<Layout />}>
-                    {generateRoutes(menuItems)}
-                  </Route>
-                </Routes>
-              </div>
-            </CartProvider>
-          </ProductsProvider>
-        </AuthProvider>
-      </LanguageProvider>
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider>
+        <LanguageProvider>
+          <AuthProvider>
+            <ProductsProvider>
+              <CartProvider>
+                <div className={cn(style.App)}>
+                  <Routes>
+                    <Route path="/" element={<Layout />}>
+                      {generateRoutes(menuItems)}
+                    </Route>
+                  </Routes>
+                </div>
+              </CartProvider>
+            </ProductsProvider>
+          </AuthProvider>
+        </LanguageProvider>
+      </ThemeProvider>
+    </Provider>
   );
 }
 
