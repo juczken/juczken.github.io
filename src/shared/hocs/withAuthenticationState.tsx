@@ -23,8 +23,6 @@ export const WithAuthenticationState: FC<WithAuthenticationStateProps> = ({
   routes,
 }) => {
   const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
-  console.log('isAuthenticated', isAuthenticated);
-  console.log('AuthenticationState', authenticationState);
 
   return (
     <>

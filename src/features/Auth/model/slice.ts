@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { signin, signup, signout, verifyToken } from './thunks';
-import { getTokenFromLocalStorage } from './localStorage';
+import { signin, signup, signout } from './thunks';
+import { getTokenFromLocalStorage } from '../../../shared/lib/localStorage';
 
 interface AuthState {
-  user: { id: number; email: string; name: string; about: string; isAdmin: boolean } | null;
+  // user: { id: number; email: string; name: string; about: string; isAdmin: boolean } | null;
   token: string | null;
   isAuthenticated: boolean;
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
@@ -11,7 +11,7 @@ interface AuthState {
 }
 
 const initialState: AuthState = {
-  user: null,
+  // user: null,
   token: getTokenFromLocalStorage(),
   isAuthenticated: false,
   status: 'idle',
@@ -31,7 +31,7 @@ const authSlice = createSlice({
       })
       .addCase(signin.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.user = action.payload.user;
+        // state.user = action.payload.user;
         state.token = action.payload.token;
         state.isAuthenticated = true;
       })
@@ -47,7 +47,7 @@ const authSlice = createSlice({
       })
       .addCase(signup.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.user = action.payload.user;
+        // state.user = action.payload.user;
         state.token = action.payload.token;
         state.isAuthenticated = true;
       })
@@ -57,16 +57,10 @@ const authSlice = createSlice({
         state.isAuthenticated = false;
       })
       .addCase(signout.fulfilled, (state) => {
-        state.user = null;
+        // state.user = null;
         state.token = null;
         state.isAuthenticated = false;
         state.status = 'idle';
-      })
-      .addCase(verifyToken.fulfilled, (state, action) => {
-        state.user = action.payload.user;
-        state.token = action.payload.token;
-        state.isAuthenticated = true;
-        state.status = 'succeeded';
       });
   },
 });

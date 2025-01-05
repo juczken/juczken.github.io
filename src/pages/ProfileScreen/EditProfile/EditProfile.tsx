@@ -12,14 +12,15 @@ export type EditProfileFields = {
 
 type EditProfileProps = {
   onSubmit: (data: EditProfileFields) => void;
+  defaultValues?: EditProfileFields;
 };
 
-const EditProfile: React.FC<EditProfileProps> = ({ onSubmit }) => {
+const EditProfile: React.FC<EditProfileProps> = ({ onSubmit, defaultValues }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({ defaultValues });
   const { t } = useTranslation();
 
   return (

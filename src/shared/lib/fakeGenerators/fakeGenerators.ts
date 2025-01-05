@@ -104,10 +104,11 @@ import fakeDatabase from './fakeDatabase';
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const fetch = async (url: string, options: RequestInit) => {
-  await delay(500);
+  await delay(5000);
 
-  const { method, body } = options;
+  const { method, body, headers } = options;
   const data = body ? JSON.parse(body.toString()) : ({} as any);
+  const token = new Headers(headers).get('Authorization')?.replace('Bearer ', '');
 
   if (url.endsWith('/signin') && method === 'POST') {
     const user = [...fakeDatabase.users.values()].find((u) => u.email === data.email && u.password === data.password);
@@ -169,24 +170,69 @@ export const fetch = async (url: string, options: RequestInit) => {
     return { ok: true, status: 200, json: async () => ({} as any) };
   }
 
-  if (url.endsWith('/verify') && method === 'POST') {
-    const token = data.token;
-    if (!fakeDatabase.tokens.has(token)) {
-      return { ok: false, status: 401, json: async () => ({ message: 'Invalid token' }) };
+  // Handle GET profile
+  if (url.startsWith('/api/users/') && method === 'GET') {
+    if (token && !fakeDatabase.tokens.has(token)) {
+      // return new Response(null, { status: 401, statusText: 'Unauthorized' });
+      return { ok: false, status: 401, json: async () => ({ message: 'Unauthorized' }) };
     }
-
-    const user = [...fakeDatabase.users.values()].find((u) => u.token === token);
+    const email = url.split('/').pop();
+    const user = [...fakeDatabase.users.values()].find((u) => u.email === email);
     if (!user) {
-      return { ok: false, status: 401, json: async () => ({ message: 'Invalid token' }) };
+      return { ok: false, status: 404, json: async () => ({ message: 'User not found' }) };
+      // return new Response(null, { status: 404, statusText: 'User not found' });
     }
-
     return {
+      json: async () => ({
+        user: { id: user.id, email: user.email, name: user.username, about: user.about, isAdmin: user.isAdmin },
+      }),
       ok: true,
       status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    };
+  }
+
+  // Handle POST update profile
+  if (url === '/api/users/update' && method === 'POST') {
+    if (token && !fakeDatabase.tokens.has(token)) {
+      return { ok: false, status: 401, json: async () => ({ message: 'Unauthorized' }) };
+    }
+    const userData = JSON.parse(body as string);
+    const user = [...fakeDatabase.users.values()].find((u) => u.email === userData.email);
+    if (!user) {
+      return { ok: false, status: 404, json: async () => ({ message: 'User not found' }) };
+    }
+    user.username = userData.name;
+    user.about = userData.about;
+    return {
       json: async () => ({
-        user: { id: user.id, name: user.username, about: user.about, email: user.email, isAdmin: user.isAdmin },
-        token: user.token,
+        user: { id: user.id, email: user.email, name: user.username, about: user.about, isAdmin: user.isAdmin },
       }),
+      ok: true,
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    };
+  }
+
+  // Handle POST change password
+  if (url === '/api/users/chngePassword' && method === 'POST') {
+    if (token && !fakeDatabase.tokens.has(token)) {
+      return { ok: false, status: 401, json: async () => ({ message: 'Unauthorized' }) };
+    }
+    const { oldPassword, newPassword, email } = JSON.parse(body as string);
+    const user = [...fakeDatabase.users.values()].find((u) => u.email === email);
+    if (!user) {
+      return { ok: false, status: 404, json: async () => ({ message: 'User not found' }) };
+    }
+    if (user.password !== oldPassword) {
+      return { ok: false, status: 400, json: async () => ({ message: 'Incorrect password' }) };
+    }
+    user.password = newPassword;
+    return {
+      json: async () => ({ message: 'Password updated successfully' }),
+      ok: true,
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
     };
   }
 

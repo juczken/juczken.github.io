@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { saveTokenToLocalStorage, removeTokenFromLocalStorage } from './localStorage';
+import { saveTokenToLocalStorage, removeTokenFromLocalStorage } from '../../../shared/lib/localStorage';
 import { fetch } from '../../../shared/lib/fakeGenerators/fakeGenerators';
+import { clearCurrentUser, setCurrentUser } from '../../../entities/User/model/slice';
 
 export const signin = createAsyncThunk(
   'auth/signin',
@@ -16,6 +17,8 @@ export const signin = createAsyncThunk(
       const data = await response.json();
 
       saveTokenToLocalStorage(data.token);
+      thunkAPI.dispatch(setCurrentUser(data.user));
+
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue((error as Error).message);
@@ -37,6 +40,8 @@ export const signup = createAsyncThunk(
       const data = await response.json();
 
       saveTokenToLocalStorage(data.token);
+      thunkAPI.dispatch(setCurrentUser(data.user));
+
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue((error as Error).message);
@@ -51,27 +56,10 @@ export const signout = createAsyncThunk('auth/signout', async (_, thunkAPI) => {
     });
 
     removeTokenFromLocalStorage();
+    thunkAPI.dispatch(clearCurrentUser());
+
     return null;
   } catch (error) {
-    return thunkAPI.rejectWithValue((error as Error).message);
-  }
-});
-
-export const verifyToken = createAsyncThunk('auth/verifyToken', async (_, thunkAPI) => {
-  const token = localStorage.getItem('auth_token');
-  if (!token) throw new Error('No token');
-
-  try {
-    const response = await fetch('/api/verify-token', {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-
-    if (!response.ok) throw new Error('Invalid token');
-    const data = await response.json();
-
-    return data;
-  } catch (error) {
-    removeTokenFromLocalStorage();
     return thunkAPI.rejectWithValue((error as Error).message);
   }
 });
