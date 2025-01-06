@@ -30,8 +30,26 @@ function App() {
   }, []);
 
   const generateRoutes = (items: typeof menuItems) => {
-    return items.map((item) => {
-      if (item.dropdown) {
+    return [
+      ...items.map((item) => {
+        if (item.dropdown) {
+          return (
+            <React.Fragment key={item.path + item.label}>
+              <Route
+                path={item.path}
+                element={
+                  <WithAuthenticationState
+                    authenticationState={item.authenticationState}
+                    routes={{ root: '/', signIn: '/auth/SignIn' }}
+                  >
+                    {item.element}
+                  </WithAuthenticationState>
+                }
+              />
+              {generateRoutes(item.dropdown)}
+            </React.Fragment>
+          );
+        }
         return (
           <React.Fragment key={item.path + item.label}>
             <Route
@@ -45,26 +63,47 @@ function App() {
                 </WithAuthenticationState>
               }
             />
-            {generateRoutes(item.dropdown)}
           </React.Fragment>
         );
-      }
-      return (
-        <React.Fragment key={item.path + item.label}>
-          <Route
-            path={item.path}
-            element={
-              <WithAuthenticationState
-                authenticationState={item.authenticationState}
-                routes={{ root: '/', signIn: '/auth/SignIn' }}
+      }),
+      <React.Fragment key={'rootTempElement'}>
+        <Route
+          path={'/'}
+          element={
+            <>
+              <p>
+                Сейчас в виртуальной базе два пользователя. При авторизации под ними происходит синхронизация на разных
+                вкладках. При регистрации нового пользователя, он будет доступен только на его вкладке.
+              </p>
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  justifySelf: 'center',
+                  width: '300px',
+                }}
               >
-                {item.element}
-              </WithAuthenticationState>
-            }
-          />
-        </React.Fragment>
-      );
-    });
+                <span>user1@example.com</span>
+                <span>password1</span>
+              </div>
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  justifySelf: 'center',
+                  width: '300px',
+                }}
+              >
+                <span>user2@example.com</span>
+                <span>password2</span>
+              </div>
+            </>
+          }
+        />
+      </React.Fragment>,
+    ];
   };
 
   return (
