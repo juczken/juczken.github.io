@@ -1,7 +1,6 @@
 import React from 'react';
 import { useForm, Controller, useFieldArray } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-// import { ProductEdit } from "./locales/ProductEdit";
 import cn from 'clsx';
 import styles from './ProductEditForm.module.css';
 import Button from '../../../shared/ui/Button/Button';
@@ -20,8 +19,6 @@ type ProductEditFormProps = {
   defaultValues?: ProductEditFormFields;
   categories?: string[];
 };
-
-// const categories = ['Electronics', 'Books', 'Clothing', 'Food', 'Toys'];
 
 const ProductEditForm: React.FC<ProductEditFormProps> = ({ onSubmit, defaultValues, categories }) => {
   const { t } = useTranslation();

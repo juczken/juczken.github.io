@@ -5,7 +5,8 @@ import CartButton from '../../../../features/Cart/ui/CartButton/CartButton';
 import cutStringHelper from '../../../../shared/lib/cutStringHelper';
 import { useTranslation } from 'react-i18next';
 
-type ProductItemProps = Pick<Product, 'price' | 'photo' | 'name' | 'desc'> & {
+type ProductItemProps = Pick<Product, 'price' | 'name' | 'desc'> & {
+  photo?: Product['photos'] extends (infer T)[] ? T : undefined;
   onCountChange?: (value: number) => void;
   count?: number;
 };

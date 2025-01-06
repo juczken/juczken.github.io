@@ -5,3 +5,7 @@
   border-color: var(--border-color);
   padding: 20px;
 }
+
+.error {
+  color: red;
+}

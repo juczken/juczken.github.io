@@ -8,7 +8,7 @@ export const createRandomProduct = (createdAt: string): Product => {
   return {
     id: id,
     name: `Продукт ${id}`,
-    photo: `https://dummyimage.com/500x500/cccccc/000000&text=Lorem+ipsum+${id}`,
+    photos: [`https://dummyimage.com/500x500/cccccc/000000&text=Lorem+ipsum+${id}`],
     // photo: `https://via.placeholder.com/500.png?text=Lorem+ipsum+${id}`,
     // photo: `store/photos/products/${id}.jpeg`,
     createdAt: createdAt,
@@ -34,7 +34,7 @@ export const createRandomOperation = (createdAt: string): Operation => {
   };
 };
 
-const getRandomId = (): string => {
+export const getRandomId = (): string => {
   return uuidv4();
 };
 
@@ -58,7 +58,7 @@ const getRandom = (min: number, max: number, digits: number): number => {
   return Math.round((min + Math.random() * (max - min)) * 10 ** digits) / 10 ** digits;
 };
 
-const categories: Category[] = [
+export const categories: Category[] = [
   {
     id: '1',
     name: 'Прям вот очень нужное',
