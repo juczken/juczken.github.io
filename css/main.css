@@ -300,6 +300,9 @@ code {
   padding: 20px;
 }
 
+.AuthScreen-module_error-BtGjm {
+  color: red;
+}
 .EditProfile-module_form-yS6N9 {
   color: var(--text-color);
   background-color: var(--background-color);
@@ -391,6 +394,10 @@ code {
 .ProfileScreen-module_title-TV4Mm {
   font-size: 1.5rem;
   margin-bottom: 10px;
+}
+
+.ProfileScreen-module_error-mSesY {
+  color: red;
 }
 .CatalogScreen-module_item-eoLaa {
     /* display: flex;
