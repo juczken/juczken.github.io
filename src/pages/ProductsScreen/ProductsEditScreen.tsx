@@ -1,19 +1,40 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import cn from 'clsx';
 import styles from './ProductsEditScreen.module.css';
 import ProductItem from '../../entities/Product/ui/ProductItem/ProductItem';
 import ComponentFetchList from '../../shared/ui/ComponentFetchList/ComponentFetchList';
-import useProducts from '../../shared/contexts/ProductsContext/ProductsContext';
 import withEditMode from '../../shared/hocs/withEditMode';
 import Modal from '../../shared/ui/Modal/Modal';
 import ProductEditForm from '../../features/forms/ProductEditForm/ProductEditForm';
+import { updateProduct, getPartProducts } from '../../features/Products/model/thunks';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../app/store/store';
 
 const EditProductItem = withEditMode(ProductItem);
 
 const ProductsEditScreen: React.FC = () => {
-  const { currentProducts: items, fetchProducts: doFetch, editProduct, catigories } = useProducts();
-  const [categories] = useState(catigories.map((category) => category.name));
+  const dispatch: AppDispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getPartProducts());
+  }, []);
+
+  const items = useSelector((state: RootState) => state.products.products);
+  const categories = useSelector((state: RootState) => state.products.categories);
+
+  const [categoryNames] = useState(categories.map((category) => category.name));
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
+
+  const handleEditProduct = useCallback(
+    (id: string, data: Partial<Product>) => {
+      dispatch(updateProduct({ id, updatedProduct: data }));
+    },
+    [dispatch]
+  );
+
+  const handleFetchProducts = useCallback(() => {
+    dispatch(getPartProducts());
+  }, [dispatch]);
 
   const renderCallback = useCallback(
     (item: Product) => (
@@ -23,7 +44,7 @@ const ProductsEditScreen: React.FC = () => {
           name={item.name}
           desc={item.desc}
           price={item.price}
-          photo={item.photo}
+          photo={item.photos?.length > 0 ? item.photos[0] : ''}
         />
       </div>
     ),
@@ -32,7 +53,7 @@ const ProductsEditScreen: React.FC = () => {
 
   return (
     <>
-      <ComponentFetchList items={items} doFetch={doFetch} render={renderCallback} />
+      <ComponentFetchList items={items} doFetch={handleFetchProducts} render={renderCallback} />
       {editingProduct && (
         <Modal setVisible={(visible) => (visible ? null : setEditingProduct(null))} visible={editingProduct !== null}>
           <ProductEditForm
@@ -41,13 +62,18 @@ const ProductsEditScreen: React.FC = () => {
               price: editingProduct.price,
               description: editingProduct.desc,
               category: editingProduct.category.name,
-              photos: [{ url: editingProduct.photo }],
+              photos: editingProduct.photos.map((photo) => ({ url: photo })),
             }}
-            categories={categories}
+            categories={categoryNames}
             onSubmit={(data) => {
-              const category = catigories.find((category) => category.name === data.category);
+              const category = categories.find((category) => category.name === data.category);
               const { category: _, description: desc, photos, ...rest } = data;
-              editProduct(editingProduct.id, { ...rest, desc, category, photo: photos.length > 0 && photos[0].url });
+              handleEditProduct(editingProduct.id, {
+                ...rest,
+                desc,
+                category,
+                photos: photos.map((photo) => photo.url),
+              });
               setEditingProduct(null);
             }}
           />

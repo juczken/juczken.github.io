@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import cn from 'clsx';
 import style from './App.css';
 import Layout from '../shared/ui/Layout/Layout';
@@ -11,11 +11,21 @@ import { LanguageProvider } from '../shared/providers/LanguageProvider/LanguageP
 import AuthProvider from '../shared/providers/AuthProvider/AuthProvider';
 import ProductsProvider from '../shared/providers/ProductsProvider/ProductsProvider';
 import CartProvider from '../shared/providers/CartProvider/CartProvider';
-import { Provider } from 'react-redux';
-import { store } from './store/store';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from './store/store';
+import { getCategories } from '../features/Products/model/thunks';
+import { removeTokenFromLocalStorage } from '../shared/lib/localStorage';
 
 function App() {
   const [menuItems] = useState([...shopMenuItems, ...profileMenuItems, ...adminMenuItems, ...authMenuItems]);
+  const [initialized, setInitialization] = useState(false);
+  const dispatch: AppDispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCategories());
+    removeTokenFromLocalStorage();
+    setInitialization(true);
+  }, []);
 
   const generateRoutes = (items: typeof menuItems) => {
     return items.map((item) => {
@@ -56,25 +66,23 @@ function App() {
   };
 
   return (
-    <Provider store={store}>
-      <ThemeProvider>
-        <LanguageProvider>
-          <AuthProvider>
-            <ProductsProvider>
-              <CartProvider>
-                <div className={cn(style.App)}>
-                  <Routes>
-                    <Route path="/" element={<Layout />}>
-                      {generateRoutes(menuItems)}
-                    </Route>
-                  </Routes>
-                </div>
-              </CartProvider>
-            </ProductsProvider>
-          </AuthProvider>
-        </LanguageProvider>
-      </ThemeProvider>
-    </Provider>
+    <ThemeProvider>
+      <LanguageProvider>
+        <AuthProvider>
+          <ProductsProvider>
+            <CartProvider>
+              <div className={cn(style.App)}>
+                <Routes>
+                  <Route path="/" element={<Layout />}>
+                    {generateRoutes(menuItems)}
+                  </Route>
+                </Routes>
+              </div>
+            </CartProvider>
+          </ProductsProvider>
+        </AuthProvider>
+      </LanguageProvider>
+    </ThemeProvider>
   );
 }
 

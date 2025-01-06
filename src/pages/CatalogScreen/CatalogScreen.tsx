@@ -17,7 +17,7 @@ const CatalogScreen: React.FC = () => {
           name={item.name}
           desc={item.desc}
           price={item.price}
-          photo={item.photo}
+          photo={item.photos?.length > 0 ? item.photos[0] : undefined}
           count={currentCart.find(({ product }) => product.id === item.id)?.quantity ?? 0}
           onCountChange={(count) => setQuantity(item, count)}
         />

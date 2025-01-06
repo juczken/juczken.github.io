@@ -8,7 +8,6 @@ export interface NavItem {
   label: string;
   path?: string | null;
   element?: React.ReactNode | null;
-  needAuthorized?: boolean;
   authenticationState?: AuthenticationState;
   dropdown?: NavItem[];
 }

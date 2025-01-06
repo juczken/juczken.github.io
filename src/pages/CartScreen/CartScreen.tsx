@@ -18,7 +18,7 @@ const CatalogScreen: React.FC = () => {
         <CartItem
           name={item.product.name}
           price={item.product.price}
-          photo={item.product.photo}
+          photo={item.product.photos?.length > 0 ? item.product.photos[0] : undefined}
           count={item.quantity}
           onIncrement={() => handleIncrement(item.product)}
           onDecrement={() => handleDecrement(item.product.id)}

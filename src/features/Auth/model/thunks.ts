@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { saveTokenToLocalStorage, removeTokenFromLocalStorage } from '../../../shared/lib/localStorage';
-import { fetch } from '../../../shared/lib/fakeGenerators/fakeGenerators';
+import { fetch } from '../../../shared/lib/fakeGenerators/fakeFetch';
 import { clearCurrentUser, setCurrentUser } from '../../../entities/User/model/slice';
 
 export const signin = createAsyncThunk(

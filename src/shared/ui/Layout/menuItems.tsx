@@ -13,7 +13,12 @@ export const shopMenuItems: NavItem[] = [
 ];
 
 export const adminMenuItems: NavItem[] = [
-  { label: 'Routes.Products.label', path: '/products', element: <ProductsEditScreen /> },
+  {
+    label: 'Routes.Products.label',
+    authenticationState: AuthenticationState.AdminAuthenticated,
+    path: '/products',
+    element: <ProductsEditScreen />,
+  },
 ];
 
 export const authMenuItems: NavItem[] = [

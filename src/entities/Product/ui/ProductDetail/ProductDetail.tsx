@@ -7,8 +7,7 @@ import { useTranslation } from 'react-i18next';
 //   Product& MutatePropertyToArray<Product> & AddPropertyPrefix<Category, 'category'>,
 //   'categoryName' | 'desc' | 'name' | 'photos' | 'price'
 // >;
-type ProductDetailProps = Pick<Product, 'desc' | 'name' | 'price'> & {
-  photos: Product['photo'][];
+type ProductDetailProps = Pick<Product, 'desc' | 'name' | 'price' | 'photos'> & {
   categoryName: Category['name'];
 };
 

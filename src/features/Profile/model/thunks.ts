@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { fetch } from '../../../shared/lib/fakeGenerators/fakeGenerators';
+import { fetch } from '../../../shared/lib/fakeGenerators/fakeFetch';
 import { getTokenFromLocalStorage } from '../../../shared/lib/localStorage';
 import { updateCurrentUser } from '../../../entities/User/model/slice';
 

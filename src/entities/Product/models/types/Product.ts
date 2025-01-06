@@ -7,7 +7,7 @@ type Category = {
 type Product = {
   id: string;
   name: string;
-  photo: string;
+  photos?: string[];
   desc?: string;
   createdAt: string;
   oldPrice?: number;

@@ -10,24 +10,19 @@ import { changePassword, updateProfile } from '../../features/Profile/model/thun
 
 const ProfileScreen: React.FC = () => {
   const { t } = useTranslation();
-  // const { handleChangePassword, handleUpdateProfile } = useAuth();
   const dispatch: AppDispatch = useDispatch();
   const currentUser = useSelector((state: RootState) => state.user.currentUser);
   const profileStatus = useSelector((state: RootState) => state.profile.status);
   const profileError = useSelector((state: RootState) => state.profile.error);
 
-  // const { handleChangePassword, handleUpdateProfile } = useAuth();
-
   const handleEditProfileSubmit = (data: EditProfileFields) => {
     dispatch(updateProfile({ email: currentUser.email, name: data.userName, about: data.about }));
-    // handleUpdateProfile({ name: data.userName, about: data.about });
   };
 
   const handleChangePasswordSubmit = (data: ChangePasswordFields) => {
     dispatch(
       changePassword({ email: currentUser.email, oldPassword: data.oldPassword, newPassword: data.newPassword })
     );
-    // handleChangePassword({ password: data.oldPassword, newPassword: data.newPassword });
   };
 
   if (profileStatus === 'loading') {

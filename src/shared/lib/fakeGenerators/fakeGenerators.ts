@@ -8,7 +8,7 @@ export const createRandomProduct = (createdAt: string): Product => {
   return {
     id: id,
     name: `Продукт ${id}`,
-    photo: `https://dummyimage.com/500x500/cccccc/000000&text=Lorem+ipsum+${id}`,
+    photos: [`https://dummyimage.com/500x500/cccccc/000000&text=Lorem+ipsum+${id}`],
     // photo: `https://via.placeholder.com/500.png?text=Lorem+ipsum+${id}`,
     // photo: `store/photos/products/${id}.jpeg`,
     createdAt: createdAt,
@@ -34,7 +34,7 @@ export const createRandomOperation = (createdAt: string): Operation => {
   };
 };
 
-const getRandomId = (): string => {
+export const getRandomId = (): string => {
   return uuidv4();
 };
 
@@ -58,7 +58,7 @@ const getRandom = (min: number, max: number, digits: number): number => {
   return Math.round((min + Math.random() * (max - min)) * 10 ** digits) / 10 ** digits;
 };
 
-const categories: Category[] = [
+export const categories: Category[] = [
   {
     id: '1',
     name: 'Прям вот очень нужное',
@@ -93,148 +93,4 @@ export const getCategories = (): Category[] => {
 
 export const getAuth = (): string => {
   return uuidv4();
-};
-
-// export const fetch = async (input: RequestInfo | URL, init?: RequestInit): Promise<Response> => {
-//   return Promise.resolve(new Response());
-// }
-
-import fakeDatabase from './fakeDatabase';
-
-const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
-export const fetch = async (url: string, options: RequestInit) => {
-  await delay(5000);
-
-  const { method, body, headers } = options;
-  const data = body ? JSON.parse(body.toString()) : ({} as any);
-  const token = new Headers(headers).get('Authorization')?.replace('Bearer ', '');
-
-  if (url.endsWith('/signin') && method === 'POST') {
-    const user = [...fakeDatabase.users.values()].find((u) => u.email === data.email && u.password === data.password);
-
-    if (!user) {
-      return { ok: false, status: 401, json: async () => ({ message: 'Invalid credentials' }) };
-    }
-
-    fakeDatabase.tokens.add(user.token);
-    return {
-      ok: true,
-      status: 200,
-      json: async () => ({
-        user: { id: user.id, name: user.username, about: user.about, email: user.email, isAdmin: user.isAdmin },
-        token: user.token,
-      }),
-    };
-  }
-
-  if (url.endsWith('/signup') && method === 'POST') {
-    const existingUser = [...fakeDatabase.users.values()].find((u) => u.email === data.email);
-
-    if (existingUser) {
-      return { ok: false, status: 409, json: async () => ({ message: 'User already exists' }) };
-    }
-
-    const newUser = {
-      id: getRandomId(),
-      username: data.username,
-      password: data.password,
-      email: data.email,
-      about: data.about,
-      token: getRandomId(),
-      isAdmin: false,
-    };
-
-    fakeDatabase.users.set(newUser.id, newUser);
-    fakeDatabase.tokens.add(newUser.token);
-
-    return {
-      ok: true,
-      status: 201,
-      json: async () => ({
-        user: {
-          id: newUser.id,
-          name: newUser.username,
-          about: newUser.about,
-          email: newUser.email,
-          isAdmin: newUser.isAdmin,
-        },
-        token: newUser.token,
-      }),
-    };
-  }
-
-  if (url.endsWith('/signout') && method === 'POST') {
-    const token = data.token;
-    fakeDatabase.tokens.delete(token);
-    return { ok: true, status: 200, json: async () => ({} as any) };
-  }
-
-  // Handle GET profile
-  if (url.startsWith('/api/users/') && method === 'GET') {
-    if (token && !fakeDatabase.tokens.has(token)) {
-      // return new Response(null, { status: 401, statusText: 'Unauthorized' });
-      return { ok: false, status: 401, json: async () => ({ message: 'Unauthorized' }) };
-    }
-    const email = url.split('/').pop();
-    const user = [...fakeDatabase.users.values()].find((u) => u.email === email);
-    if (!user) {
-      return { ok: false, status: 404, json: async () => ({ message: 'User not found' }) };
-      // return new Response(null, { status: 404, statusText: 'User not found' });
-    }
-    return {
-      json: async () => ({
-        user: { id: user.id, email: user.email, name: user.username, about: user.about, isAdmin: user.isAdmin },
-      }),
-      ok: true,
-      status: 200,
-      headers: { 'Content-Type': 'application/json' },
-    };
-  }
-
-  // Handle POST update profile
-  if (url === '/api/users/update' && method === 'POST') {
-    if (token && !fakeDatabase.tokens.has(token)) {
-      return { ok: false, status: 401, json: async () => ({ message: 'Unauthorized' }) };
-    }
-    const userData = JSON.parse(body as string);
-    const user = [...fakeDatabase.users.values()].find((u) => u.email === userData.email);
-    if (!user) {
-      return { ok: false, status: 404, json: async () => ({ message: 'User not found' }) };
-    }
-    user.username = userData.name;
-    user.about = userData.about;
-    return {
-      json: async () => ({
-        user: { id: user.id, email: user.email, name: user.username, about: user.about, isAdmin: user.isAdmin },
-      }),
-      ok: true,
-      status: 200,
-      headers: { 'Content-Type': 'application/json' },
-    };
-  }
-
-  // Handle POST change password
-  if (url === '/api/users/chngePassword' && method === 'POST') {
-    if (token && !fakeDatabase.tokens.has(token)) {
-      return { ok: false, status: 401, json: async () => ({ message: 'Unauthorized' }) };
-    }
-    const { oldPassword, newPassword, email } = JSON.parse(body as string);
-    const user = [...fakeDatabase.users.values()].find((u) => u.email === email);
-    if (!user) {
-      return { ok: false, status: 404, json: async () => ({ message: 'User not found' }) };
-    }
-    if (user.password !== oldPassword) {
-      return { ok: false, status: 400, json: async () => ({ message: 'Incorrect password' }) };
-    }
-    user.password = newPassword;
-    return {
-      json: async () => ({ message: 'Password updated successfully' }),
-      ok: true,
-      status: 200,
-      headers: { 'Content-Type': 'application/json' },
-    };
-  }
-
-  return { ok: false, status: 404, json: async () => ({ message: 'Not found' }) };
 };
