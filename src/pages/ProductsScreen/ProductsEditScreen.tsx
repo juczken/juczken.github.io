@@ -15,8 +15,10 @@ const EditProductItem = withEditMode(ProductItem);
 const ProductsEditScreen: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
 
+  const itemsEmpty = useSelector((state: RootState) => state.products.products).length === 0;
+
   useEffect(() => {
-    dispatch(getPartProducts());
+    if (itemsEmpty) dispatch(getPartProducts());
   }, []);
 
   const items = useSelector((state: RootState) => state.products.products);

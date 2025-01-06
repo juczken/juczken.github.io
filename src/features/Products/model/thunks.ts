@@ -3,13 +3,13 @@ import { getTokenFromLocalStorage } from '../../../shared/lib/localStorage';
 import { fetch } from '../../../shared/lib/fakeGenerators/fakeFetch';
 
 export const getPartProducts = createAsyncThunk('products/getpart', async (_, thunkAPI) => {
-  const token = getTokenFromLocalStorage();
-  if (!token) throw new Error('No token');
+  // const token = getTokenFromLocalStorage();
+  // if (!token) throw new Error('No token');
 
   try {
     const response = await fetch('/api/products/get', {
       method: 'GET',
-      headers: { Authorization: `Bearer ${token}` },
+      // headers: { Authorization: `Bearer ${token}` },
     });
     if (!response.ok) throw new Error(`${response.status}`);
     const data = await response.json();
