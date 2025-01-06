@@ -51,6 +51,9 @@ export const fetch = async (url: string, options: RequestInit) => {
     fakeDatabase.users.set(newUser.id, newUser);
     fakeDatabase.tokens.add(newUser.token);
 
+    console.log(fakeDatabase.users);
+    console.log(fakeDatabase.tokens);
+
     return {
       ok: true,
       status: 201,
@@ -71,6 +74,28 @@ export const fetch = async (url: string, options: RequestInit) => {
     const token = data.token;
     fakeDatabase.tokens.delete(token);
     return { ok: true, status: 200, json: async () => ({} as any) };
+  }
+
+  if (url.startsWith('/api/users/byToken') && method === 'GET') {
+    console.log(fakeDatabase.tokens);
+    console.log(token);
+    if (token && !fakeDatabase.tokens.has(token)) {
+      return { ok: false, status: 401, json: async () => ({ message: 'Unauthorized' }) };
+    }
+    const requestedToken = url.split('/').pop();
+    const user = [...fakeDatabase.users.values()].find((u) => u.token === requestedToken);
+    if (!user) {
+      return { ok: false, status: 404, json: async () => ({ message: 'User not found' }) };
+    }
+    return {
+      json: async () => ({
+        user: { id: user.id, email: user.email, name: user.username, about: user.about, isAdmin: user.isAdmin },
+        token: user.token,
+      }),
+      ok: true,
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    };
   }
 
   if (url.startsWith('/api/users/') && method === 'GET') {

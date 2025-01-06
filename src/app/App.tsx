@@ -15,6 +15,7 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from './store/store';
 import { getCategories } from '../features/Products/model/thunks';
 import { removeTokenFromLocalStorage } from '../shared/lib/localStorage';
+import { setupAuthSync } from '../features/Auth/model/sync';
 
 function App() {
   const [menuItems] = useState([...shopMenuItems, ...profileMenuItems, ...adminMenuItems, ...authMenuItems]);
@@ -22,6 +23,7 @@ function App() {
   const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
+    setupAuthSync();
     dispatch(getCategories());
     removeTokenFromLocalStorage();
     setInitialization(true);
