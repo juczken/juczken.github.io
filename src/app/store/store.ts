@@ -3,6 +3,7 @@ import authReducer from '../../features/Auth/model/slice';
 import profileReducer from '../../features/Profile/model/slice';
 import userReducer from '../../entities/User/model/slice';
 import productsReducer from '../../features/Products/model/slice';
+import cartReducer from '../../entities/Cart/model/slice';
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     profile: profileReducer,
     user: userReducer,
     products: productsReducer,
+    cart: cartReducer,
   },
   devTools: process.env.NODE_ENV !== 'production',
 });
