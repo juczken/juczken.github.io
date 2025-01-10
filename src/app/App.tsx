@@ -16,6 +16,7 @@ import { AppDispatch } from './store/store';
 import { getCategories } from '../features/Products/model/thunks';
 import { removeTokenFromLocalStorage } from '../shared/lib/localStorage';
 import { setupAuthSync } from '../features/Auth/model/sync';
+import RootScreen from 'src/pages/RootScreen/RootScreen';
 
 function App() {
   const [menuItems] = useState([...shopMenuItems, ...profileMenuItems, ...adminMenuItems, ...authMenuItems]);
@@ -66,43 +67,7 @@ function App() {
           </React.Fragment>
         );
       }),
-      <React.Fragment key={'rootTempElement'}>
-        <Route
-          path={'/'}
-          element={
-            <>
-              <p>
-                Сейчас в виртуальной базе два пользователя. При авторизации под ними происходит синхронизация на разных
-                вкладках. При регистрации нового пользователя, он будет доступен только на его вкладке.
-              </p>
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                  justifySelf: 'center',
-                  width: '300px',
-                }}
-              >
-                <span>user1@example.com</span>
-                <span>password1</span>
-              </div>
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                  justifySelf: 'center',
-                  width: '300px',
-                }}
-              >
-                <span>user2@example.com</span>
-                <span>password2</span>
-              </div>
-            </>
-          }
-        />
-      </React.Fragment>,
+      <RootScreen key={'rootScreenElement'} />,
     ];
   };
 
