@@ -705,5 +705,12 @@ input[type="number"] {
     opacity: 1;
     pointer-events: auto;
 }
+.RootScreen-module_tabItem-xRfLj{
+    display: 'flex';
+    flex-direction: 'row';
+    justify-content: 'space-between';
+    justify-self: 'center';
+    width: '300px';
+}
 
 /*# sourceMappingURL=main.css.map*/
