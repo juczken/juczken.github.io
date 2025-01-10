@@ -67,7 +67,9 @@ function App() {
           </React.Fragment>
         );
       }),
-      <RootScreen key={'rootScreenElement'} />,
+      <React.Fragment key={'rootScreenElement'}>
+        <RootScreen />
+      </React.Fragment>,
     ];
   };
 
