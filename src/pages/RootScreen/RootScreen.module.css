@@ -1,0 +1,7 @@
+.tabItem{
+    display: 'flex';
+    flex-direction: 'row';
+    justify-content: 'space-between';
+    justify-self: 'center';
+    width: '300px';
+}
