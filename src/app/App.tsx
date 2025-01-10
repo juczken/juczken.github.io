@@ -68,7 +68,7 @@ function App() {
         );
       }),
       <React.Fragment key={'rootScreenElement'}>
-        <RootScreen />
+        <Route path={'/'} element={<RootScreen />} />
       </React.Fragment>,
     ];
   };
