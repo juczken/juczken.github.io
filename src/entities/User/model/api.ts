@@ -20,33 +20,30 @@ export const userApi = baseApi.injectEndpoints({
 
 const { useGetProfileQuery, useUpdateProfileMutation } = userApi;
 
-const useGetProfileWithSync = (): typeof useGetProfileQuery => {
-  const { isSuccess, data, ...other } = useGetProfileQuery();
-  useEffect(() => {
-    if (isSuccess) {
-      setCurrentUser(data);
-    }
-  }, [isSuccess, data]);
-  return { isSuccess, data, ...other };
-};
+// const useGetProfileWithSync = (): typeof useGetProfileQuery => {
+//   const { isSuccess, data, ...other } = useGetProfileQuery();
+//   useEffect(() => {
+//     if (isSuccess) {
+//       setCurrentUser(data);
+//     }
+//   }, [isSuccess, data]);
+//   return { isSuccess, data, ...other };
+// };
 
-const useUpdateProfileWithSync = (): {
-  updateProfile: ReturnType<typeof useUpdateProfileMutation>[0];
-  updateProfileState: ReturnType<typeof useUpdateProfileMutation>[1];
-} => {
-  const [updateProfile, updateProfileState] = useUpdateProfileMutation();
-  const { isSuccess, data } = updateProfileState;
-  useEffect(() => {
-    if (isSuccess && data) {
-      setCurrentUser(data);
-    }
-  }, [isSuccess, data, setCurrentUser]);
+// const useUpdateProfileWithSync = (): {
+//   updateProfile: ReturnType<typeof useUpdateProfileMutation>[0];
+//   updateProfileState: ReturnType<typeof useUpdateProfileMutation>[1];
+// } => {
+//   const [updateProfile, updateProfileState] = useUpdateProfileMutation();
+//   const { isSuccess, data } = updateProfileState;
+//   useEffect(() => {
+//     if (isSuccess && data) {
+//       setCurrentUser(data);
+//     }
+//   }, [isSuccess, data, setCurrentUser]);
 
-  return { updateProfile, updateProfileState };
-};
+//   return { updateProfile, updateProfileState };
+// };
 
-export { useGetProfileWithSync, useGetProfileQuery, useUpdateProfileWithSync, useUpdateProfileMutation };
-
-type qwe = ReturnType<typeof useUpdateProfileMutation>[1];
-
-const ewq: qwe = {};
+// export { useGetProfileWithSync, useGetProfileQuery, useUpdateProfileWithSync, useUpdateProfileMutation };
+export { useGetProfileQuery, useUpdateProfileMutation };

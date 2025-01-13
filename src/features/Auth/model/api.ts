@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { useGetProfileWithSync } from 'src/entities/User/model/api';
+// import { useGetProfileWithSync } from 'src/entities/User/model/api';
 import { baseApi } from 'src/shared/api/baseApi';
 import { saveTokenToLocalStorage } from 'src/shared/lib/localStorage';
 import { AuthResult, SignInBody, SignUpBody } from 'src/shared/types/serverTypes';
@@ -27,45 +27,46 @@ export const authApi = baseApi.injectEndpoints({
 
 const { useSigninMutation, useSignupMutation } = authApi;
 
-const useSigninWithSync = (): {
-  signin: ReturnType<typeof useSigninMutation>[0];
-  signinState: ReturnType<typeof useSigninMutation>[1];
-  profile: ReturnType<typeof useGetProfileWithSync>;
-} => {
-  const dispatch = useDispatch();
-  const [signin, signinState] = useSigninMutation();
+// const useSigninWithSync = (): {
+//   signin: ReturnType<typeof useSigninMutation>[0];
+//   signinState: ReturnType<typeof useSigninMutation>[1];
+//   profile: ReturnType<typeof useGetProfileWithSync>;
+// } => {
+//   const dispatch = useDispatch();
+//   const [signin, signinState] = useSigninMutation();
 
-  useEffect(() => {
-    if (signinState.isSuccess && signinState.data?.token) {
-      saveTokenToLocalStorage(signinState.data.token);
-      dispatch(setAuthenticated(signinState.data));
-    }
-  }, [signinState, dispatch]);
+//   useEffect(() => {
+//     if (signinState.isSuccess && signinState.data?.token) {
+//       saveTokenToLocalStorage(signinState.data.token);
+//       dispatch(setAuthenticated(signinState.data));
+//     }
+//   }, [signinState, dispatch]);
 
-  const profile = useGetProfileWithSync();
+//   const profile = useGetProfileWithSync();
 
-  return { signin, signinState, profile };
-};
+//   return { signin, signinState, profile };
+// };
 
-const useSignupWithSync = (): {
-  signup: ReturnType<typeof useSignupMutation>[0];
-  signupState: ReturnType<typeof useSignupMutation>[1];
-  profile: ReturnType<typeof useGetProfileWithSync>;
-} => {
-  const dispatch = useDispatch();
-  const [signup, signupState] = useSignupMutation();
-  const { isSuccess, data } = signupState;
+// const useSignupWithSync = (): {
+//   signup: ReturnType<typeof useSignupMutation>[0];
+//   signupState: ReturnType<typeof useSignupMutation>[1];
+//   profile: ReturnType<typeof useGetProfileWithSync>;
+// } => {
+//   const dispatch = useDispatch();
+//   const [signup, signupState] = useSignupMutation();
+//   const { isSuccess, data } = signupState;
 
-  useEffect(() => {
-    if (isSuccess && data?.token) {
-      saveTokenToLocalStorage(data.token);
-      dispatch(setAuthenticated(data));
-    }
-  }, [isSuccess, data, dispatch]);
+//   useEffect(() => {
+//     if (isSuccess && data?.token) {
+//       saveTokenToLocalStorage(data.token);
+//       dispatch(setAuthenticated(data));
+//     }
+//   }, [isSuccess, data, dispatch]);
 
-  const profile = useGetProfileWithSync();
+//   const profile = useGetProfileWithSync();
 
-  return { signup, signupState, profile };
-};
+//   return { signup, signupState, profile };
+// };
 
-export { useSigninMutation, useSigninWithSync, useSignupMutation, useSignupWithSync };
+// export { useSigninMutation, useSigninWithSync, useSignupMutation, useSignupWithSync };
+export { useSigninMutation, useSignupMutation, };
