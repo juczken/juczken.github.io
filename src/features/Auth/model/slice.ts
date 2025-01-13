@@ -18,7 +18,18 @@ const initialState: AuthState = {
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    setAuthenticated: (state, action) => {
+      state.token = action.payload;
+      state.isAuthenticated = true;
+      state.status = 'succeeded';
+    },
+    setUnauthenticated: (state) => {
+      state.token = null;
+      state.isAuthenticated = false;
+      state.status = 'idle';
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(signin.pending, (state) => {
@@ -59,4 +70,5 @@ const authSlice = createSlice({
   },
 });
 
+export const { setAuthenticated, setUnauthenticated } = authSlice.actions;
 export default authSlice.reducer;

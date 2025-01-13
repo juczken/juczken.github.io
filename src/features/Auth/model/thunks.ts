@@ -2,6 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { saveTokenToLocalStorage, removeTokenFromLocalStorage } from '../../../shared/lib/localStorage';
 import { fetch } from '../../../shared/lib/fakeGenerators/fakeFetch';
 import { clearCurrentUser, setCurrentUser } from '../../../entities/User/model/slice';
+import { setUnauthenticated } from './slice';
 
 export const signin = createAsyncThunk(
   'auth/signin',
@@ -64,6 +65,7 @@ export const signout = createAsyncThunk('auth/signout', async (_, thunkAPI) => {
 
     removeTokenFromLocalStorage();
     thunkAPI.dispatch(clearCurrentUser());
+    thunkAPI.dispatch(setUnauthenticated());
 
     return null;
   } catch (error) {

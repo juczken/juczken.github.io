@@ -4,9 +4,16 @@ import SignUp, { SignUpFields } from './SignUp/SignUp';
 import cn from 'clsx';
 import styles from './AuthScreen.module.css';
 import { useTranslation } from 'react-i18next';
-import { AppDispatch, RootState } from '../../app/store/store';
-import { useDispatch, useSelector } from 'react-redux';
-import { signout, signin, signup } from '../../features/Auth/model/thunks';
+import { AppDispatch } from '../../app/store/store';
+import { useDispatch } from 'react-redux';
+import { signout } from '../../features/Auth/model/thunks';
+import { useSigninMutation, useSignupMutation } from 'src/features/Auth/model/api';
+import SignOut from './SignOut/SignOut';
+import { useGetProfileQuery } from 'src/entities/User/model/api';
+import { saveTokenToLocalStorage } from 'src/shared/lib/localStorage';
+import { AuthResult } from 'src/shared/types/serverTypes';
+import { setCurrentUser } from 'src/entities/User/model/slice';
+import { setAuthenticated } from 'src/features/Auth/model/slice';
 
 export enum AuthAction {
   SignIn = 'signIn',
@@ -21,42 +28,43 @@ type AuthScreenProps = {
 const AuthScreen: React.FC<AuthScreenProps> = ({ authAction }) => {
   const { t } = useTranslation();
   const dispatch: AppDispatch = useDispatch();
-  const authStatus = useSelector((state: RootState) => state.auth.status);
-  const authError = useSelector((state: RootState) => state.auth.error);
 
-  const handleSignInSubmit = (data: SignInFields) => {
-    dispatch(signin({ email: data.email, password: data.password }));
-  };
-  const handleSignUpSubmit = (data: SignUpFields) => {
-    dispatch(signup({ email: data.email, password: data.password }));
-  };
+  const [signin,{isLoading:isLoadingSignin,isError:isErrorSignin,error:errorSignin,data:dataSignin}]=useSigninMutation();
+  const [signup,{isLoading:isLoadingSignup,isError:isErrorSignup,error:errorSignup,data:dataSignup}]=useSignupMutation();
+  const {isLoading:isLoadingProfile,isError:isErrorProfile,error:errorProfile,data:dataProfile}=useGetProfileQuery();
 
-  if (authAction === AuthAction.SignOut) {
-    dispatch(signout());
-
-    if (authStatus === 'loading') {
-      return <div>{'loading'}</div>;
-    }
-    if (authStatus === 'failed') {
-      return <div className={styles.error}>{authError}</div>;
-    }
-    return <div>{t('AuthScreen.signOut')}</div>;
+  const setLoginedState=(data:AuthResult)=>{
+    saveTokenToLocalStorage(data.token);
+    setCurrentUser(dataProfile);
+    dispatch(setAuthenticated(data));
   }
 
-  if (authStatus === 'loading') {
+  const handleSignInSubmit = async (data: SignInFields) => {
+    await signin({ email: data.email, password: data.password });
+    setLoginedState(dataSignin);
+  };
+  const handleSignUpSubmit = async (data: SignUpFields) => {
+    await signup({ email: data.email, password: data.password, commandId: '' });
+    setLoginedState(dataSignup);
+  };
+  const handleSignOut = () => dispatch(signout);
+
+  if(isLoadingProfile||isLoadingSignin||isLoadingSignup){
     return <div>{'loading'}</div>;
   }
 
   const signIn = <>{authAction === AuthAction.SignIn && <SignIn onSubmit={handleSignInSubmit} />}</>;
   const signUp = <>{authAction === AuthAction.SignUp && <SignUp onSubmit={handleSignUpSubmit} />}</>;
+  const signOut = <>{authAction === AuthAction.SignOut && <SignOut onSignOut={handleSignOut} />}</>;
 
   return (
     <div className={cn(styles.page)}>
       <div>
         {signIn}
         {signUp}
+        {signOut}
       </div>
-      {authError && <div className={styles.error}>{authError}</div>}
+      {/* {authError && <div className={styles.error}>{authError}</div>} */}
     </div>
   );
 };
