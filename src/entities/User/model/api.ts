@@ -1,7 +1,5 @@
 import { baseApi } from 'src/shared/api/baseApi';
 import { Profile, UpdateProfileBody } from 'src/shared/types/serverTypes';
-import { setCurrentUser } from './slice';
-import { useEffect } from 'react';
 
 export const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({

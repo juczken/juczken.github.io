@@ -10,7 +10,7 @@ export const setupAuthSync = () => {
   window.addEventListener('storage', (event) => {
     if (event.key === TOKEN_KEY) {
       if (event.newValue) {
-        const {data}=useGetProfileQuery();
+        const { data } = useGetProfileQuery();
         const token = getTokenFromLocalStorage();
         store.dispatch(setAuthenticated({ token: token }));
         store.dispatch(setCurrentUser(data));

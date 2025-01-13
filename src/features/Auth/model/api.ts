@@ -1,10 +1,6 @@
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 // import { useGetProfileWithSync } from 'src/entities/User/model/api';
 import { baseApi } from 'src/shared/api/baseApi';
-import { saveTokenToLocalStorage } from 'src/shared/lib/localStorage';
 import { AuthResult, SignInBody, SignUpBody } from 'src/shared/types/serverTypes';
-import { setAuthenticated } from './slice';
 
 export const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -69,4 +65,4 @@ const { useSigninMutation, useSignupMutation } = authApi;
 // };
 
 // export { useSigninMutation, useSigninWithSync, useSignupMutation, useSignupWithSync };
-export { useSigninMutation, useSignupMutation, };
+export { useSigninMutation, useSignupMutation };
