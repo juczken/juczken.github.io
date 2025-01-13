@@ -29,15 +29,22 @@ const AuthScreen: React.FC<AuthScreenProps> = ({ authAction }) => {
   const { t } = useTranslation();
   const dispatch: AppDispatch = useDispatch();
 
-  const [signin,{isLoading:isLoadingSignin,isError:isErrorSignin,error:errorSignin,data:dataSignin}]=useSigninMutation();
-  const [signup,{isLoading:isLoadingSignup,isError:isErrorSignup,error:errorSignup,data:dataSignup}]=useSignupMutation();
-  const {isLoading:isLoadingProfile,isError:isErrorProfile,error:errorProfile,data:dataProfile}=useGetProfileQuery();
+  const [signin, { isLoading: isLoadingSignin, isError: isErrorSignin, error: errorSignin, data: dataSignin }] =
+    useSigninMutation();
+  const [signup, { isLoading: isLoadingSignup, isError: isErrorSignup, error: errorSignup, data: dataSignup }] =
+    useSignupMutation();
+  const {
+    isLoading: isLoadingProfile,
+    isError: isErrorProfile,
+    error: errorProfile,
+    data: dataProfile,
+  } = useGetProfileQuery();
 
-  const setLoginedState=(data:AuthResult)=>{
+  const setLoginedState = (data: AuthResult) => {
     saveTokenToLocalStorage(data.token);
     setCurrentUser(dataProfile);
     dispatch(setAuthenticated(data));
-  }
+  };
 
   const handleSignInSubmit = async (data: SignInFields) => {
     await signin({ email: data.email, password: data.password });
@@ -49,7 +56,7 @@ const AuthScreen: React.FC<AuthScreenProps> = ({ authAction }) => {
   };
   const handleSignOut = () => dispatch(signout);
 
-  if(isLoadingProfile||isLoadingSignin||isLoadingSignup){
+  if (isLoadingProfile || isLoadingSignin || isLoadingSignup) {
     return <div>{'loading'}</div>;
   }
 

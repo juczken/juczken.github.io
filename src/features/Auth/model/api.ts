@@ -29,7 +29,7 @@ const { useSigninMutation, useSignupMutation } = authApi;
 
 const useSigninWithSync = (): {
   signin: ReturnType<typeof useSigninMutation>[0];
-  signinState: ReturnType<typeof useSigninMutation>[1]
+  signinState: ReturnType<typeof useSigninMutation>[1];
   profile: ReturnType<typeof useGetProfileWithSync>;
 } => {
   const dispatch = useDispatch();
