@@ -1,17 +1,17 @@
 import React, { useEffect } from 'react';
 import SignIn, { SignInFields } from './SignIn/SignIn';
 import SignUp, { SignUpFields } from './SignUp/SignUp';
+import SignOut from './SignOut/SignOut';
 import cn from 'clsx';
 import styles from './AuthScreen.module.css';
 import { useTranslation } from 'react-i18next';
-import { AppDispatch } from '../../app/store/store';
-import { useDispatch } from 'react-redux';
+import { AppDispatch, RootState } from '../../app/store/store';
+import { useDispatch, useSelector } from 'react-redux';
 import { signout } from '../../features/Auth/model/thunks';
-import { useSigninMutation, useSignupMutation } from 'src/features/Auth/model/api';
-import SignOut from './SignOut/SignOut';
+import { setAuthenticated } from '../../features/Auth/model/slice';
+import { useSigninMutation, useSignupMutation } from '../../features/Auth/model//api';
 import { saveTokenToLocalStorage } from 'src/shared/lib/localStorage';
 import { AuthResult } from 'src/shared/types/serverTypes';
-import { setAuthenticated } from 'src/features/Auth/model/slice';
 
 export enum AuthAction {
   SignIn = 'signIn',
@@ -26,6 +26,10 @@ type AuthScreenProps = {
 const AuthScreen: React.FC<AuthScreenProps> = ({ authAction }) => {
   const { t } = useTranslation();
   const dispatch: AppDispatch = useDispatch();
+
+  const authState = useSelector((state: RootState) => state.auth);
+  const userState = useSelector((state: RootState) => state.user);
+  const profileState = useSelector((state: RootState) => state.profile);
 
   const [
     signin,
@@ -58,6 +62,7 @@ const AuthScreen: React.FC<AuthScreenProps> = ({ authAction }) => {
     saveTokenToLocalStorage(data.token);
     // setCurrentUser(dataProfile);
     dispatch(setAuthenticated(data));
+    console.log(authState, userState, profileState);
   };
 
   useEffect(() => {

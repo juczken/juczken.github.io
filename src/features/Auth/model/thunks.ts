@@ -59,9 +59,7 @@ export const signup = createAsyncThunk(
 
 export const signout = createAsyncThunk('auth/signout', async (_, thunkAPI) => {
   try {
-    await fetch('/api/signout', {
-      method: 'POST',
-    });
+    console.log('thunk signout');
 
     removeTokenFromLocalStorage();
     thunkAPI.dispatch(clearCurrentUser());
