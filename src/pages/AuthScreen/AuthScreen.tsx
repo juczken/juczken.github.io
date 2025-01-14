@@ -9,7 +9,6 @@ import { useDispatch } from 'react-redux';
 import { signout } from '../../features/Auth/model/thunks';
 import { useSigninMutation, useSignupMutation } from 'src/features/Auth/model/api';
 import SignOut from './SignOut/SignOut';
-import { useGetProfileQuery } from 'src/entities/User/model/api';
 import { saveTokenToLocalStorage } from 'src/shared/lib/localStorage';
 import { AuthResult } from 'src/shared/types/serverTypes';
 import { setAuthenticated } from 'src/features/Auth/model/slice';
@@ -48,12 +47,12 @@ const AuthScreen: React.FC<AuthScreenProps> = ({ authAction }) => {
       isSuccess: isSuccessSignup,
     },
   ] = useSignupMutation();
-  const {
-    isLoading: isLoadingProfile,
-    isError: isErrorProfile,
-    error: errorProfile,
-    data: dataProfile,
-  } = useGetProfileQuery();
+  // const {
+  //   isLoading: isLoadingProfile,
+  //   isError: isErrorProfile,
+  //   error: errorProfile,
+  //   data: dataProfile,
+  // } = useGetProfileQuery();
 
   const setLoginedState = (data: AuthResult) => {
     saveTokenToLocalStorage(data.token);
@@ -83,7 +82,8 @@ const AuthScreen: React.FC<AuthScreenProps> = ({ authAction }) => {
   };
   const handleSignOut = () => dispatch(signout);
 
-  if (isLoadingProfile || isLoadingSignin || isLoadingSignup) {
+  // if (isLoadingProfile || isLoadingSignin || isLoadingSignup) {
+  if (isLoadingSignin || isLoadingSignup) {
     return <div>{'loading'}</div>;
   }
 
