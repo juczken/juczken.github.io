@@ -7,9 +7,9 @@ export const baseApi = createApi({
     baseUrl: 'https://19429ba06ff2.vps.myjino.ru/api',
     prepareHeaders: (headers) => {
       const token = getTokenFromLocalStorage();
-      console.log('prepareHeaders', token);
+      console.log('prepareHeaders', token, getTokenFromLocalStorage());
       if (token) {
-        headers.set('Auyhorization', `Bearer ${token}`);
+        headers.set('Authorization', `Bearer ${token}`);
       }
       return headers;
     },
