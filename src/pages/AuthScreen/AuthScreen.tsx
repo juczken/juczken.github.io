@@ -62,7 +62,6 @@ const AuthScreen: React.FC<AuthScreenProps> = ({ authAction }) => {
     saveTokenToLocalStorage(data.token);
     // setCurrentUser(dataProfile);
     dispatch(setAuthenticated(data.token));
-    console.log(authState, userState, profileState);
   };
 
   useEffect(() => {
@@ -85,7 +84,7 @@ const AuthScreen: React.FC<AuthScreenProps> = ({ authAction }) => {
     await signup({ email: data.email, password: data.password, commandId: '' });
     // setLoginedState(dataSignup);
   };
-  const handleSignOut = () => dispatch(signout);
+  const handleSignOut = () => dispatch(signout());
 
   // if (isLoadingProfile || isLoadingSignin || isLoadingSignup) {
   if (isLoadingSignin || isLoadingSignup) {
