@@ -17,7 +17,7 @@ export const setupAuthSync = () => {
         console.log('addEventListener after invalidateTags');
         const token = getTokenFromLocalStorage();
         console.log('addEventListener after getTokenFromLocalStorage', token);
-        store.dispatch(setAuthenticated({ token: token }));
+        store.dispatch(setAuthenticated(token));
         console.log('addEventListener after setAuthenticated', token);
         // store.dispatch(setCurrentUser(data));
         // store.dispatch(signin({ token: event.newValue }));
