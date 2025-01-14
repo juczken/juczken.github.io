@@ -6,6 +6,7 @@ type SignOutProps = {
 };
 
 const SignOut: React.FC<SignOutProps> = ({ onSignOut }) => {
+  console.log('SignOut component');
   onSignOut();
   return <Navigate to={'/'} replace />;
 };

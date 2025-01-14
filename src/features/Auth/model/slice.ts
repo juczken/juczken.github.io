@@ -23,7 +23,7 @@ const authSlice = createSlice({
       state.token = action.payload;
       state.isAuthenticated = true;
       state.status = 'succeeded';
-      console.log('setAuthenticated');
+      console.log('setAuthenticated', action);
     },
     setUnauthenticated: (state) => {
       state.token = null;

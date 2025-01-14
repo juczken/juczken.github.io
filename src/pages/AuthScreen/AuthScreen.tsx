@@ -91,7 +91,7 @@ const AuthScreen: React.FC<AuthScreenProps> = ({ authAction }) => {
   if (isLoadingSignin || isLoadingSignup) {
     return <div>{'loading'}</div>;
   }
-
+  console.log(authAction);
   const signIn = <>{authAction === AuthAction.SignIn && <SignIn onSubmit={handleSignInSubmit} />}</>;
   const signUp = <>{authAction === AuthAction.SignUp && <SignUp onSubmit={handleSignUpSubmit} />}</>;
   const signOut = <>{authAction === AuthAction.SignOut && <SignOut onSignOut={handleSignOut} />}</>;
