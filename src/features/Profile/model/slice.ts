@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { changePassword, getProfile, updateProfile } from './thunks';
+import { changePassword, getProfile, updateProfile } from '../../../entities/User/model/thunks';
 
 interface ProfileState {
   status: 'idle' | 'loading' | 'succeeded' | 'failed';

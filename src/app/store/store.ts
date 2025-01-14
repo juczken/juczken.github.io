@@ -4,15 +4,19 @@ import profileReducer from '../../features/Profile/model/slice';
 import userReducer from '../../entities/User/model/slice';
 import productsReducer from '../../features/Products/model/slice';
 import cartReducer from '../../entities/Cart/model/slice';
+import { api, apiMiddleware, apiReducer } from '../api/api';
 
 export const store = configureStore({
   reducer: {
+    [api.reducerPath]: apiReducer,
+    // api:apiReducer,
     auth: authReducer,
     profile: profileReducer,
     user: userReducer,
     products: productsReducer,
     cart: cartReducer,
   },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiMiddleware),
   devTools: process.env.NODE_ENV !== 'production',
 });
 

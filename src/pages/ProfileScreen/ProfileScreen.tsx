@@ -6,7 +6,7 @@ import styles from './ProfileScreen.module.css';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../app/store/store';
-import { changePassword, updateProfile } from '../../features/Profile/model/thunks';
+import { changePassword, updateProfile } from '../../entities/User/model/thunks';
 
 const ProfileScreen: React.FC = () => {
   const { t } = useTranslation();

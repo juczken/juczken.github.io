@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { fetch } from '../../../shared/lib/fakeGenerators/fakeFetch';
 import { getTokenFromLocalStorage } from '../../../shared/lib/localStorage';
-import { updateCurrentUser } from '../../../entities/User/model/slice';
+import { updateCurrentUser } from './slice';
 
 export const getProfile = createAsyncThunk('profile/get', async (email: string, thunkAPI) => {
   const token = getTokenFromLocalStorage();
