@@ -61,7 +61,7 @@ const AuthScreen: React.FC<AuthScreenProps> = ({ authAction }) => {
   const setLoginedState = (data: AuthResult) => {
     saveTokenToLocalStorage(data.token);
     // setCurrentUser(dataProfile);
-    dispatch(setAuthenticated(data));
+    dispatch(setAuthenticated(data.token));
     console.log(authState, userState, profileState);
   };
 
