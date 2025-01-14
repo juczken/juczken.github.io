@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import SignIn, { SignInFields } from './SignIn/SignIn';
 import SignUp, { SignUpFields } from './SignUp/SignUp';
 import cn from 'clsx';
@@ -12,7 +12,6 @@ import SignOut from './SignOut/SignOut';
 import { useGetProfileQuery } from 'src/entities/User/model/api';
 import { saveTokenToLocalStorage } from 'src/shared/lib/localStorage';
 import { AuthResult } from 'src/shared/types/serverTypes';
-import { setCurrentUser } from 'src/entities/User/model/slice';
 import { setAuthenticated } from 'src/features/Auth/model/slice';
 
 export enum AuthAction {
@@ -29,10 +28,26 @@ const AuthScreen: React.FC<AuthScreenProps> = ({ authAction }) => {
   const { t } = useTranslation();
   const dispatch: AppDispatch = useDispatch();
 
-  const [signin, { isLoading: isLoadingSignin, isError: isErrorSignin, error: errorSignin, data: dataSignin }] =
-    useSigninMutation();
-  const [signup, { isLoading: isLoadingSignup, isError: isErrorSignup, error: errorSignup, data: dataSignup }] =
-    useSignupMutation();
+  const [
+    signin,
+    {
+      isLoading: isLoadingSignin,
+      isError: isErrorSignin,
+      error: errorSignin,
+      data: dataSignin,
+      isSuccess: isSuccessSignin,
+    },
+  ] = useSigninMutation();
+  const [
+    signup,
+    {
+      isLoading: isLoadingSignup,
+      isError: isErrorSignup,
+      error: errorSignup,
+      data: dataSignup,
+      isSuccess: isSuccessSignup,
+    },
+  ] = useSignupMutation();
   const {
     isLoading: isLoadingProfile,
     isError: isErrorProfile,
@@ -41,19 +56,30 @@ const AuthScreen: React.FC<AuthScreenProps> = ({ authAction }) => {
   } = useGetProfileQuery();
 
   const setLoginedState = (data: AuthResult) => {
-    console.log('setLoginedState', isLoadingSignin, isErrorSignin, data, errorSignin);
     saveTokenToLocalStorage(data.token);
-    setCurrentUser(dataProfile);
+    // setCurrentUser(dataProfile);
     dispatch(setAuthenticated(data));
   };
 
+  useEffect(() => {
+    if (isSuccessSignin) {
+      setLoginedState(dataSignin);
+    }
+  }, [isSuccessSignin, dataSignin]);
+
+  useEffect(() => {
+    if (isSuccessSignup) {
+      setLoginedState(dataSignup);
+    }
+  }, [isSuccessSignup, dataSignup]);
+
   const handleSignInSubmit = async (data: SignInFields) => {
     await signin({ email: data.email, password: data.password });
-    setLoginedState(dataSignin);
+    // setLoginedState(dataSignin);
   };
   const handleSignUpSubmit = async (data: SignUpFields) => {
     await signup({ email: data.email, password: data.password, commandId: '' });
-    setLoginedState(dataSignup);
+    // setLoginedState(dataSignup);
   };
   const handleSignOut = () => dispatch(signout);
 
