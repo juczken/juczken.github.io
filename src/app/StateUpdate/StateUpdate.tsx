@@ -11,6 +11,7 @@ const StateUpdater: React.FC = () => {
   useEffect(() => {
     if (isSuccess) {
       dispatch(setCurrentUser(data));
+      console.log('StateUpdater setCurrentUser', data);
     }
   }, [isSuccess, data]);
 

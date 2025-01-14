@@ -60,10 +60,12 @@ export const signup = createAsyncThunk(
 export const signout = createAsyncThunk('auth/signout', async (_, thunkAPI) => {
   try {
     console.log('thunk signout');
-
     removeTokenFromLocalStorage();
+    console.log('thunk signout after removeTokenFromLocalStorage');
     thunkAPI.dispatch(clearCurrentUser());
+    console.log('thunk signout after clearCurrentUser');
     thunkAPI.dispatch(setUnauthenticated());
+    console.log('thunk signout after setUnauthenticated');
 
     return null;
   } catch (error) {
