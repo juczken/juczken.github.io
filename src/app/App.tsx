@@ -25,9 +25,9 @@ function App() {
   const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
+    removeTokenFromLocalStorage();
     setupAuthSync();
     dispatch(getCategories());
-    removeTokenFromLocalStorage();
     setInitialization(true);
   }, []);
 

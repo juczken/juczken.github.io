@@ -12,13 +12,19 @@ export const setupAuthSync = () => {
     if (event.key === TOKEN_KEY) {
       if (event.newValue) {
         // const { data } = useGetProfileQuery();
+        console.log('addEventListener before invalidateTags');
         store.dispatch(userApi.util.invalidateTags(['Profile']));
+        console.log('addEventListener after invalidateTags');
         const token = getTokenFromLocalStorage();
+        console.log('addEventListener after getTokenFromLocalStorage', token);
         store.dispatch(setAuthenticated({ token: token }));
+        console.log('addEventListener after setAuthenticated', token);
         // store.dispatch(setCurrentUser(data));
         // store.dispatch(signin({ token: event.newValue }));
       } else {
+        console.log('addEventListener before signout');
         store.dispatch(signout());
+        console.log('addEventListener after signout');
       }
     }
   });
