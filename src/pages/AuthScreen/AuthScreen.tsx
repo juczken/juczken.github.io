@@ -41,6 +41,7 @@ const AuthScreen: React.FC<AuthScreenProps> = ({ authAction }) => {
   } = useGetProfileQuery();
 
   const setLoginedState = (data: AuthResult) => {
+    console.log('setLoginedState', isLoadingSignin, isErrorSignin, data, errorSignin);
     saveTokenToLocalStorage(data.token);
     setCurrentUser(dataProfile);
     dispatch(setAuthenticated(data));
