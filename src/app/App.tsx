@@ -17,6 +17,7 @@ import { getCategories } from '../features/Products/model/thunks';
 import { removeTokenFromLocalStorage } from '../shared/lib/localStorage';
 import { setupAuthSync } from '../features/Auth/model/sync';
 import RootScreen from 'src/pages/RootScreen/RootScreen';
+import StateUpdater from './StateUpdate/StateUpdate';
 
 function App() {
   const [menuItems] = useState([...shopMenuItems, ...profileMenuItems, ...adminMenuItems, ...authMenuItems]);
@@ -79,6 +80,7 @@ function App() {
         <AuthProvider>
           <ProductsProvider>
             <CartProvider>
+              <StateUpdater />
               <div className={cn(style.App)}>
                 <Routes>
                   <Route path="/" element={<Layout />}>

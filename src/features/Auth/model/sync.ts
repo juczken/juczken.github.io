@@ -3,17 +3,19 @@ import { store } from '../../../app/store/store'; // Импорт стора и�
 import { getTokenFromLocalStorage, TOKEN_KEY } from '../../../shared/lib/localStorage';
 import { signout } from './thunks'; // Экспортируемый logout-редьюсер из authSlice
 import { setAuthenticated } from './slice';
-import { useGetProfileQuery } from 'src/entities/User/model/api';
-import { setCurrentUser } from 'src/entities/User/model/slice';
+import { userApi } from 'src/entities/User/model/api';
+// import { useGetProfileQuery } from 'src/entities/User/model/api';
+// import { setCurrentUser } from 'src/entities/User/model/slice';
 
 export const setupAuthSync = () => {
   window.addEventListener('storage', (event) => {
     if (event.key === TOKEN_KEY) {
       if (event.newValue) {
-        const { data } = useGetProfileQuery();
+        // const { data } = useGetProfileQuery();
+        store.dispatch(userApi.util.invalidateTags(['Profile']));
         const token = getTokenFromLocalStorage();
         store.dispatch(setAuthenticated({ token: token }));
-        store.dispatch(setCurrentUser(data));
+        // store.dispatch(setCurrentUser(data));
         // store.dispatch(signin({ token: event.newValue }));
       } else {
         store.dispatch(signout());
