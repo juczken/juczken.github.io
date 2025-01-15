@@ -13,6 +13,7 @@ import { useSigninMutation, useSignupMutation } from '../../features/Auth/model/
 import { saveTokenToLocalStorage } from 'src/shared/lib/localStorage';
 import { AuthResult } from 'src/shared/types/serverTypes';
 import { useGetProfileQuery } from '../../entities/User/model/api';
+import { setCurrentUser } from 'src/entities/User/model/slice';
 
 export enum AuthAction {
   SignIn = 'signIn',
@@ -81,23 +82,27 @@ const AuthScreen: React.FC<AuthScreenProps> = ({ authAction }) => {
   const {
     isLoading: isLoadingProfile,
     isError: isErrorProfile,
+    isSuccess: isSuccessProfile,
     error: errorProfile,
     data: dataProfile,
   } = useGetProfileQuery(undefined, { skip: !isSuccessSignin && !isSuccessSignup });
   console.log('authscreen postgetProfile', isSuccessSignin);
 
+  useEffect(() => {
+    if (isSuccessProfile) {
+      dispatch(setCurrentUser(dataProfile));
+    }
+  }, [isSuccessProfile, dataProfile]);
+
   const handleSignInSubmit = async (data: SignInFields) => {
     await signin({ email: data.email, password: data.password });
-    // setLoginedState(dataSignin);
   };
   const handleSignUpSubmit = async (data: SignUpFields) => {
     await signup({ email: data.email, password: data.password, commandId: '' });
-    // setLoginedState(dataSignup);
   };
   const handleSignOut = () => dispatch(signout());
 
-  // if (isLoadingProfile || isLoadingSignin || isLoadingSignup) {
-  if (isLoadingSignin || isLoadingSignup) {
+  if (isLoadingProfile || isLoadingSignin || isLoadingSignup) {
     return <div>{'loading'}</div>;
   }
   const signIn = <>{authAction === AuthAction.SignIn && <SignIn onSubmit={handleSignInSubmit} />}</>;
