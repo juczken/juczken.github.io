@@ -4,6 +4,7 @@ import { getTokenFromLocalStorage, TOKEN_KEY } from '../../../shared/lib/localSt
 import { signout } from './thunks'; // Экспортируемый logout-редьюсер из authSlice
 import { setAuthenticated } from './slice';
 import { baseApi } from '../../../shared/api/baseApi';
+import { setNeedUpdateState } from 'src/entities/User/model/slice';
 // import { useGetProfileQuery } from 'src/entities/User/model/api';
 // import { setCurrentUser } from 'src/entities/User/model/slice';
 
@@ -18,6 +19,7 @@ export const setupAuthSync = () => {
         store.dispatch(setAuthenticated(token));
         // store.dispatch(setCurrentUser(data));
         // store.dispatch(signin({ token: event.newValue }));
+        store.dispatch(setNeedUpdateState(true));
       } else {
         store.dispatch(signout());
       }
