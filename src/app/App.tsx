@@ -18,6 +18,7 @@ import { removeTokenFromLocalStorage } from '../shared/lib/localStorage';
 import { setupAuthSync } from '../features/Auth/model/sync';
 // import RootScreen from 'src/pages/RootScreen/RootScreen';
 import StateUpdater from './StateUpdate/StateUpdate';
+import Title from './Title/Title';
 
 function App() {
   // const [menuItems] = useState([...shopMenuItems, ...profileMenuItems, ...adminMenuItems, ...authMenuItems]);
@@ -80,6 +81,7 @@ function App() {
         <AuthProvider>
           <ProductsProvider>
             <CartProvider>
+              <Title />
               <StateUpdater />
               <div className={cn(style.App)}>
                 <Routes>
