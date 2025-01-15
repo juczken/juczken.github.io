@@ -6,8 +6,8 @@ export const baseApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://19429ba06ff2.vps.myjino.ru/api',
     prepareHeaders: (headers) => {
+      console.log('prepareHeaders');
       const token = getTokenFromLocalStorage();
-      console.log('prepareHeaders', token, getTokenFromLocalStorage());
       if (token) {
         headers.set('Authorization', `Bearer ${token}`);
       }

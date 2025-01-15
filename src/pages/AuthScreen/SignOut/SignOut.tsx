@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 
 type SignOutProps = {
@@ -6,9 +6,10 @@ type SignOutProps = {
 };
 
 const SignOut: React.FC<SignOutProps> = ({ onSignOut }) => {
-  console.log('SignOut component');
-  onSignOut();
-  return <Navigate to={'/'} replace />;
+  useEffect(() => {
+    onSignOut();
+  }, []);
+  return <Navigate to="/" replace />;
 };
 
 export default SignOut;

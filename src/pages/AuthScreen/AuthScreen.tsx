@@ -12,6 +12,7 @@ import { setAuthenticated } from '../../features/Auth/model/slice';
 import { useSigninMutation, useSignupMutation } from '../../features/Auth/model//api';
 import { saveTokenToLocalStorage } from 'src/shared/lib/localStorage';
 import { AuthResult } from 'src/shared/types/serverTypes';
+import { useGetProfileQuery } from '../../entities/User/model/api';
 
 export enum AuthAction {
   SignIn = 'signIn',
@@ -76,6 +77,13 @@ const AuthScreen: React.FC<AuthScreenProps> = ({ authAction }) => {
     }
   }, [isSuccessSignup, dataSignup]);
 
+  const {
+    isLoading: isLoadingProfile,
+    isError: isErrorProfile,
+    error: errorProfile,
+    data: dataProfile,
+  } = useGetProfileQuery(undefined, { skip: !isSuccessSignin && !isSuccessSignup });
+
   const handleSignInSubmit = async (data: SignInFields) => {
     await signin({ email: data.email, password: data.password });
     // setLoginedState(dataSignin);
@@ -90,7 +98,6 @@ const AuthScreen: React.FC<AuthScreenProps> = ({ authAction }) => {
   if (isLoadingSignin || isLoadingSignup) {
     return <div>{'loading'}</div>;
   }
-  console.log(authAction);
   const signIn = <>{authAction === AuthAction.SignIn && <SignIn onSubmit={handleSignInSubmit} />}</>;
   const signUp = <>{authAction === AuthAction.SignUp && <SignUp onSubmit={handleSignUpSubmit} />}</>;
   const signOut = <>{authAction === AuthAction.SignOut && <SignOut onSignOut={handleSignOut} />}</>;
