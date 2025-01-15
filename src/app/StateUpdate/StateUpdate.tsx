@@ -9,25 +9,26 @@ import { getTokenFromLocalStorage } from '../../shared/lib/localStorage';
 const StateUpdater: React.FC = () => {
   console.log('StateUpdater');
   const update = useSelector((state: RootState) => state.user.needUpdateState);
-  const { isSuccess, data, isFetching, isLoading, status } = useGetProfileQuery(undefined, {
+  const { isSuccess, data, isFetching, isLoading, status, error } = useGetProfileQuery(undefined, {
     skip: getTokenFromLocalStorage() === null,
-    selectFromResult: ({ isSuccess, data, isFetching, isLoading, status }) => ({
+    selectFromResult: ({ isSuccess, data, isFetching, isLoading, status, error }) => ({
       isSuccess,
       data,
       isFetching,
       isLoading,
       status,
+      error,
     }),
   });
-  console.log(isSuccess, data, isFetching, isLoading);
   const dispatch: AppDispatch = useDispatch();
   useEffect(() => {
     if (isSuccess) {
       dispatch(setCurrentUser(data));
-      console.log('StateUpdater setCurrentUser', data);
       dispatch(setNeedUpdateState(false));
+      console.log('StateUpdater inside effect', error);
     }
   }, [isSuccess, data, status, update]);
+  console.log('StateUpdater after effect', error);
 
   return (
     <>

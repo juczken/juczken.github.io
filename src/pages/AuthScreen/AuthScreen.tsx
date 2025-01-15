@@ -78,7 +78,6 @@ const AuthScreen: React.FC<AuthScreenProps> = ({ authAction }) => {
     }
   }, [isSuccessSignup, dataSignup]);
 
-  console.log('authscreen pregetProfile', isSuccessSignin);
   const {
     isLoading: isLoadingProfile,
     isError: isErrorProfile,
@@ -86,7 +85,7 @@ const AuthScreen: React.FC<AuthScreenProps> = ({ authAction }) => {
     error: errorProfile,
     data: dataProfile,
   } = useGetProfileQuery(undefined, { skip: !isSuccessSignin && !isSuccessSignup });
-  console.log('authscreen postgetProfile', isSuccessSignin, isSuccessProfile);
+  console.log('authscreen postgetProfile', isSuccessSignin, isSuccessProfile, errorProfile);
 
   useEffect(() => {
     console.log('useEffect - profile');
