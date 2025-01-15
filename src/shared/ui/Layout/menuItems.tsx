@@ -6,13 +6,18 @@ import CatalogScreen from '../../../pages/CatalogScreen/CatalogScreen';
 import { AuthenticationState } from '../../hocs/withAuthenticationState';
 import ProductsEditScreen from '../../../pages/ProductsScreen/ProductsEditScreen';
 import CartScreen from '../../../pages/CartScreen/CartScreen';
+import RootScreen from 'src/pages/RootScreen/RootScreen';
 
-export const shopMenuItems: NavItem[] = [
+const rootMenuItems: NavItem[] = [
+  { label: 'Routes.Home.label', path: '/', element: <RootScreen />}
+];
+
+const shopMenuItems: NavItem[] = [
   { label: 'Routes.Catalog.label', path: '/catalog', element: <CatalogScreen /> },
   { label: 'Routes.Cart.label', path: '/cart', element: <CartScreen /> },
 ];
 
-export const adminMenuItems: NavItem[] = [
+const adminMenuItems: NavItem[] = [
   {
     label: 'Routes.Products.label',
     authenticationState: AuthenticationState.AdminAuthenticated,
@@ -21,7 +26,7 @@ export const adminMenuItems: NavItem[] = [
   },
 ];
 
-export const authMenuItems: NavItem[] = [
+const authMenuItems: NavItem[] = [
   {
     label: 'Routes.Auth.label',
     dropdown: [
@@ -47,7 +52,7 @@ export const authMenuItems: NavItem[] = [
   },
 ];
 
-export const profileMenuItems: NavItem[] = [
+const profileMenuItems: NavItem[] = [
   {
     label: 'Routes.Profile.label',
     authenticationState: AuthenticationState.Authenticated,
@@ -56,6 +61,10 @@ export const profileMenuItems: NavItem[] = [
   },
 ];
 
-export const testMenuItems: NavItem[] = [
+const testMenuItems: NavItem[] = [
   // { label: 'Routes.test.label', path: '/test', element: <Modal visible={true} setVisible={() => { }} >{Array.from({ length: 100 }).map((_, index) => <div key={index}>{`text ${index}`}</div>)}</Modal> },
 ];
+
+const menuItems=[...rootMenuItems,...shopMenuItems,...profileMenuItems,...adminMenuItems,...authMenuItems];
+
+export default menuItems;
