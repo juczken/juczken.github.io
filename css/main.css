@@ -656,6 +656,13 @@ input[type="number"] {
     color: var(--text-color);
     background-color: #f00000;
 }
+.RootScreen-module_tabItem-xRfLj{
+    display: 'flex';
+    flex-direction: 'row';
+    justify-content: 'space-between';
+    justify-self: 'center';
+    width: '300px';
+}
 .NavigationBar-module_navbar-xjg6S {
     display: flex;
     justify-content: space-around;
@@ -704,13 +711,6 @@ input[type="number"] {
 .NavigationBar-module_navItem-TiQ4r:hover .NavigationBar-module_dropdown-s8Bai {
     opacity: 1;
     pointer-events: auto;
-}
-.RootScreen-module_tabItem-xRfLj{
-    display: 'flex';
-    flex-direction: 'row';
-    justify-content: 'space-between';
-    justify-self: 'center';
-    width: '300px';
 }
 
 /*# sourceMappingURL=main.css.map*/
