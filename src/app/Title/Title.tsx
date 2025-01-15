@@ -5,7 +5,7 @@ import React, { useEffect } from 'react';
 const Title: React.FC = () => {
   const userState = useSelector((state: RootState) => state.user);
   useEffect(() => {
-    document.title = `My Project${userState && ` - ${userState.currentUser.name}`}`;
+    document.title = `My Project${userState.currentUser && ` - ${userState.currentUser.name}`}`;
   }, [userState]);
   return <></>;
 };
