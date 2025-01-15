@@ -89,7 +89,9 @@ const AuthScreen: React.FC<AuthScreenProps> = ({ authAction }) => {
   console.log('authscreen postgetProfile', isSuccessSignin);
 
   useEffect(() => {
+    console.log('useEffect - profile');
     if (isSuccessProfile) {
+      console.log('useEffect - profile - isSuccess');
       dispatch(setCurrentUser(dataProfile));
     }
   }, [isSuccessProfile, dataProfile]);
