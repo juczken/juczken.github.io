@@ -8,9 +8,7 @@ import ProductsEditScreen from '../../../pages/ProductsScreen/ProductsEditScreen
 import CartScreen from '../../../pages/CartScreen/CartScreen';
 import RootScreen from 'src/pages/RootScreen/RootScreen';
 
-const rootMenuItems: NavItem[] = [
-  { label: 'Routes.Home.label', path: '/', element: <RootScreen />}
-];
+const rootMenuItems: NavItem[] = [{ label: 'Routes.Home.label', path: '/', element: <RootScreen /> }];
 
 const shopMenuItems: NavItem[] = [
   { label: 'Routes.Catalog.label', path: '/catalog', element: <CatalogScreen /> },
@@ -65,6 +63,6 @@ const testMenuItems: NavItem[] = [
   // { label: 'Routes.test.label', path: '/test', element: <Modal visible={true} setVisible={() => { }} >{Array.from({ length: 100 }).map((_, index) => <div key={index}>{`text ${index}`}</div>)}</Modal> },
 ];
 
-const menuItems=[...rootMenuItems,...shopMenuItems,...profileMenuItems,...adminMenuItems,...authMenuItems];
+const menuItems = [...rootMenuItems, ...shopMenuItems, ...profileMenuItems, ...adminMenuItems, ...authMenuItems];
 
 export default menuItems;
