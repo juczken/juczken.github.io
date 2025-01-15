@@ -13,7 +13,7 @@ export const userApi = baseApi.injectEndpoints({
         method: 'POST',
         body: profile,
       }),
-      invalidatesTags: ['Profile'],
+      // invalidatesTags: ['Profile'],
     }),
   }),
 });
