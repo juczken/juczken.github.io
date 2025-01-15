@@ -88,11 +88,11 @@ const AuthScreen: React.FC<AuthScreenProps> = ({ authAction }) => {
   } = useGetProfileQuery(undefined, { skip: !isSuccessSignin && !isSuccessSignup });
   console.log('authscreen postgetProfile', isSuccessSignin);
 
-  useEffect(()=>{
-    if(isSuccessProfile){
+  useEffect(() => {
+    if (isSuccessProfile) {
       dispatch(setCurrentUser(dataProfile));
     }
-  },[isSuccessProfile,dataProfile]);
+  }, [isSuccessProfile, dataProfile]);
 
   const handleSignInSubmit = async (data: SignInFields) => {
     await signin({ email: data.email, password: data.password });
