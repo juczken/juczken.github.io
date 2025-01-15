@@ -134,6 +134,10 @@
     },
     "Products": {
       "label": "Products"
+    },
+    "Home": {
+      "label": "Home"
     }
+
   }
 }

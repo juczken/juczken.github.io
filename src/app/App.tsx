@@ -3,7 +3,7 @@ import cn from 'clsx';
 import style from './App.css';
 import Layout from '../shared/ui/Layout/Layout';
 import './localization';
-import { profileMenuItems, authMenuItems, shopMenuItems, adminMenuItems } from 'src/shared/ui/Layout/menuItems';
+import menuItems from 'src/shared/ui/Layout/menuItems';
 import { Route, Routes } from 'react-router-dom';
 import { WithAuthenticationState } from '../shared/hocs/withAuthenticationState';
 import ThemeProvider from '../shared/providers/ThemeProvider/ThemeProvider';
@@ -16,11 +16,11 @@ import { AppDispatch } from './store/store';
 import { getCategories } from '../features/Products/model/thunks';
 import { removeTokenFromLocalStorage } from '../shared/lib/localStorage';
 import { setupAuthSync } from '../features/Auth/model/sync';
-import RootScreen from 'src/pages/RootScreen/RootScreen';
+// import RootScreen from 'src/pages/RootScreen/RootScreen';
 import StateUpdater from './StateUpdate/StateUpdate';
 
 function App() {
-  const [menuItems] = useState([...shopMenuItems, ...profileMenuItems, ...adminMenuItems, ...authMenuItems]);
+  // const [menuItems] = useState([...shopMenuItems, ...profileMenuItems, ...adminMenuItems, ...authMenuItems]);
   const [initialized, setInitialization] = useState(false);
   const dispatch: AppDispatch = useDispatch();
 
@@ -68,9 +68,9 @@ function App() {
           </React.Fragment>
         );
       }),
-      <React.Fragment key={'rootScreenElement'}>
-        <Route path={'/'} element={<RootScreen />} />
-      </React.Fragment>,
+      // <React.Fragment key={'rootScreenElement'}>
+      //   <Route path={'/'} element={<RootScreen />} />
+      // </React.Fragment>,
     ];
   };
 
