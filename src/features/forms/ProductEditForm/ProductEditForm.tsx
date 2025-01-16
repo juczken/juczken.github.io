@@ -1,5 +1,5 @@
 import React from 'react';
-import { useForm, Controller, useFieldArray } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import cn from 'clsx';
 import styles from './ProductEditForm.module.css';
@@ -7,7 +7,7 @@ import Button from '../../../shared/ui/Button/Button';
 
 type ProductEditFormFields = {
   name: string;
-  photos: { url: string }[];
+  photo: { url: string };
   description?: string;
   price: number;
   oldPrice?: number;
@@ -31,11 +31,6 @@ const ProductEditForm: React.FC<ProductEditFormProps> = ({ onSubmit, defaultValu
     defaultValues,
   });
 
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: 'photos',
-  });
-
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={cn(styles.form)}>
       {/* Name */}
@@ -52,42 +47,20 @@ const ProductEditForm: React.FC<ProductEditFormProps> = ({ onSubmit, defaultValu
 
       {/* Photos */}
       <div>
-        <label className={cn(styles.label)}>{t('ProductEdit.photos')}</label>
-        {fields.map((field, index) => (
-          <div key={field.id} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <div style={{ display: 'flex', width: '100%', alignItems: 'center' }}>
-              <input
-                className={cn(styles.input, { [styles.error]: errors.photos })}
-                style={{ paddingTop: '20px' }}
-                type="text"
-                {...register(`photos.${index}.url`, {
-                  required: t('ProductEdit.errors.photosRequired'),
-                  validate: (value) => value.trim().startsWith('http') || t('ProductEdit.errors.photosInvalid'),
-                })}
-                placeholder={t('ProductEdit.photoPlaceholder')}
-              />
-              <Button
-                className={styles.button}
-                type="button"
-                onClick={() => remove(index)}
-                // style={{ marginLeft: "10px" }}
-                disabled={fields.length === 1}
-                lable={t('ProductEdit.removePhoto')}
-              />
-            </div>
-            {errors.photos && errors.photos[index]?.url && (
-              <p className={styles.error}>{errors.photos[index]?.url?.message}</p>
-            )}
-          </div>
-        ))}
-        <Button
-          className={styles.button}
-          type="button"
-          onClick={() => append({ url: '' })}
-          // style={{ marginTop: "10px" }}
-          disabled={fields.length >= 5}
-          lable={t('ProductEdit.addPhoto')}
-        />
+        <label className={cn(styles.label)}>{t('ProductEdit.photo')}</label>
+        <div style={{ display: 'flex', width: '100%', alignItems: 'center' }}>
+          <input
+            className={cn(styles.input, { [styles.error]: errors.photo })}
+            style={{ paddingTop: '20px' }}
+            type="text"
+            {...register(`photo.url`, {
+              required: t('ProductEdit.errors.photosRequired'),
+              validate: (value) => value.trim().startsWith('http') || t('ProductEdit.errors.photosInvalid'),
+            })}
+            placeholder={t('ProductEdit.photoPlaceholder')}
+          />
+        </div>
+        {errors.photo && errors.photo?.url && <p className={styles.error}>{errors.photo?.url?.message}</p>}
       </div>
 
       {/* Description */}

@@ -86,6 +86,7 @@
     "name": "Name",
     "namePlaceholder": "Enter name",
     "photos": "Photos",
+    "photo": "Photo",
     "photoPlaceholder": "Enter photo URL",
     "addPhoto": "Add photo",
     "removePhoto": "Remove",
@@ -126,6 +127,18 @@
         "label": "Sign Out"
       }
     },
+    "AuthByQuery": {
+      "label": "Authorization by RTK Query",
+      "SignIn": {
+        "label": "Sign In"
+      },
+      "SignUp": {
+        "label": "Sign Up"
+      },
+      "SignOut": {
+        "label": "Sign Out"
+      }
+    },
     "Catalog": {
       "label": "Catalog"
     },
@@ -138,6 +151,14 @@
     "Home": {
       "label": "Home"
     }
-
+  },
+  "ErrorCode": {
+    "ERR_ACCOUNT_ALREADY_EXIST": "An account with this email address already exists.",
+    "ERR_INCORRECT_EMAIL_OR_PASSWORD": "Incorrect email or password.",
+    "ERR_INCORRECT_PASSWORD": "Incorrect password.",
+    "ERR_INVALID_PASSWORD": "The password does not meet security requirements."
+  },
+  "CommonError": {
+    "UnexspectedError": "Unexpected error. Please try again."
   }
 }

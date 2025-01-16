@@ -23,12 +23,7 @@ const ProductFetchListViewer: FC = () => {
   const renderCallback = useCallback(
     (item: Product) => (
       <div key={item.id}>
-        <ProductItem
-          name={item.name}
-          desc={item.desc}
-          price={item.price}
-          photo={item.photos?.length > 0 ? item.photos[0] : undefined}
-        />
+        <ProductItem name={item.name} desc={item.desc} price={item.price} photo={item.photo} />
       </div>
     ),
     []

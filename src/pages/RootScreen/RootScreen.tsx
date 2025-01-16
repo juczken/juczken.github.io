@@ -6,16 +6,16 @@ const RootScreen: React.FC = () => {
   return (
     <>
       <p>
-        Сейчас в виртуальной базе два пользователя. При авторизации под ними происходит синхронизация на разных
-        вкладках. При регистрации нового пользователя, он будет доступен только на его вкладке.
+        Реализована система регистрации и авторизации пользователей и редактирования профиля через redux thunk и rtk
+        query. Есть два (минимум) зарегистрированных ползователя.
       </p>
       <div className={cn(style.tabItem)}>
-        <span>user1@example.com</span>
-        <span>password1</span>
+        <span>user68@example.com</span>
+        <span>qqqqqqqq</span>
       </div>
       <div className={cn(style.tabItem)}>
-        <span>user2@example.com</span>
-        <span>password2</span>
+        <span>qwerty@qwerty.com</span>
+        <span>qqqqqqqq</span>
       </div>
     </>
   );

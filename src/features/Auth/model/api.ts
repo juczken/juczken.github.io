@@ -1,70 +1,61 @@
-// import { useGetProfileWithSync } from 'src/entities/User/model/api';
-import { baseApi } from 'src/shared/api/baseApi';
-import { AuthResult, SignInBody, SignUpBody } from 'src/shared/types/serverTypes';
+import { saveTokenToLocalStorage, removeTokenFromLocalStorage } from '../../../shared/lib/localStorage';
+import { baseApi } from '../../../shared/api/baseApi';
+import { userApi } from '../../../entities/User/model/api';
+import { setAuthenticated } from './slice';
+import { ServerErrors } from '../../../shared/types/serverTypes';
+import { getLocaleErrorMessage } from '../../../shared/lib/errorsParsing';
 
 export const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    signin: builder.mutation<AuthResult, SignInBody>({
+    signin: builder.mutation<{ token: string }, { email: string; password: string }>({
       query: (credentials) => ({
         url: '/signin',
         method: 'POST',
         body: credentials,
       }),
-      // invalidatesTags: ['Profile'],
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          saveTokenToLocalStorage(data.token);
+          dispatch(setAuthenticated(data));
+
+          dispatch(userApi.util.invalidateTags(['Profile']));
+        } catch (error) {
+          removeTokenFromLocalStorage();
+          console.error('Signin failed:', error);
+        }
+      },
+      transformErrorResponse(baseQueryReturnValue, meta, arg) {
+        return (baseQueryReturnValue.data as { status: number } & ServerErrors).errors.map((error) =>
+          getLocaleErrorMessage(error)
+        );
+      },
     }),
-    signup: builder.mutation<AuthResult, SignUpBody>({
+    signup: builder.mutation<{ token: string }, { email: string; password: string; commandId: string }>({
       query: (credentials) => ({
         url: '/signup',
         method: 'POST',
         body: credentials,
       }),
-      // invalidatesTags: ['Profile'],
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          saveTokenToLocalStorage(data.token);
+          dispatch(setAuthenticated(data.token));
+
+          dispatch(baseApi.util.invalidateTags(['Profile']));
+        } catch (error) {
+          removeTokenFromLocalStorage();
+          console.error('Signin failed:', error);
+        }
+      },
+      transformErrorResponse(baseQueryReturnValue, meta, arg) {
+        return (baseQueryReturnValue.data as { status: number } & ServerErrors).errors.map((error) =>
+          getLocaleErrorMessage(error)
+        );
+      },
     }),
   }),
 });
 
-const { useSigninMutation, useSignupMutation } = authApi;
-
-// const useSigninWithSync = (): {
-//   signin: ReturnType<typeof useSigninMutation>[0];
-//   signinState: ReturnType<typeof useSigninMutation>[1];
-//   profile: ReturnType<typeof useGetProfileWithSync>;
-// } => {
-//   const dispatch = useDispatch();
-//   const [signin, signinState] = useSigninMutation();
-
-//   useEffect(() => {
-//     if (signinState.isSuccess && signinState.data?.token) {
-//       saveTokenToLocalStorage(signinState.data.token);
-//       dispatch(setAuthenticated(signinState.data));
-//     }
-//   }, [signinState, dispatch]);
-
-//   const profile = useGetProfileWithSync();
-
-//   return { signin, signinState, profile };
-// };
-
-// const useSignupWithSync = (): {
-//   signup: ReturnType<typeof useSignupMutation>[0];
-//   signupState: ReturnType<typeof useSignupMutation>[1];
-//   profile: ReturnType<typeof useGetProfileWithSync>;
-// } => {
-//   const dispatch = useDispatch();
-//   const [signup, signupState] = useSignupMutation();
-//   const { isSuccess, data } = signupState;
-
-//   useEffect(() => {
-//     if (isSuccess && data?.token) {
-//       saveTokenToLocalStorage(data.token);
-//       dispatch(setAuthenticated(data));
-//     }
-//   }, [isSuccess, data, dispatch]);
-
-//   const profile = useGetProfileWithSync();
-
-//   return { signup, signupState, profile };
-// };
-
-// export { useSigninMutation, useSigninWithSync, useSignupMutation, useSignupWithSync };
-export { useSigninMutation, useSignupMutation };
+export const { useSigninMutation, useSignupMutation } = authApi;

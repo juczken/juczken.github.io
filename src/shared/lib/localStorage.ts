@@ -1,8 +1,7 @@
 export const TOKEN_KEY = 'auth_token';
 
 export const getTokenFromLocalStorage = () => {
-  const token = localStorage.getItem(TOKEN_KEY);
-  return token;
+  return localStorage.getItem(TOKEN_KEY);
 };
 
 export const saveTokenToLocalStorage = (token: string) => {

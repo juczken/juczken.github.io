@@ -3,7 +3,6 @@ import cn from 'clsx';
 import style from './App.css';
 import Layout from '../shared/ui/Layout/Layout';
 import './localization';
-import menuItems from 'src/shared/ui/Layout/menuItems';
 import { Route, Routes } from 'react-router-dom';
 import { WithAuthenticationState } from '../shared/hocs/withAuthenticationState';
 import ThemeProvider from '../shared/providers/ThemeProvider/ThemeProvider';
@@ -14,21 +13,32 @@ import CartProvider from '../shared/providers/CartProvider/CartProvider';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from './store/store';
 import { getCategories } from '../features/Products/model/thunks';
-import { removeTokenFromLocalStorage } from '../shared/lib/localStorage';
 import { setupAuthSync } from '../features/Auth/model/sync';
-// import RootScreen from 'src/pages/RootScreen/RootScreen';
-import StateUpdater from './StateUpdate/StateUpdate';
-import Title from './Title/Title';
+import { getTokenFromLocalStorage } from '../shared/lib/localStorage';
+import { getProfile } from '../entities/User/model/thunks';
+import { setAuthenticated } from '../features/Auth/model/slice';
+import menuItems from './menu/menuItems';
 
 function App() {
-  // const [menuItems] = useState([...shopMenuItems, ...profileMenuItems, ...adminMenuItems, ...authMenuItems]);
+  // const [menuItems] = useState([
+  //   ...shopMenuItems,
+  //   ...profileMenuItems,
+  //   ...adminMenuItems,
+  //   ...authMenuItems,
+  //   ...authByQueryMenuItems,
+  // ]);
   const [initialized, setInitialization] = useState(false);
   const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
-    removeTokenFromLocalStorage();
+    if (getTokenFromLocalStorage()) {
+      dispatch(getProfile());
+      const token = getTokenFromLocalStorage();
+      dispatch(setAuthenticated({ token }));
+    }
     setupAuthSync();
     dispatch(getCategories());
+    // removeTokenFromLocalStorage();
     setInitialization(true);
   }, []);
 
@@ -81,11 +91,9 @@ function App() {
         <AuthProvider>
           <ProductsProvider>
             <CartProvider>
-              <Title />
-              <StateUpdater />
               <div className={cn(style.App)}>
                 <Routes>
-                  <Route path="/" element={<Layout />}>
+                  <Route path="/" element={<Layout menuItems={menuItems} />}>
                     {generateRoutes(menuItems)}
                   </Route>
                 </Routes>

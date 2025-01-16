@@ -16,13 +16,11 @@ const ProfileScreen: React.FC = () => {
   const profileError = useSelector((state: RootState) => state.profile.error);
 
   const handleEditProfileSubmit = (data: EditProfileFields) => {
-    dispatch(updateProfile({ email: currentUser.email, name: data.userName, about: data.about }));
+    dispatch(updateProfile({ name: data.userName }));
   };
 
   const handleChangePasswordSubmit = (data: ChangePasswordFields) => {
-    dispatch(
-      changePassword({ email: currentUser.email, oldPassword: data.oldPassword, newPassword: data.newPassword })
-    );
+    dispatch(changePassword({ password: data.oldPassword, newPassword: data.newPassword }));
   };
 
   if (profileStatus === 'loading') {
@@ -35,13 +33,13 @@ const ProfileScreen: React.FC = () => {
       <div>
         <EditProfile
           onSubmit={handleEditProfileSubmit}
-          defaultValues={currentUser && { userName: currentUser?.name, about: currentUser?.about }}
+          defaultValues={currentUser && { userName: currentUser?.name }}
         />
       </div>
       <div>
         <ChangePassword onSubmit={handleChangePasswordSubmit} />
       </div>
-      {profileError && <div className={styles.error}>{profileError}</div>}
+      {profileError && <div className={styles.error}>{(profileError as string[]).map((str) => t(str)).join('\n')}</div>}
     </div>
   );
 };

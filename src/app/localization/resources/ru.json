@@ -86,6 +86,7 @@
     "name": "Имя",
     "namePlaceholder": "Введите имя",
     "photos": "Фотографии",
+    "photo": "Фотография",
     "photoPlaceholder": "Введите URL фотографии",
     "addPhoto": "Добавить фото",
     "removePhoto": "Удалить",
@@ -126,6 +127,18 @@
         "label": "Выход"
       }
     },
+    "AuthByQuery": {
+      "label": "Авторизация через RTK Query",
+      "SignIn": {
+        "label": "Вход"
+      },
+      "SignUp": {
+        "label": "Регистрация"
+      },
+      "SignOut": {
+        "label": "Выход"
+      }
+    },
     "Catalog": {
       "label": "Каталог"
     },
@@ -138,5 +151,14 @@
     "Home": {
       "label": "Главная"
     }
+  },
+  "ErrorCode": {
+    "ERR_ACCOUNT_ALREADY_EXIST": "Аккаунт с таким адресом электронной почты уже существует.",
+    "ERR_INCORRECT_EMAIL_OR_PASSWORD": "Неверный адрес электронной почты или пароль.",
+    "ERR_INCORRECT_PASSWORD": "Неверный пароль.",
+    "ERR_INVALID_PASSWORD": "Пароль не соответствует требованиям безопасности."
+  },
+  "CommonError": {
+    "UnexspectedError": "Неожиданная ошибка. Пожалуйста, повторите попытку."
   }
 }

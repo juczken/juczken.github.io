@@ -4,8 +4,8 @@ import Counter from '../../../../shared/ui/Counter/Counter';
 import Button from '../../../../shared/ui/Button/Button';
 import { useTranslation } from 'react-i18next';
 
-type CartItemProps = Pick<Product, 'price' | 'name'> & {
-  photo?: Product['photos'] extends (infer T)[] ? T : undefined;
+type CartItemProps = Pick<Product, 'price' | 'name' | 'photo'> & {
+  // photo?: Product['photos'] extends (infer T)[] ? T : undefined;
   count: number;
   onIncrement: () => void;
   onDecrement: () => void;

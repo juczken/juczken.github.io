@@ -5,7 +5,7 @@ interface AuthState {
   token: string | null;
   isAuthenticated: boolean;
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
-  error: string | null;
+  error: string | null | string[];
 }
 
 const initialState: AuthState = {
@@ -20,14 +20,14 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     setAuthenticated: (state, action) => {
-      state.token = action.payload;
-      state.isAuthenticated = true;
       state.status = 'succeeded';
+      state.token = action.payload.token;
+      state.isAuthenticated = true;
     },
     setUnauthenticated: (state) => {
+      state.status = 'idle';
       state.token = null;
       state.isAuthenticated = false;
-      state.status = 'idle';
     },
   },
   extraReducers: (builder) => {
@@ -70,5 +70,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { setAuthenticated, setUnauthenticated } = authSlice.actions;
+export const { setAuthenticated } = authSlice.actions;
 export default authSlice.reducer;

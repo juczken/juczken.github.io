@@ -7,7 +7,6 @@ import Button from '../../../shared/ui/Button/Button';
 
 export type EditProfileFields = {
   userName: string;
-  about: string | null;
 };
 
 type EditProfileProps = {
@@ -35,14 +34,6 @@ const EditProfile: React.FC<EditProfileProps> = ({ onSubmit, defaultValues }) =>
           placeholder={t('EditProfile.userNamePlaceholder')}
         />
         {typeof errors.userName?.message === 'string' && <p className={styles.error}>{errors.userName.message}</p>}
-      </div>
-      <div>
-        <label className={cn(styles.label)}>{t('EditProfile.about')}</label>
-        <textarea
-          className={cn(styles.textarea)}
-          {...register('about')}
-          placeholder={t('EditProfile.aboutPlaceholder')}
-        />
       </div>
       <Button className={styles.button} lable={t('EditProfile.button')} disabled={false} type="submit" />
     </form>

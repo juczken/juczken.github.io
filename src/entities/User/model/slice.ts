@@ -3,12 +3,10 @@ import { User } from './types';
 
 interface UserState {
   currentUser: User | null;
-  needUpdateState: boolean;
 }
 
 const initialState: UserState = {
   currentUser: null,
-  needUpdateState: false,
 };
 
 const userSlice = createSlice({
@@ -27,11 +25,8 @@ const userSlice = createSlice({
         ...action.payload,
       };
     },
-    setNeedUpdateState: (state, action) => {
-      state.needUpdateState = action.payload;
-    },
   },
 });
 
-export const { setCurrentUser, clearCurrentUser, updateCurrentUser, setNeedUpdateState } = userSlice.actions;
+export const { setCurrentUser, clearCurrentUser, updateCurrentUser } = userSlice.actions;
 export default userSlice.reducer;
