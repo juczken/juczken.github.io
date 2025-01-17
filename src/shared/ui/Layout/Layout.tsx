@@ -6,10 +6,13 @@ import Logo from '../Logo/Logo';
 import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher';
 import LanguageSwitcher from '../LanguageSwitcher/LanguageSwitcher';
 import { Outlet } from 'react-router-dom';
-import menuItems from './menuItems';
-import NavigationBar from '../NavigationBar/NavigationBar';
+import NavigationBar, { NavItem } from '../NavigationBar/NavigationBar';
 
-const Layout: FC = () => {
+type LayoutProps = {
+  menuItems: NavItem[];
+};
+
+const Layout: FC<LayoutProps> = ({ menuItems }) => {
   return (
     <div className={cn(style.Layout)}>
       <Header>

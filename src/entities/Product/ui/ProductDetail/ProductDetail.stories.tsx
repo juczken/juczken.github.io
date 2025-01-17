@@ -14,7 +14,7 @@ const meta: Meta<typeof ProductDetail> = {
     desc: { control: 'text' },
     name: { control: 'text' },
     price: { control: 'number' },
-    photos: { control: 'array' },
+    photo: { control: 'text' },
   },
   decorators: [
     (story) => (
@@ -34,13 +34,7 @@ export const OrdinaryProductDetail: Story = {
     name: 'Lorem ipsum',
     categoryName: 'Lorem ipsum categoty',
     price: 19.95,
-    photos: [
-      'https://via.placeholder.com/500.png?text=Lorem+ipsum+1',
-      'https://via.placeholder.com/500.png?text=Lorem+ipsum+2',
-      'https://via.placeholder.com/500.png?text=Lorem+ipsum+3',
-      'https://via.placeholder.com/500.png?text=Lorem+ipsum+4',
-      'https://via.placeholder.com/500.png?text=Lorem+ipsum+5',
-    ],
+    photo: 'https://via.placeholder.com/500.png?text=Lorem+ipsum+1',
   },
 };
 
@@ -50,7 +44,7 @@ export const MissingPhotoProductDetail: Story = {
     categoryName: 'Lorem ipsum categoty',
     name: 'Lorem ipsum',
     price: 19.95,
-    photos: ['https://wrong.com/miss.png'],
+    photo: 'https://wrong.com/miss.png',
   },
 };
 
@@ -60,7 +54,7 @@ export const OnePhotoProductDetail: Story = {
     categoryName: 'Lorem ipsum categoty',
     name: 'Lorem ipsum',
     price: 19.95,
-    photos: ['https://via.placeholder.com/500.png?text=Lorem+ipsum'],
+    photo: 'https://via.placeholder.com/500.png?text=Lorem+ipsum',
   },
 };
 
@@ -69,12 +63,6 @@ export const MisingDescriptionProductDetail: Story = {
     name: 'Lorem ipsum',
     categoryName: 'Lorem ipsum categoty',
     price: 19.95,
-    photos: [
-      'https://via.placeholder.com/500.png?text=Lorem+ipsum+1',
-      'https://via.placeholder.com/500.png?text=Lorem+ipsum+2',
-      'https://via.placeholder.com/500.png?text=Lorem+ipsum+3',
-      'https://via.placeholder.com/500.png?text=Lorem+ipsum+4',
-      'https://via.placeholder.com/500.png?text=Lorem+ipsum+5',
-    ],
+    photo: 'https://via.placeholder.com/500.png?text=Lorem+ipsum+1',
   },
 };

@@ -25,7 +25,6 @@ export const fetch = async (url: string, options: RequestInit) => {
       ok: true,
       status: 200,
       json: async () => ({
-        user: { id: user.id, name: user.username, about: user.about, email: user.email, isAdmin: user.isAdmin },
         token: user.token,
       }),
     };
@@ -51,20 +50,10 @@ export const fetch = async (url: string, options: RequestInit) => {
     fakeDatabase.users.set(newUser.id, newUser);
     fakeDatabase.tokens.add(newUser.token);
 
-    console.log(fakeDatabase.users);
-    console.log(fakeDatabase.tokens);
-
     return {
       ok: true,
       status: 201,
       json: async () => ({
-        user: {
-          id: newUser.id,
-          name: newUser.username,
-          about: newUser.about,
-          email: newUser.email,
-          isAdmin: newUser.isAdmin,
-        },
         token: newUser.token,
       }),
     };
@@ -77,8 +66,6 @@ export const fetch = async (url: string, options: RequestInit) => {
   }
 
   if (url.startsWith('/api/users/byToken') && method === 'GET') {
-    console.log(fakeDatabase.tokens);
-    console.log(token);
     if (token && !fakeDatabase.tokens.has(token)) {
       return { ok: false, status: 401, json: async () => ({ message: 'Unauthorized' }) };
     }
@@ -98,18 +85,21 @@ export const fetch = async (url: string, options: RequestInit) => {
     };
   }
 
-  if (url.startsWith('/api/users/') && method === 'GET') {
+  if (url === '/api/profile' && method === 'GET') {
     if (token && !fakeDatabase.tokens.has(token)) {
       return { ok: false, status: 401, json: async () => ({ message: 'Unauthorized' }) };
     }
-    const email = url.split('/').pop();
-    const user = [...fakeDatabase.users.values()].find((u) => u.email === email);
+    const user = [...fakeDatabase.users.values()].find((u) => u.token === token);
     if (!user) {
       return { ok: false, status: 404, json: async () => ({ message: 'User not found' }) };
     }
     return {
       json: async () => ({
-        user: { id: user.id, email: user.email, name: user.username, about: user.about, isAdmin: user.isAdmin },
+        id: user.id,
+        email: user.email,
+        name: user.username,
+        about: user.about,
+        isAdmin: user.isAdmin,
       }),
       ok: true,
       status: 200,
@@ -117,21 +107,19 @@ export const fetch = async (url: string, options: RequestInit) => {
     };
   }
 
-  if (url === '/api/users/update' && method === 'POST') {
+  if (url === '/api/profile' && (method === 'POST' || method === 'PUT' || method === 'PATCH')) {
     if (token && !fakeDatabase.tokens.has(token)) {
       return { ok: false, status: 401, json: async () => ({ message: 'Unauthorized' }) };
     }
     const userData = JSON.parse(body as string);
-    const user = [...fakeDatabase.users.values()].find((u) => u.email === userData.email);
+    const user = [...fakeDatabase.users.values()].find((u) => u.token === token);
     if (!user) {
       return { ok: false, status: 404, json: async () => ({ message: 'User not found' }) };
     }
-    user.username = userData.name;
-    user.about = userData.about;
+    fakeDatabase.users.set(user.id, { ...user, ...userData });
+
     return {
-      json: async () => ({
-        user: { id: user.id, email: user.email, name: user.username, about: user.about, isAdmin: user.isAdmin },
-      }),
+      json: async () => fakeDatabase.users.get(user.id),
       ok: true,
       status: 200,
       headers: { 'Content-Type': 'application/json' },

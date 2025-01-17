@@ -18,11 +18,13 @@ const ProductsEditScreen: React.FC = () => {
   const itemsEmpty = useSelector((state: RootState) => state.products.products).length === 0;
 
   useEffect(() => {
-    if (itemsEmpty) dispatch(getPartProducts());
+    if (itemsEmpty) dispatch(getPartProducts({ pagination: { pageSize: 10, pageNumber: 1 } }));
   }, []);
 
   const items = useSelector((state: RootState) => state.products.products);
   const categories = useSelector((state: RootState) => state.products.categories);
+  const pagination = useSelector((state: RootState) => state.products.pagination);
+  console.log('handleFetchProducts', pagination, items);
 
   const [categoryNames] = useState(categories.map((category) => category.name));
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
@@ -35,8 +37,11 @@ const ProductsEditScreen: React.FC = () => {
   );
 
   const handleFetchProducts = useCallback(() => {
-    dispatch(getPartProducts());
-  }, [dispatch]);
+    console.log('handleFetchProducts useCallback', pagination, items);
+    if (pagination.pageNumber !== pagination.total && pagination.pageNumber !== 0) {
+      dispatch(getPartProducts({ pagination: { pageSize: 10, pageNumber: pagination.pageNumber + 1 } }));
+    }
+  }, [dispatch, pagination]);
 
   const renderCallback = useCallback(
     (item: Product) => (
@@ -46,7 +51,7 @@ const ProductsEditScreen: React.FC = () => {
           name={item.name}
           desc={item.desc}
           price={item.price}
-          photo={item.photos?.length > 0 ? item.photos[0] : ''}
+          photo={item.photo}
         />
       </div>
     ),
@@ -64,17 +69,17 @@ const ProductsEditScreen: React.FC = () => {
               price: editingProduct.price,
               description: editingProduct.desc,
               category: editingProduct.category.name,
-              photos: editingProduct.photos.map((photo) => ({ url: photo })),
+              photo: { url: editingProduct.photo },
             }}
             categories={categoryNames}
             onSubmit={(data) => {
               const category = categories.find((category) => category.name === data.category);
-              const { category: _, description: desc, photos, ...rest } = data;
+              const { category: _, description: desc, photo, ...rest } = data;
               handleEditProduct(editingProduct.id, {
                 ...rest,
                 desc,
                 category,
-                photos: photos.map((photo) => photo.url),
+                photo: photo.url,
               });
               setEditingProduct(null);
             }}

@@ -24,7 +24,8 @@ export const WithAuthenticationState: FC<WithAuthenticationStateProps> = ({
   routes,
 }) => {
   const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
-  const isAdmin = useSelector((state: RootState) => state.user.currentUser?.isAdmin);
+  const isAdmin = true;
+  // const isAdmin = useSelector((state: RootState) => state.user.currentUser?.isAdmin);
 
   return (
     <>
@@ -48,7 +49,8 @@ const withAuthenticationState = <P extends object>(
 ): ComponentType<P & withAuthenticationStateProps> | null => {
   const HOC: React.FC<P & withAuthenticationStateProps> = (props) => {
     const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
-    const isAdmin = useSelector((state: RootState) => state.user.currentUser?.isAdmin);
+    const isAdmin = true;
+    // const isAdmin = useSelector((state: RootState) => state.user.currentUser?.isAdmin);
     const { authenticationState, ...restProps } = props;
 
     return (

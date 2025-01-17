@@ -1,49 +1,61 @@
-import { baseApi } from 'src/shared/api/baseApi';
-import { Profile, UpdateProfileBody } from 'src/shared/types/serverTypes';
+import { baseApi } from '../../../shared/api/baseApi';
+import { setCurrentUser } from './slice';
 
 export const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getProfile: builder.query<Profile, void>({
+    getProfile: builder.query<
+      {
+        id: string;
+        name: string;
+        email: string;
+        signUpDate: string;
+        commandId: string;
+      },
+      void
+    >({
       query: () => '/profile',
       providesTags: ['Profile'],
+      onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(setCurrentUser(data));
+        } catch (error) {
+          console.log('error', error);
+        }
+      },
     }),
-    updateProfile: builder.mutation<Profile, UpdateProfileBody>({
-      query: (profile) => ({
+    updateProfile: builder.mutation<
+      {
+        id: string;
+        name: string;
+        email: string;
+        signUpDate: string;
+        commandId: string;
+      },
+      { name: string }
+    >({
+      query: ({ name }) => ({
         url: '/profile',
         method: 'POST',
-        body: profile,
+        body: { name },
       }),
-      // invalidatesTags: ['Profile'],
+      onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(setCurrentUser(data));
+        } catch (error) {
+          console.log(error);
+        }
+      },
+    }),
+    changePassword: builder.mutation<{ success: boolean }, { password: string; newPassword: string }>({
+      query: ({ password, newPassword }) => ({
+        url: '/profile/change-password',
+        method: 'POST',
+        body: { password, newPassword },
+      }),
     }),
   }),
 });
 
-const { useGetProfileQuery, useUpdateProfileMutation } = userApi;
-
-// const useGetProfileWithSync = (): typeof useGetProfileQuery => {
-//   const { isSuccess, data, ...other } = useGetProfileQuery();
-//   useEffect(() => {
-//     if (isSuccess) {
-//       setCurrentUser(data);
-//     }
-//   }, [isSuccess, data]);
-//   return { isSuccess, data, ...other };
-// };
-
-// const useUpdateProfileWithSync = (): {
-//   updateProfile: ReturnType<typeof useUpdateProfileMutation>[0];
-//   updateProfileState: ReturnType<typeof useUpdateProfileMutation>[1];
-// } => {
-//   const [updateProfile, updateProfileState] = useUpdateProfileMutation();
-//   const { isSuccess, data } = updateProfileState;
-//   useEffect(() => {
-//     if (isSuccess && data) {
-//       setCurrentUser(data);
-//     }
-//   }, [isSuccess, data, setCurrentUser]);
-
-//   return { updateProfile, updateProfileState };
-// };
-
-// export { useGetProfileWithSync, useGetProfileQuery, useUpdateProfileWithSync, useUpdateProfileMutation };
-export { useGetProfileQuery, useUpdateProfileMutation };
+export const { useGetProfileQuery, useUpdateProfileMutation, useChangePasswordMutation } = userApi;

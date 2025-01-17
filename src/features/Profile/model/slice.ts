@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { changePassword, getProfile, updateProfile } from '../../../entities/User/model/thunks';
+import { clearCurrentUser, setCurrentUser } from '../../../entities/User/model/slice';
 
 interface ProfileState {
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
-  error: string | null;
+  error: string | null | string[];
 }
 
 const initialState: ProfileState = {
@@ -52,7 +53,18 @@ const ProfileSlice = createSlice({
       .addCase(changePassword.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.payload as string;
+      })
+      .addCase(setCurrentUser, (state) => {
+        state.status = 'succeeded';
+      })
+      .addCase(clearCurrentUser, (state) => {
+        state.status = 'idle';
+        state.error = null;
       });
+    // .addCase(signout.fulfilled, (state) => {
+    //   state.status = 'idle';
+    //   state.error = null;
+    // });
   },
 });
 
