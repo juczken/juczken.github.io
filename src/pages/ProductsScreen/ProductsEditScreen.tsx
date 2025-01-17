@@ -9,6 +9,8 @@ import ProductEditForm from '../../features/forms/ProductEditForm/ProductEditFor
 import { updateProduct, getPartProducts } from '../../features/Products/model/thunks';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../app/store/store';
+import Header from 'src/shared/ui/Header/Header';
+import Button from 'src/shared/ui/Button/Button';
 
 const EditProductItem = withEditMode(ProductItem);
 
@@ -61,6 +63,15 @@ const ProductsEditScreen: React.FC = () => {
 
   return (
     <>
+      <Header>
+        <Button
+          className=""
+          lable="Add product"
+          onClick={() => {
+            /* nothing */
+          }}
+        />
+      </Header>
       <ComponentFetchList
         items={items}
         doFetch={handleFetchProducts}
