@@ -183,6 +183,175 @@ code {
     height: 100%;
     width: 100%;
  }
+.NavigationBar-module_navbar-xjg6S {
+    display: flex;
+    justify-content: space-around;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    padding: 10px;
+    position: relative;
+}
+
+.NavigationBar-module_navItem-TiQ4r {
+    position: relative;
+}
+
+.NavigationBar-module_link-SADNv {
+    text-decoration: none;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    font-weight: 400;
+    padding: 5px 10px;
+    transition: background-color 0.3s ease, font-weight 0.3s ease;
+}
+
+.NavigationBar-module_link-SADNv:hover,
+.NavigationBar-module_link-SADNv:active {
+    font-weight: 700;
+    color: var(--text-color);
+    background-color: var(--active-color);
+}
+
+.NavigationBar-module_dropdown-s8Bai {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    min-width: 150px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.NavigationBar-module_navItem-TiQ4r:hover .NavigationBar-module_dropdown-s8Bai {
+    opacity: 1;
+    pointer-events: auto;
+}
+.SignIn-module_form-J2c38 {
+    color: var(--text-color);
+    background-color: var(--background-color);
+    border-color: var(--border-color);
+    padding: 20px;
+}
+
+.SignIn-module_title-O5QkI {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+}
+
+.SignIn-module_label-gN2yf {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.SignIn-module_error-tu8zs {
+    color: red;
+}
+
+.SignIn-module_input-OMTsd,
+.SignIn-module_textarea-dXKMW {
+    /* color: var(--text-color);
+      background-color: var(--background-color);
+      border-color: var(--border-color); */
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid;
+}
+
+.SignIn-module_button-AW9pB {
+    /* color: var(--text-color);
+    background-color: lightblue; */
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.Button-module_wrapper-wEP3r {
+    text-align: center;
+    width: 100%;
+    height: 100%;
+}
+
+.Button-module_button-daFKk {
+    width: 100%;
+    height: 100%;
+    border-style: none;
+    /* background-color: #ffd700; */
+}
+
+.Button-module_button_disable-dDMqC{
+    background-color: var(--disable-color);
+    color: var(--disable-text-color);
+}
+
+.Button-module_button_enable-Z4C7O{
+    color: var(--text-color);
+    background-color: var(--secondary-color);
+    /* background-color: #999999; */
+}
+
+.Button-module_button_enable-Z4C7O:active {
+    background: var(--active-color);
+    outline: none;
+}
+.SignUp-module_form-AYNRE {
+    color: var(--text-color);
+    background-color: var(--background-color);
+    border-color: var(--border-color);
+    padding: 20px;
+}
+
+.SignUp-module_title-cOcNf {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+}
+
+.SignUp-module_label-SEt_w {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.SignUp-module_error-TisA1 {
+    color: red;
+}
+
+.SignUp-module_input-mYweb,
+.SignUp-module_textarea-nLcHm {
+    /* color: var(--text-color);
+      background-color: var(--background-color);
+      border-color: var(--border-color); */
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid;
+}
+
+.SignUp-module_button-gCJJY {
+    /* color: var(--text-color);
+    background-color: lightblue; */
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+.AuthScreen-module_page-NoyA6 {
+  text-align: left;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  border-color: var(--border-color);
+  padding: 20px;
+}
+
+.AuthScreen-module_error-Tf1h7 {
+  color: red;
+}
 .SignIn-module_form-XQzrw {
     color: var(--text-color);
     background-color: var(--background-color);
@@ -222,35 +391,6 @@ code {
     padding: 10px 20px;
     border: none;
     cursor: pointer;
-}
-
-.Button-module_wrapper-wEP3r {
-    text-align: center;
-    width: 100%;
-    height: 100%;
-}
-
-.Button-module_button-daFKk {
-    width: 100%;
-    height: 100%;
-    border-style: none;
-    /* background-color: #ffd700; */
-}
-
-.Button-module_button_disable-dDMqC{
-    background-color: var(--disable-color);
-    color: var(--disable-text-color);
-}
-
-.Button-module_button_enable-Z4C7O{
-    color: var(--text-color);
-    background-color: var(--secondary-color);
-    /* background-color: #999999; */
-}
-
-.Button-module_button_enable-Z4C7O:active {
-    background: var(--active-color);
-    outline: none;
 }
 .SignUp-module_form-OfgtB {
     color: var(--text-color);
@@ -662,55 +802,6 @@ input[type="number"] {
     justify-content: 'space-between';
     justify-self: 'center';
     width: '300px';
-}
-.NavigationBar-module_navbar-xjg6S {
-    display: flex;
-    justify-content: space-around;
-    color: var(--text-color);
-    background-color: var(--background-color);
-    padding: 10px;
-    position: relative;
-}
-
-.NavigationBar-module_navItem-TiQ4r {
-    position: relative;
-}
-
-.NavigationBar-module_link-SADNv {
-    text-decoration: none;
-    color: var(--text-color);
-    background-color: var(--background-color);
-    font-weight: 400;
-    padding: 5px 10px;
-    transition: background-color 0.3s ease, font-weight 0.3s ease;
-}
-
-.NavigationBar-module_link-SADNv:hover,
-.NavigationBar-module_link-SADNv:active {
-    font-weight: 700;
-    color: var(--text-color);
-    background-color: var(--active-color);
-}
-
-.NavigationBar-module_dropdown-s8Bai {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    color: var(--text-color);
-    background-color: var(--background-color);
-    z-index: 10;
-    display: flex;
-    flex-direction: column;
-    min-width: 150px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease-in-out;
-}
-
-.NavigationBar-module_navItem-TiQ4r:hover .NavigationBar-module_dropdown-s8Bai {
-    opacity: 1;
-    pointer-events: auto;
 }
 
 /*# sourceMappingURL=main.css.map*/
