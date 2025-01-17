@@ -47,7 +47,7 @@ const CatalogScreen: React.FC = () => {
 
   return (
     <>
-      <ComponentFetchList items={items} doFetch={handleFetchProducts} render={renderCallback} />
+      <ComponentFetchList items={items} doFetch={handleFetchProducts} render={renderCallback} needObserve={true} />
     </>
   );
 };

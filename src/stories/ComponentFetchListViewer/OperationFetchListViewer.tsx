@@ -31,7 +31,7 @@ const OperationFetchListViewer: FC = () => {
 
   return (
     <>
-      <ComponentFetchList items={items} doFetch={fetchItems} render={renderCallback} />
+      <ComponentFetchList items={items} doFetch={fetchItems} render={renderCallback} needObserve={true} />
     </>
   );
 };
