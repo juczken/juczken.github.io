@@ -56,6 +56,7 @@ const CatalogScreen: React.FC = () => {
           /* do nothing */
         }}
         render={renderCallback}
+        needObserve={true}
       />
     </>
   );
