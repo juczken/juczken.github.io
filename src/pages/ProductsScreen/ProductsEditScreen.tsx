@@ -24,7 +24,6 @@ const ProductsEditScreen: React.FC = () => {
   const items = useSelector((state: RootState) => state.products.products);
   const categories = useSelector((state: RootState) => state.products.categories);
   const pagination = useSelector((state: RootState) => state.products.pagination);
-  console.log('handleFetchProducts', pagination, items);
 
   const [categoryNames] = useState(categories.map((category) => category.name));
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
@@ -37,7 +36,6 @@ const ProductsEditScreen: React.FC = () => {
   );
 
   const handleFetchProducts = useCallback(() => {
-    console.log('handleFetchProducts useCallback', pagination, items);
     if (pagination.pageNumber !== pagination.total && pagination.pageNumber !== 0) {
       dispatch(getPartProducts({ pagination: { pageSize: 10, pageNumber: pagination.pageNumber + 1 } }));
     }
@@ -60,7 +58,12 @@ const ProductsEditScreen: React.FC = () => {
 
   return (
     <>
-      <ComponentFetchList items={items} doFetch={handleFetchProducts} render={renderCallback} />
+      <ComponentFetchList
+        items={items}
+        doFetch={handleFetchProducts}
+        render={renderCallback}
+        needObserve={pagination.pageNumber < pagination.total}
+      />
       {editingProduct && (
         <Modal setVisible={(visible) => (visible ? null : setEditingProduct(null))} visible={editingProduct !== null}>
           <ProductEditForm
