@@ -38,7 +38,7 @@ const ProductsEditScreen: React.FC = () => {
 
   const handleFetchProducts = useCallback(() => {
     console.log('handleFetchProducts useCallback', pagination, items);
-    if (pagination.pageNumber !== pagination.total) {
+    if (pagination.pageNumber !== pagination.total && pagination.pageNumber !== 0) {
       dispatch(getPartProducts({ pagination: { pageSize: 10, pageNumber: pagination.pageNumber + 1 } }));
     }
   }, [dispatch, pagination]);
