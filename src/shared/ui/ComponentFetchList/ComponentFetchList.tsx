@@ -5,13 +5,14 @@ type ComponentFetchListProps<T> = {
   items: T[];
   doFetch: () => void;
   render: (item: T) => React.ReactNode;
+  needObserve: boolean;
   // render: (item: T, index: number, count: number, ref: React.RefObject<HTMLDivElement>) => React.ReactNode,
 };
 
-const ComponentFetchList = <T,>({ items, render, doFetch }: ComponentFetchListProps<T>) => {
+const ComponentFetchList = <T,>({ items, render, doFetch, needObserve }: ComponentFetchListProps<T>) => {
   const targetRef = useRef<HTMLDivElement>(null);
 
-  useIntersectionObserve(targetRef, doFetch, { threshold: 0.5 });
+  useIntersectionObserve(targetRef, doFetch, { threshold: 0.5 }, needObserve);
 
   return (
     <>

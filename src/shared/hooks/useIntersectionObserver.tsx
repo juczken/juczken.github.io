@@ -3,11 +3,12 @@ import { useEffect } from 'react';
 function useIntersectionObserve<T extends HTMLElement>(
   ref: React.RefObject<T>,
   onIntersect: () => void,
-  options?: IntersectionObserverInit
+  options?: IntersectionObserverInit,
+  needObserve = true
 ) {
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
+      if (entry.isIntersecting && needObserve) {
         onIntersect();
       }
     }, options);
@@ -23,7 +24,7 @@ function useIntersectionObserve<T extends HTMLElement>(
         observer.unobserve(currentRef);
       }
     };
-  }, [options, ref]);
+  }, [options, ref, needObserve]);
 }
 
 export default useIntersectionObserve;
