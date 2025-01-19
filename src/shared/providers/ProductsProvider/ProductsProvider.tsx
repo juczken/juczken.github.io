@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { createRandomProduct, getCategories, getRandomDate } from '../../lib/fakeGenerators/fakeGenerators';
 import { ProductsContext } from '../../contexts/ProductsContext/ProductsContext';
+import { Product } from '../../types/serverTypes';
 
 export const ProductsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [currentProducts, setCurrentProducts] = useState(

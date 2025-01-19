@@ -12,21 +12,14 @@ import ProductsProvider from '../shared/providers/ProductsProvider/ProductsProvi
 import CartProvider from '../shared/providers/CartProvider/CartProvider';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from './store/store';
-import { getCategories } from '../features/Products/model/thunks';
 import { setupAuthSync } from '../features/Auth/model/sync';
 import { getTokenFromLocalStorage } from '../shared/lib/localStorage';
 import { getProfile } from '../entities/User/model/thunks';
 import { setAuthenticated } from '../features/Auth/model/slice';
 import menuItems from './menu/menuItems';
+import { getCategories } from '../entities/Category/model/thunks';
 
 function App() {
-  // const [menuItems] = useState([
-  //   ...shopMenuItems,
-  //   ...profileMenuItems,
-  //   ...adminMenuItems,
-  //   ...authMenuItems,
-  //   ...authByQueryMenuItems,
-  // ]);
   const [initialized, setInitialization] = useState(false);
   const dispatch: AppDispatch = useDispatch();
 
@@ -35,10 +28,9 @@ function App() {
       dispatch(getProfile());
       const token = getTokenFromLocalStorage();
       dispatch(setAuthenticated({ token }));
+      dispatch(getCategories(null));
     }
     setupAuthSync();
-    dispatch(getCategories());
-    // removeTokenFromLocalStorage();
     setInitialization(true);
   }, []);
 
@@ -79,9 +71,6 @@ function App() {
           </React.Fragment>
         );
       }),
-      // <React.Fragment key={'rootScreenElement'}>
-      //   <Route path={'/'} element={<RootScreen />} />
-      // </React.Fragment>,
     ];
   };
 

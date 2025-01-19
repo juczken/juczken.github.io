@@ -1,4 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
+import { Category, Product } from '../../types/serverTypes';
+import { Operation } from '../../../entities/Operation/models/types/operation';
 
 export const createRandomProduct = (createdAt: string): Product => {
   const id = getRandomId();
@@ -65,24 +67,39 @@ export const categories: Category[] = [
   {
     id: '1',
     name: 'Прям вот очень нужное',
+    commandId: '6d4672bc-6245-4b6b-a4c4-acdb6cf3fc89',
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     id: '2',
     name: 'Не так, что бы нужное',
     photo: 'store/photos/categories/2.jpeg',
+    commandId: '6d4672bc-6245-4b6b-a4c4-acdb6cf3fc89',
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     id: '3',
     name: 'Совсем выбрось',
     photo: 'store/photos/categories/3.jpeg',
+    commandId: '6d4672bc-6245-4b6b-a4c4-acdb6cf3fc89',
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     id: '4',
     name: 'Необходимое',
+    commandId: '6d4672bc-6245-4b6b-a4c4-acdb6cf3fc89',
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     id: '5',
     name: 'Вроде некуда, а жаль',
+    commandId: '6d4672bc-6245-4b6b-a4c4-acdb6cf3fc89',
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
 ];
 

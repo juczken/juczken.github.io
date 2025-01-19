@@ -1,3 +1,4 @@
+import { Category, Product } from '../../types/serverTypes';
 import { createRandomProduct, getCategories, getRandomDate } from './fakeGenerators';
 
 const fakeDatabase = {

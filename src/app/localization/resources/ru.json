@@ -1,5 +1,7 @@
 {
-  "categoty": {},
+  "categoty": {
+    "photo_alt": "Категория {{name}}"
+  },
   "operation": {
     "amount": "{{amount, currency}}",
     "description_undefined": "неописуемо"
@@ -104,7 +106,24 @@
       "photosInvalid": "Каждая ссылка должна быть корректным URL",
       "priceRequired": "Цена обязательна",
       "priceMin": "Цена должна быть не меньше 0",
-      "categoryRequired": "Категория обязательна"
+      "categoryRequired": "Категория обязательна",
+      "uploadError": "'Не удалось загрузить файл. Попробуйте еще раз.'"
+    },
+    "button": "Сохранить"
+  },
+  "CategoryEdit": {
+    "name": "Имя",
+    "namePlaceholder": "Введите имя",
+    "photos": "Фотографии",
+    "photo": "Фотография",
+    "photoPlaceholder": "Введите URL фотографии",
+    "addPhoto": "Добавить фото",
+    "errors": {
+      "nameRequired": "Имя обязательно",
+      "photosRequired": "Укажите фотографию",
+      "photosInvalid": "Каждая ссылка должна быть корректным URL",
+      "priceRequired": "Цена обязательна",
+      "uploadError": "'Не удалось загрузить файл. Попробуйте еще раз.'"
     },
     "button": "Сохранить"
   },
@@ -145,8 +164,14 @@
     "Cart": {
       "label": "Корзина"
     },
-    "Products": {
-      "label": "Товары"
+    "Edit": {
+      "label": "Редактирование",
+      "Products": {
+        "label": "Товары"
+      },
+      "Categories": {
+        "label": "Категории"
+      }
     },
     "Home": {
       "label": "Главная"
@@ -160,5 +185,14 @@
   },
   "CommonError": {
     "UnexspectedError": "Неожиданная ошибка. Пожалуйста, повторите попытку."
+  },
+  "CartScreen": {
+    "cart": "Корзина",
+    "loading": "Загрузка...",
+    "emptyCart": "Корзина пуста",
+    "totalTitle": "Итого",
+    "total": "{{total, currency}}",
+    "clear": "Очистить",
+    "checkoutButton": "Оформить заказ"
   }
 }

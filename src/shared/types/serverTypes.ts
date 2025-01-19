@@ -30,7 +30,24 @@ export type ServerErrors = {
 
 export type ServerError = ServerErrors['errors'] extends (infer T)[] ? T : undefined;
 
-type Product = {
+export type Profile = {
+  id: string;
+  name: string;
+  email: string;
+  signUpDate: unknown;
+  commandId: string;
+};
+
+export type Category = {
+  id: string;
+  name: string;
+  photo?: string;
+  createdAt: Date;
+  updatedAt: Date;
+  commandId: string;
+};
+
+export type Product = {
   id: string;
   name: string;
   photo?: string;
@@ -42,6 +59,35 @@ type Product = {
   commandId: string;
   category: Category;
 };
+
+export type User = Partial<Profile>;
+
+export type Order = {
+  id: string;
+  products: OrderProduct[];
+  user: User;
+  status: OrderStatus;
+  createdAt: Date;
+  updatedAt: Date;
+  commandId: string;
+};
+
+export type OrderProduct = {
+  _id: string; // служебный id - это не id продукта
+  product: Product;
+  quantity: number;
+};
+
+export enum OrderStatus {
+  PendingConfirmation = 'pending_confirmation',
+  Processing = 'processing',
+  Packaging = 'packaging',
+  WaitingForDelivery = 'waiting_for_delivery',
+  InTransit = 'in_transit',
+  Delivered = 'delivered',
+  ReturnRequested = 'return_requested',
+  OrderCancelled = 'order_cancelled',
+}
 
 export type Pagination = {
   pageSize?: number;
@@ -57,8 +103,8 @@ export type PaginationWithTotal = Pagination & {
   total: number;
 };
 
-export type ProductsResult = {
-  data: Product[];
+export type GetPageResult<T> = {
+  data: T[];
   pagination: PaginationWithTotal;
   sorting: Sorting;
 };
@@ -83,4 +129,65 @@ export type ProductsFilters = CommonFilters & {
   name?: string;
   ids?: string[];
   categoryIds?: string[];
+};
+
+export type CategoriesFilters = CommonFilters & {
+  name?: string;
+  ids?: string[];
+};
+
+export type OrdersFilters = CommonFilters & {
+  productIds?: string[];
+  userId?: string;
+  ids?: string[];
+  status?: OrderStatus;
+};
+
+export type AuthResult = {
+  token: string;
+  profile: Profile;
+};
+
+export type SignUpBody = {
+  email: string;
+  password: string;
+  commandId: string;
+};
+
+export type SignInBody = {
+  email: string;
+  password: string;
+};
+
+export type ChangePasswordBody = {
+  password: string;
+  newPassword: string;
+};
+
+export type ChangePasswordResult = {
+  success: boolean;
+};
+
+export type UpdateProfileBody = {
+  name: string;
+};
+
+export type MutateRequest<T> = {
+  body: T;
+  id: string;
+};
+
+export type MutateProductBody = Omit<Product, 'id' | 'createdAt' | 'updatedAt' | 'commandId' | 'category'> & {
+  categoryId: string;
+};
+
+export type MutateCategoryBody = Omit<Category, 'id' | 'createdAt' | 'updatedAt' | 'commandId'>;
+
+export type MutateOrderProduct = {
+  id: string;
+  quantity: number;
+};
+
+export type MutateOrderBody = Omit<Order, 'id' | 'createdAt' | 'products' | 'user' | 'updatedAt' | 'commandId'> & {
+  products: MutateOrderProduct[];
 };

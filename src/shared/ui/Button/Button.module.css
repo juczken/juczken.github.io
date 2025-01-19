@@ -1,7 +1,6 @@
-
 .wrapper {
     text-align: center;
-    width: 100%;
+    /* width: 100%; */
     height: 100%;
 }
 
@@ -12,12 +11,12 @@
     /* background-color: #ffd700; */
 }
 
-.button_disable{
+.button_disable {
     background-color: var(--disable-color);
     color: var(--disable-text-color);
 }
 
-.button_enable{
+.button_enable {
     color: var(--text-color);
     background-color: var(--secondary-color);
     /* background-color: #999999; */

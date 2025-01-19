@@ -1,6 +1,10 @@
-.Layout{
+.Layout {
     color: var(--text-color);
     background-color: var(--background-color);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
 
 .header {
@@ -15,12 +19,17 @@
     justify-content: space-between;
 }
 
-.item{
+.content {
+    flex-grow: 1;
+    overflow: auto;
+}
+
+.item {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.right_wrapper{
+.right_wrapper {
     display: flex;
 }

@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { signin, signup, signout } from './thunks';
+import { resetState } from '../../../shared/actions/actions';
 
 interface AuthState {
   token: string | null;
@@ -32,6 +33,7 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(resetState, () => initialState)
       .addCase(signin.pending, (state) => {
         state.status = 'loading';
         state.isAuthenticated = false;
