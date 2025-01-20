@@ -93,10 +93,10 @@ const ProductEditForm: React.FC<ProductEditFormProps> = ({ onSubmit, defaultValu
             type="text"
             {...register('photo.url', {
               validate: (value) =>
-                value.trim().startsWith('http') ||
-                value === '' ||
                 value === undefined ||
                 value === null ||
+                value === '' ||
+                value.trim().startsWith('http') ||
                 t('ProductEdit.errors.photosInvalid'),
             })}
             placeholder={t('ProductEdit.photoPlaceholder')}
