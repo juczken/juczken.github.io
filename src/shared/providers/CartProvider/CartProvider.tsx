@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { CartContext } from '../../contexts/CartContext/CartContext';
+import { Product } from '../../types/serverTypes';
 
 export type CartEntry = {
   product: Product;

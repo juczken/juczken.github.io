@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { User } from './types';
+import { resetState } from '../../../shared/actions/actions';
 
 interface UserState {
   currentUser: User | null;
@@ -25,6 +26,9 @@ const userSlice = createSlice({
         ...action.payload,
       };
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(resetState, () => initialState);
   },
 });
 

@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getCategories, getPartProducts, updateProduct } from './thunks';
-import { PaginationWithTotal, Sorting } from '../../../shared/types/serverTypes';
+import { getPartProducts, updateProduct } from './thunks';
+import { Category, PaginationWithTotal, Product, Sorting } from '../../../shared/types/serverTypes';
+import { getCategories } from '../../../entities/Category/model/thunks';
+import { resetState } from '../../../shared/actions/actions';
 
 interface ProductsState {
   products: Product[];
@@ -8,7 +10,7 @@ interface ProductsState {
   pagination: PaginationWithTotal;
   sorting: Sorting;
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
-  error: string | null;
+  error: string | null | string[];
 }
 
 const initialState: ProductsState = {
@@ -20,12 +22,13 @@ const initialState: ProductsState = {
   error: null,
 };
 
-const ProductsSlice = createSlice({
+const productsSlice = createSlice({
   name: 'Products',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(resetState, () => initialState)
       .addCase(getPartProducts.pending, (state) => {
         state.status = 'loading';
         state.error = null;
@@ -46,9 +49,9 @@ const ProductsSlice = createSlice({
       })
       .addCase(updateProduct.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        const index = state.products.findIndex((item) => item.id === action.payload.product.id);
+        const index = state.products.findIndex((item) => item.id === action.payload.id);
         if (index !== -1) {
-          state.products[index] = action.payload.product;
+          state.products[index] = action.payload;
         }
       })
       .addCase(updateProduct.rejected, (state, action) => {
@@ -61,7 +64,7 @@ const ProductsSlice = createSlice({
       })
       .addCase(getCategories.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.categories = [...action.payload.categories];
+        state.categories = [...action.payload.data];
       })
       .addCase(getCategories.rejected, (state, action) => {
         state.status = 'failed';
@@ -70,4 +73,4 @@ const ProductsSlice = createSlice({
   },
 });
 
-export default ProductsSlice.reducer;
+export default productsSlice.reducer;

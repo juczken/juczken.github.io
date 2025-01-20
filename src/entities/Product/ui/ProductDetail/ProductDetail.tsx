@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import CartButton from '../../../../features/Cart/ui/CartButton/CartButton';
 import style from './ProductDetail.module.css';
 import { useTranslation } from 'react-i18next';
+import { Category, Product } from '../../../../shared/types/serverTypes';
 
 // type ProductDetailProps = Pick<
 //   Product& MutatePropertyToArray<Product> & AddPropertyPrefix<Category, 'category'>,

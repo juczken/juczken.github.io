@@ -5,20 +5,21 @@
     background-color: var(--background-color);
     top: 0;
     border-bottom: 1px solid #d8dbdf;
-    z-index: 1;
+    /* z-index: 1; */
     display: flex;
     justify-content: space-between;
 }
 
-.item{
+.item {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.right_wrapper{
+.right_wrapper {
     display: flex;
 }
+
 /* .themeSwitcher {
     background-color: var(--background-color);
     color: var(--text-color);

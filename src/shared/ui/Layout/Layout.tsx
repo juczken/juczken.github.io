@@ -31,7 +31,9 @@ const Layout: FC<LayoutProps> = ({ menuItems }) => {
           </div>
         </div>
       </Header>
-      <Outlet />
+      <div className={style.content}>
+        <Outlet />
+      </div>
     </div>
   );
 };

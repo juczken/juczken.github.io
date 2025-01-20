@@ -3,6 +3,7 @@ import React, { FC, useCallback, useState } from 'react';
 import { createRandomProduct, getRandomDate } from '../../shared/lib/fakeGenerators/fakeGenerators';
 import ProductItem from '../../entities/Product/ui/ProductItem/ProductItem';
 import ComponentFetchList from '../../shared/ui/ComponentFetchList/ComponentFetchList';
+import { Product } from '../../shared/types/serverTypes';
 
 const ProductFetchListViewer: FC = () => {
   const [items, setItems] = useState(

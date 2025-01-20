@@ -1,6 +1,5 @@
 import React from 'react';
 import { NavItem } from '../../shared/ui/NavigationBar/NavigationBar';
-import AuthScreenByQuery from '../../pages/AuthScreenByQuery/AuthScreen';
 import AuthScreen, { AuthAction } from '../../pages/AuthScreen/AuthScreen';
 import ProfileScreen from '../../pages/ProfileScreen/ProfileScreen';
 import CatalogScreen from '../../pages/CatalogScreen/CatalogScreen';
@@ -8,6 +7,7 @@ import { AuthenticationState } from '../../shared/hocs/withAuthenticationState';
 import ProductsEditScreen from '../../pages/ProductsScreen/ProductsEditScreen';
 import CartScreen from '../../pages/CartScreen/CartScreen';
 import RootScreen from '../../pages/RootScreen/RootScreen';
+import CategoriesEditScreen from '../../pages/CategoriesScreen/CategoriesEditScreen';
 
 const homeMenuItems: NavItem[] = [{ label: 'Routes.Home.label', path: '/', element: <RootScreen /> }];
 
@@ -16,12 +16,24 @@ const shopMenuItems: NavItem[] = [
   { label: 'Routes.Cart.label', path: '/cart', element: <CartScreen /> },
 ];
 
-const adminMenuItems: NavItem[] = [
+const editMenuItems: NavItem[] = [
   {
-    label: 'Routes.Products.label',
+    label: 'Routes.Edit.label',
     authenticationState: AuthenticationState.AdminAuthenticated,
-    path: '/products',
-    element: <ProductsEditScreen />,
+    dropdown: [
+      {
+        label: 'Routes.Edit.Products.label',
+        authenticationState: AuthenticationState.AdminAuthenticated,
+        path: '/products',
+        element: <ProductsEditScreen />,
+      },
+      {
+        label: 'Routes.Edit.Categories.label',
+        authenticationState: AuthenticationState.AdminAuthenticated,
+        path: '/categories',
+        element: <CategoriesEditScreen />,
+      },
+    ],
   },
 ];
 
@@ -51,31 +63,31 @@ const authMenuItems: NavItem[] = [
   },
 ];
 
-const authByQueryMenuItems: NavItem[] = [
-  {
-    label: 'Routes.AuthByQuery.label',
-    dropdown: [
-      {
-        label: 'Routes.AuthByQuery.SignIn.label',
-        authenticationState: AuthenticationState.Unauthenticated,
-        path: '/authByQuery/SignIn',
-        element: <AuthScreenByQuery authAction={AuthAction.SignIn} />,
-      },
-      {
-        label: 'Routes.AuthByQuery.SignUp.label',
-        authenticationState: AuthenticationState.Unauthenticated,
-        path: '/authByQuery/SignUp',
-        element: <AuthScreenByQuery authAction={AuthAction.SignUp} />,
-      },
-      {
-        label: 'Routes.AuthByQuery.SignOut.label',
-        authenticationState: AuthenticationState.Authenticated,
-        path: '/authByQuery/SignOut',
-        element: <AuthScreenByQuery authAction={AuthAction.SignOut} />,
-      },
-    ],
-  },
-];
+// const authByQueryMenuItems: NavItem[] = [
+//   {
+//     label: 'Routes.AuthByQuery.label',
+//     dropdown: [
+//       {
+//         label: 'Routes.AuthByQuery.SignIn.label',
+//         authenticationState: AuthenticationState.Unauthenticated,
+//         path: '/authByQuery/SignIn',
+//         element: <AuthScreenByQuery authAction={AuthAction.SignIn} />,
+//       },
+//       {
+//         label: 'Routes.AuthByQuery.SignUp.label',
+//         authenticationState: AuthenticationState.Unauthenticated,
+//         path: '/authByQuery/SignUp',
+//         element: <AuthScreenByQuery authAction={AuthAction.SignUp} />,
+//       },
+//       {
+//         label: 'Routes.AuthByQuery.SignOut.label',
+//         authenticationState: AuthenticationState.Authenticated,
+//         path: '/authByQuery/SignOut',
+//         element: <AuthScreenByQuery authAction={AuthAction.SignOut} />,
+//       },
+//     ],
+//   },
+// ];
 
 const profileMenuItems: NavItem[] = [
   {
@@ -94,8 +106,8 @@ export default [
   ...homeMenuItems,
   ...shopMenuItems,
   ...profileMenuItems,
-  ...adminMenuItems,
+  ...editMenuItems,
   ...authMenuItems,
-  ...authByQueryMenuItems,
+  // ...authByQueryMenuItems,
   ...testMenuItems,
 ];

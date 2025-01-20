@@ -1,12 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { CartEntry } from './types';
+import { CartEntry } from '../../../entities/Cart/model/types';
+import { resetState } from '../../../shared/actions/actions';
+import { createOrder } from '../../../entities/Order/model/thunks';
 
 interface CartEntryState {
   currentCartEntry: CartEntry[];
+  createOrderStatus: 'idle' | 'loading' | 'succeeded' | 'failed';
+  createOrdreError: string | null | string[];
 }
 
 const initialState: CartEntryState = {
   currentCartEntry: [],
+  createOrderStatus: 'idle',
+  createOrdreError: null,
 };
 
 const cartEntrySlice = createSlice({
@@ -32,8 +38,23 @@ const cartEntrySlice = createSlice({
       }
     },
     clearCart: (state) => {
-      state.currentCartEntry = [];
+      return initialState;
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(resetState, () => initialState)
+      .addCase(createOrder.pending, (state) => {
+        state.createOrderStatus = 'loading';
+        state.createOrdreError = null;
+      })
+      .addCase(createOrder.fulfilled, (state, action) => {
+        state.createOrderStatus = 'succeeded';
+      })
+      .addCase(createOrder.rejected, (state, action) => {
+        state.createOrderStatus = 'failed';
+        state.createOrdreError = action.payload as string;
+      });
   },
 });
 

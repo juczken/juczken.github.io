@@ -1,11 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { saveTokenToLocalStorage, removeTokenFromLocalStorage } from '../../../shared/lib/localStorage';
 // import { fetch } from '../../../shared/lib/fakeGenerators/fakeFetch';
-import { clearCurrentUser } from '../../../entities/User/model/slice';
 import { getProfile } from '../../../entities/User/model/thunks';
 import { API_BASE_URL } from '../../../shared/configs/api';
 import { ServerErrors } from '../../../shared/types/serverTypes';
 import { getLocaleErrorMessage } from '../../../shared/lib/errorsParsing';
+import { resetState } from '../../../shared/actions/actions';
 
 export const signin = createAsyncThunk(
   'auth/signin',
@@ -72,7 +72,8 @@ export const signup = createAsyncThunk(
 export const signout = createAsyncThunk('auth/signout', async (_, thunkAPI) => {
   try {
     removeTokenFromLocalStorage();
-    thunkAPI.dispatch(clearCurrentUser());
+    // thunkAPI.dispatch(clearCurrentUser());
+    thunkAPI.dispatch(resetState());
 
     return null;
   } catch (error) {

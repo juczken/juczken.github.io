@@ -4,10 +4,12 @@ import { useTranslation } from 'react-i18next';
 import cn from 'clsx';
 import styles from './ProductEditForm.module.css';
 import Button from '../../../shared/ui/Button/Button';
+import { API_BASE_URL } from '../../../shared/configs/api';
+import { getTokenFromLocalStorage } from '../../../shared/lib/localStorage';
 
 type ProductEditFormFields = {
   name: string;
-  photo: { url: string };
+  photo?: { url: string };
   description?: string;
   price: number;
   oldPrice?: number;
@@ -26,14 +28,51 @@ const ProductEditForm: React.FC<ProductEditFormProps> = ({ onSubmit, defaultValu
     register,
     handleSubmit,
     control,
+    setValue,
+    clearErrors,
+    setError,
     formState: { errors },
   } = useForm({
     defaultValues,
   });
 
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const token = getTokenFromLocalStorage();
+    if (!token) throw new Error('No token');
+
+    const [file] = e.target.files;
+    if (!file) return;
+
+    const body = new FormData();
+    body.append('file', file);
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/upload`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        method: 'POST',
+        body,
+      });
+
+      if (!response.ok) {
+        throw new Error('Ошибка загрузки файла');
+      }
+
+      const { url } = await response.json();
+      setValue('photo.url', url);
+      clearErrors('photo.url');
+    } catch (err) {
+      console.error('Ошибка загрузки файла:', err);
+      setError('photo.url', {
+        type: 'manual',
+        message: 'Не удалось загрузить файл. Попробуйте еще раз.',
+      });
+    }
+  };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={cn(styles.form)}>
-      {/* Name */}
       <div>
         <label className={cn(styles.label)}>{t('ProductEdit.name')}</label>
         <input
@@ -45,25 +84,32 @@ const ProductEditForm: React.FC<ProductEditFormProps> = ({ onSubmit, defaultValu
         {typeof errors?.name?.message === 'string' && <p className={styles.error}>{errors.name.message}</p>}
       </div>
 
-      {/* Photos */}
       <div>
         <label className={cn(styles.label)}>{t('ProductEdit.photo')}</label>
-        <div style={{ display: 'flex', width: '100%', alignItems: 'center' }}>
+        <div style={{ display: 'flex', width: '100%', alignItems: 'center', gap: '10px' }}>
           <input
             className={cn(styles.input, { [styles.error]: errors.photo })}
-            style={{ paddingTop: '20px' }}
+            // style={{ paddingTop: '20px' }}
             type="text"
-            {...register(`photo.url`, {
-              required: t('ProductEdit.errors.photosRequired'),
-              validate: (value) => value.trim().startsWith('http') || t('ProductEdit.errors.photosInvalid'),
+            {...register('photo.url', {
+              validate: (value) =>
+                value.trim().startsWith('http') ||
+                value === '' ||
+                value === undefined ||
+                value === null ||
+                t('ProductEdit.errors.photosInvalid'),
             })}
             placeholder={t('ProductEdit.photoPlaceholder')}
           />
+
+          <input type="file" id="file-upload" onChange={handleFileUpload} style={{ display: 'none' }} />
+          <label htmlFor="file-upload" className={styles.customFileButton} style={{ whiteSpace: 'nowrap' }}>
+            Выберите файл
+          </label>
         </div>
         {errors.photo && errors.photo?.url && <p className={styles.error}>{errors.photo?.url?.message}</p>}
       </div>
 
-      {/* Description */}
       <div>
         <label className={cn(styles.label)}>{t('ProductEdit.description')}</label>
         <textarea
@@ -73,7 +119,6 @@ const ProductEditForm: React.FC<ProductEditFormProps> = ({ onSubmit, defaultValu
         />
       </div>
 
-      {/* Price */}
       <div>
         <label className={cn(styles.label)}>{t('ProductEdit.price')}</label>
         <input
@@ -89,7 +134,6 @@ const ProductEditForm: React.FC<ProductEditFormProps> = ({ onSubmit, defaultValu
         {errors.price && <p className={styles.error}>{errors.price.message}</p>}
       </div>
 
-      {/* Old Price */}
       <div>
         <label className={cn(styles.label)}>{t('ProductEdit.oldPrice')}</label>
         <input
@@ -101,7 +145,6 @@ const ProductEditForm: React.FC<ProductEditFormProps> = ({ onSubmit, defaultValu
         />
       </div>
 
-      {/* Category */}
       <div>
         <label className={cn(styles.label)}>{t('ProductEdit.category')}</label>
         <Controller

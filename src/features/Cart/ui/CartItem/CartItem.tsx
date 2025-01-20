@@ -3,6 +3,7 @@ import style from './CartItem.module.css';
 import Counter from '../../../../shared/ui/Counter/Counter';
 import Button from '../../../../shared/ui/Button/Button';
 import { useTranslation } from 'react-i18next';
+import { Product } from '../../../../shared/types/serverTypes';
 
 type CartItemProps = Pick<Product, 'price' | 'name' | 'photo'> & {
   // photo?: Product['photos'] extends (infer T)[] ? T : undefined;

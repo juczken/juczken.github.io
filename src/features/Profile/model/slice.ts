@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { changePassword, getProfile, updateProfile } from '../../../entities/User/model/thunks';
 import { clearCurrentUser, setCurrentUser } from '../../../entities/User/model/slice';
+import { resetState } from '../../../shared/actions/actions';
 
 interface ProfileState {
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
@@ -18,6 +19,7 @@ const ProfileSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(resetState, () => initialState)
       .addCase(getProfile.pending, (state) => {
         state.status = 'loading';
         state.error = null;

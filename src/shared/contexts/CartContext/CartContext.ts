@@ -1,5 +1,6 @@
 import { createContext, useContext } from 'react';
 import { CartEntry } from '../../providers/CartProvider/CartProvider';
+import { Product } from '../../types/serverTypes';
 
 type CartContextProps = {
   currentCart: CartEntry[];

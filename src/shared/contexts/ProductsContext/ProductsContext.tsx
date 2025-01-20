@@ -1,4 +1,5 @@
 import { createContext, useContext } from 'react';
+import { Category, Product } from '../../types/serverTypes';
 
 type ProductsContextProps = {
   currentProducts: Product[];

@@ -1,3 +1,5 @@
+import { Category } from '../../../../shared/types/serverTypes';
+
 type BaseOperation = {
   id: string;
   name: string;
@@ -15,4 +17,4 @@ type Profit = BaseOperation & {
   type: 'Profit';
 };
 
-type Operation = Cost | Profit;
+export type Operation = Cost | Profit;
