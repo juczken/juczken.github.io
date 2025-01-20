@@ -8,12 +8,19 @@ import ProductsEditScreen from '../../pages/ProductsScreen/ProductsEditScreen';
 import CartScreen from '../../pages/CartScreen/CartScreen';
 import RootScreen from '../../pages/RootScreen/RootScreen';
 import CategoriesEditScreen from '../../pages/CategoriesScreen/CategoriesEditScreen';
+import UserOrdersScreen from '../../pages/UserOrdersScreen/UserOrdersScreen';
 
 const homeMenuItems: NavItem[] = [{ label: 'Routes.Home.label', path: '/', element: <RootScreen /> }];
 
 const shopMenuItems: NavItem[] = [
   { label: 'Routes.Catalog.label', path: '/catalog', element: <CatalogScreen /> },
   { label: 'Routes.Cart.label', path: '/cart', element: <CartScreen /> },
+  {
+    label: 'Routes.UserOrders.label',
+    authenticationState: AuthenticationState.Authenticated,
+    path: '/userOrders',
+    element: <UserOrdersScreen />,
+  },
 ];
 
 const editMenuItems: NavItem[] = [
