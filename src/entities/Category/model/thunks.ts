@@ -85,7 +85,11 @@ export const updateCategory = createAsyncThunk<Category, MutateRequest<MutateCat
         body: JSON.stringify(updateCategory.body),
       });
 
-      if (!response.ok) throw new Error('Update failed');
+      if (!response.ok) {
+        const errors = await response.json();
+        const errorMessages = (errors as ServerErrors).errors.map((error) => getLocaleErrorMessage(error));
+        return thunkAPI.rejectWithValue(errorMessages);
+      }
       const data = await response.json();
 
       return data;
@@ -108,7 +112,11 @@ export const addCategory = createAsyncThunk<Category, MutateCategoryBody>(
         body: JSON.stringify(newCategory),
       });
 
-      if (!response.ok) throw new Error('Update failed');
+      if (!response.ok) {
+        const errors = await response.json();
+        const errorMessages = (errors as ServerErrors).errors.map((error) => getLocaleErrorMessage(error));
+        return thunkAPI.rejectWithValue(errorMessages);
+      }
       const data = await response.json();
 
       return data;

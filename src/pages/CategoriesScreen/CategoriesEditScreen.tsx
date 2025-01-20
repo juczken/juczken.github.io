@@ -11,13 +11,15 @@ import { addCategory, getPartCategories, updateCategory } from '../../entities/C
 import { Category, MutateCategoryBody } from '../../shared/types/serverTypes';
 import Button from '../../shared/ui/Button/Button';
 import ComponentFetchList from '../../shared/ui/ComponentFetchList/ComponentFetchList';
+import { useTranslation } from 'react-i18next';
 
 const EditCategoryItem = withEditMode(CategoryItem);
 
 const CategoriesEditScreen: React.FC = () => {
+  const { t } = useTranslation();
   const dispatch: AppDispatch = useDispatch();
 
-  const categoriestate = useSelector((state: RootState) => state.categories);
+  const categorieState = useSelector((state: RootState) => state.categories);
 
   const itemsEmpty = useSelector((state: RootState) => state.categories.categories).length === 0;
   const firstRender = useRef(true);
@@ -31,6 +33,7 @@ const CategoriesEditScreen: React.FC = () => {
 
   const items = useSelector((state: RootState) => state.categories.categories);
   const pagination = useSelector((state: RootState) => state.categories.pagination);
+  const categoryError = useSelector((state: RootState) => state.categories.error);
 
   const [editingCategory, setEditingCategory] = useState<Category | null>(null);
 
@@ -51,10 +54,15 @@ const CategoriesEditScreen: React.FC = () => {
   );
 
   const handleFetchCategories = useCallback(() => {
-    if (pagination.pageNumber !== pageTotal && pagination.pageNumber !== 0 && categoriestate.status !== 'loading') {
+    if (
+      pagination.pageNumber !== pageTotal &&
+      pagination.pageNumber !== 0 &&
+      categorieState.status !== 'loading' &&
+      categorieState.status !== 'failed'
+    ) {
       dispatch(getPartCategories({ pagination: { pageSize: 10, pageNumber: pagination.pageNumber + 1 } }));
     }
-  }, [dispatch, pagination, pageTotal, categoriestate.status]);
+  }, [dispatch, pagination, pageTotal, categorieState.status]);
 
   const renderCallback = useCallback(
     (item: Category) => (
@@ -81,7 +89,7 @@ const CategoriesEditScreen: React.FC = () => {
             className={styles.addButton}
             lable="Add category"
             onClick={handleAddClick}
-            disabled={categoriestate.status === 'loading'}
+            disabled={categorieState.status === 'loading'}
           />
         </div>
         <div className={styles.content}>
@@ -92,6 +100,11 @@ const CategoriesEditScreen: React.FC = () => {
             needObserve={pagination.pageNumber < pagination.total}
           />
         </div>
+        {categoryError && (
+          <div className={styles.footer}>
+            <div className={styles.error}>{(categoryError as string[]).map((str) => t(str)).join('\n')}</div>
+          </div>
+        )}
       </div>
       {editingCategory && (
         <Modal setVisible={(visible) => (visible ? null : setEditingCategory(null))} visible={editingCategory !== null}>

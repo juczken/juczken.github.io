@@ -30,3 +30,16 @@
     background-color: var(--active-color);
     /* transform: scale(0.95); */
 }
+
+.footer {
+    padding: 5px;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    display: flex;
+    flex-direction: row;
+  }
+  
+.error {
+  color: red;
+  flex-grow: 1;
+}
