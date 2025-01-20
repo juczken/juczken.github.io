@@ -89,10 +89,10 @@ const CategoryEditForm: React.FC<CategoryEditFormProps> = ({ onSubmit, defaultVa
             type="text"
             {...register('photo.url', {
               validate: (value) =>
-                value.trim().startsWith('http') ||
-                value === '' ||
                 value === undefined ||
                 value === null ||
+                value === '' ||
+                value.trim().startsWith('http') ||
                 t('CategoryEdit.errors.photosInvalid'),
             })}
             placeholder={t('CategoryEdit.photoPlaceholder')}
