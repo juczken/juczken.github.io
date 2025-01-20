@@ -10,7 +10,7 @@ interface ProductsState {
   pagination: PaginationWithTotal;
   sorting: Sorting;
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
-  error: string | null;
+  error: string | null | string[];
 }
 
 const initialState: ProductsState = {

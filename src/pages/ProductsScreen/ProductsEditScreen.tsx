@@ -12,10 +12,12 @@ import { AppDispatch, RootState } from '../../app/store/store';
 import Button from 'src/shared/ui/Button/Button';
 import { MutateProductBody, Product } from '../../shared/types/serverTypes';
 import { getCategories } from '../../entities/Category/model/thunks';
+import { useTranslation } from 'react-i18next';
 
 const EditProductItem = withEditMode(ProductItem);
 
 const ProductsEditScreen: React.FC = () => {
+  const { t } = useTranslation();
   const dispatch: AppDispatch = useDispatch();
 
   const productState = useSelector((state: RootState) => state.products);
@@ -37,6 +39,7 @@ const ProductsEditScreen: React.FC = () => {
   const items = useSelector((state: RootState) => state.products.products);
   const categories = useSelector((state: RootState) => state.products.categories);
   const pagination = useSelector((state: RootState) => state.products.pagination);
+  const productError = useSelector((state: RootState) => state.products.error);
 
   const [categoryNames, setCategoryNames] = useState(categories.map((category) => category.name));
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
@@ -115,6 +118,11 @@ const ProductsEditScreen: React.FC = () => {
             // needObserve={pagination.pageNumber < pagination.total}
           />
         </div>
+        {productError && (
+          <div className={styles.footer}>
+            <div className={styles.error}>{(productError as string[]).map((str) => t(str)).join('\n')}</div>
+          </div>
+        )}
       </div>
       {editingProduct && (
         <Modal setVisible={(visible) => (visible ? null : setEditingProduct(null))} visible={editingProduct !== null}>
