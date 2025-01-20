@@ -551,6 +551,7 @@ input[type="number"] {
     display: flex;
     flex-direction: column;
     height: '100%';
+    overflow: hidden;
 }
 
 .ProductsEditScreen-module_content-xbBRt {
@@ -870,6 +871,7 @@ input[type="number"] {
     display: flex;
     flex-direction: column;
     height: '100%';
+    overflow: hidden;
 }
 
 .CategoriesEditScreen-module_content-abQ2M {
