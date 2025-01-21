@@ -26,7 +26,8 @@ i18n
           return new Intl.NumberFormat(lng, options).format(value).replace('RUB', '₽');
         }
         if (format === 'date') {
-          return new Intl.DateTimeFormat(lng).format(value);
+          const date = typeof value === 'string' ? new Date(value) : value;
+          return new Intl.DateTimeFormat(lng).format(date);
         }
         return value;
       },

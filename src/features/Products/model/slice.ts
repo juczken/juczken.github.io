@@ -41,7 +41,7 @@ const productsSlice = createSlice({
       })
       .addCase(getPartProducts.rejected, (state, action) => {
         state.status = 'failed';
-        state.error = action.payload as string;
+        state.error = action.payload as string[];
       })
       .addCase(updateProduct.pending, (state) => {
         state.status = 'loading';
@@ -56,7 +56,7 @@ const productsSlice = createSlice({
       })
       .addCase(updateProduct.rejected, (state, action) => {
         state.status = 'failed';
-        state.error = action.payload as string;
+        state.error = action.payload as string[];
       })
       .addCase(getCategories.pending, (state) => {
         state.status = 'loading';
@@ -68,7 +68,7 @@ const productsSlice = createSlice({
       })
       .addCase(getCategories.rejected, (state, action) => {
         state.status = 'failed';
-        state.error = action.payload as string;
+        state.error = action.payload as string[];
       });
   },
 });

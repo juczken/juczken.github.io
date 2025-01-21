@@ -175,6 +175,9 @@
     },
     "Home": {
       "label": "Главная"
+    },
+    "UserOrders": {
+      "label": "Заказы"
     }
   },
   "ErrorCode": {
@@ -184,7 +187,7 @@
     "ERR_INVALID_PASSWORD": "Пароль не соответствует требованиям безопасности."
   },
   "CommonError": {
-    "UnexspectedError": "Неожиданная ошибка. Пожалуйста, повторите попытку."
+    "UnexpectedError": "Неожиданная ошибка. Пожалуйста, повторите попытку."
   },
   "CartScreen": {
     "cart": "Корзина",
@@ -194,5 +197,15 @@
     "total": "{{total, currency}}",
     "clear": "Очистить",
     "checkoutButton": "Оформить заказ"
+  },
+  "OrderItem": {
+    "createdAt": "Создан: {{createdAt, date}}",
+    "updatedAt": "Обновлен: {{updatedAt, date}}",
+    "status": "Статус: {{status}}",
+    "totalPrice": "Общая стоимость: {{totalPrice, currency}}"
+  },
+  "OrderProductItem": {
+    "price": "Цена: {{price, currency}}",
+    "quantity": "Количество: {{quantity}}"
   }
 }

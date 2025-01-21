@@ -42,7 +42,7 @@ const ordersSlice = createSlice({
       })
       .addCase(getPartOrders.rejected, (state, action) => {
         state.status = 'failed';
-        state.error = action.payload as string;
+        state.error = action.payload as string[];
       })
       .addCase(updateOrder.pending, (state) => {
         state.status = 'loading';
@@ -57,7 +57,7 @@ const ordersSlice = createSlice({
       })
       .addCase(updateOrder.rejected, (state, action) => {
         state.status = 'failed';
-        state.error = action.payload as string;
+        state.error = action.payload as string[];
       });
   },
 });

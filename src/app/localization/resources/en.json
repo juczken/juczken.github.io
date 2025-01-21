@@ -175,6 +175,9 @@
     },
     "Home": {
       "label": "Home"
+    },
+    "UserOrders": {
+      "label": "Orders"
     }
   },
   "ErrorCode": {
@@ -184,7 +187,7 @@
     "ERR_INVALID_PASSWORD": "The password does not meet security requirements."
   },
   "CommonError": {
-    "UnexspectedError": "Unexpected error. Please try again."
+    "UnexpectedError": "Unexpected error. Please try again."
   },
   "CartScreen": {
     "cart": "Cart",
@@ -194,5 +197,15 @@
     "total": "{{total, currency}}",
     "clear": "Clear",
     "checkoutButton": "Checkout"
+  },
+  "OrderItem": {
+    "createdAt": "Created at: {{createdAt, date}}",
+    "updatedAt": "Updated at: {{updatedAt, date}}",
+    "status": "Status: {{status}}",
+    "totalPrice": "Total Price: {{totalPrice, currency}}"
+  },
+  "OrderProductItem": {
+    "price": "Price: {{price, currency}}",
+    "quantity": "Quantity: {{quantity}}"
   }
 }

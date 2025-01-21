@@ -143,6 +143,8 @@ export type OrdersFilters = CommonFilters & {
   status?: OrderStatus;
 };
 
+export type UserOrdersFilters = Omit<OrdersFilters, 'productIds' | 'ids' | 'status'>;
+
 export type AuthResult = {
   token: string;
   profile: Profile;
