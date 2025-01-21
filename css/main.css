@@ -973,5 +973,122 @@ input[type="number"] {
     background: var(--active-color);
     /* outline: none; */
 }
+.UserOrdersScreen-module_wrapper-iejV4 {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.UserOrdersScreen-module_content-GXIji {
+  display: flex;
+  flex-grow: 1;
+  overflow: hidden;
+  max-height: 100%;
+}
+
+.UserOrdersScreen-module_orders-MZdNn,
+.UserOrdersScreen-module_products-V6u7F {
+  flex: 1;
+  overflow: auto;
+}
+
+.UserOrdersScreen-module_orders-MZdNn {
+  border-right: 1px solid var(--border-color);
+}
+
+.UserOrdersScreen-module_products-V6u7F {
+  border-left: 1px solid var(--border-color);
+}
+
+.UserOrdersScreen-module_selectedOrder-djD7s {
+  background-color: var(--active-color);
+  border-left: 8px solid var(--primary-color);
+  transition: background-color 0.3s ease, border-left 0.3s ease;
+}
+
+.UserOrdersScreen-module_addButton-dLxr6 {
+  padding: 0.5rem 1rem;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  border: none;
+  /* border-radius: 0.5rem; */
+  cursor: pointer;
+}
+
+.UserOrdersScreen-module_addButton-dLxr6:active {
+  background-color: var(--active-color);
+  /* transform: scale(0.95); */
+}
+
+.UserOrdersScreen-module_footer-VNK70 {
+  padding: 5px;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  display: flex;
+  flex-direction: row;
+}
+
+.UserOrdersScreen-module_error-ytrye {
+  color: red;
+  flex-grow: 1;
+}
+.OrderItem-module_orderItem-nqOkE {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  padding: 16px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  max-width: 100%;
+}
+
+.OrderItem-module_row-XEGVw {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.OrderItem-module_label-pT4cJ {
+  flex: 1;
+  text-align: left;
+}
+
+.OrderItem-module_value-Gp2dZ {
+  flex: 1;
+  text-align: right;
+  min-width: 100px;
+}
+.OrderProductItem-module_orderProductItem-W7TdD {
+    display: flex;
+    align-items: center;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    padding: 16px;
+    max-width: 100%;
+}
+
+.OrderProductItem-module_thumbnail-Z7QK3 {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin-right: 16px;
+}
+
+.OrderProductItem-module_details-rsSZT {
+    display: flex;
+    flex-direction: column;
+}
+
+.OrderProductItem-module_name-unSMv {
+    font-weight: bold;
+}
+
+.OrderProductItem-module_price-cFrIy,
+.OrderProductItem-module_quantity-Z8F9Q {
+    color: var(--secondary-color);
+}
 
 /*# sourceMappingURL=main.css.map*/
