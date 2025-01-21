@@ -25,8 +25,8 @@ const UserOrdersScreen: React.FC = () => {
 
   useEffect(() => {
     if (itemsEmpty && firstRender.current) {
-      dispatch(getUserOrders({ sorting: { type: 'ASC', field: 'createdAt' } }));
-      // dispatch(getUserOrders({ userId: userId }));
+      //   dispatch(getUserOrders({ sorting: { type: 'ASC', field: 'createdAt' } }));
+      dispatch(getUserOrders({ userId: userId }));
       // dispatch(getUserOrders({ pagination: { pageSize: 10, pageNumber: 1 } }));
     }
     firstRender.current = false;
