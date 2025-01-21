@@ -193,3 +193,9 @@ export type MutateOrderProduct = {
 export type MutateOrderBody = Omit<Order, 'id' | 'createdAt' | 'products' | 'user' | 'updatedAt' | 'commandId'> & {
   products: MutateOrderProduct[];
 };
+
+export type MutatePartProductBody = Partial<MutateProductBody>;
+
+export type MutatePartCategoryBody = Partial<MutateCategoryBody>;
+
+export type MutatePartOrderBody = Partial<MutateOrderBody>;

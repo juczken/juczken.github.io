@@ -171,6 +171,9 @@
       },
       "Categories": {
         "label": "Категории"
+      },
+      "Orders": {
+        "label": "Заказы"
       }
     },
     "Home": {
@@ -207,5 +210,14 @@
   "OrderProductItem": {
     "price": "Цена: {{price, currency}}",
     "quantity": "Количество: {{quantity}}"
-  }
-}
+  },
+  "OrderStatus": {
+    "pending_confirmation": "ожидание подтверждения",
+    "processing": "обработка",
+    "packaging": "упаковка",
+    "waiting_for_delivery": "ожидание вручения",
+    "in_transit": "в пути",
+    "delivered": "доставлено",
+    "return_requested": "требуется возврат",
+    "order_cancelled": "заказ отменен"
+  }}

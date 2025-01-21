@@ -7,17 +7,13 @@ type OrderItemProps = {
   updatedAt: Date;
   status: string;
   totalPrice: number;
-  id: string;
 };
 
-const OrderItem: React.FC<OrderItemProps> = ({ createdAt, updatedAt, status, totalPrice, id }) => {
+const OrderItem: React.FC<OrderItemProps> = ({ createdAt, updatedAt, status, totalPrice }) => {
   const { t } = useTranslation();
 
   return (
     <div className={styles.orderItem}>
-      <div className={styles.row}>
-        <span>{id}</span>
-      </div>
       <div className={styles.row}>
         <span className={styles.label}>{t('OrderItem.createdAt', { createdAt })}</span>
         <span className={styles.value}>{t('OrderItem.totalPrice', { totalPrice })}</span>

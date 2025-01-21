@@ -1,22 +1,22 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import cn from 'clsx';
-import styles from './UserOrdersScreen.module.css';
+import styles from './OrdersEditScreen.module.css';
 import { useTranslation } from 'react-i18next';
 import { AppDispatch, RootState } from '../../app/store/store';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserOrders } from '../../entities/User/model/thunks';
-import OrderItem from '../../entities/Order/ui/OrderItem/OrderItem';
-import { Order } from '../../shared/types/serverTypes';
+import { Order, OrderStatus } from '../../shared/types/serverTypes';
 import OrderProductItem from '../../entities/Product/ui/OrderProductItem/OrderProductItem';
 import ComponentFetchList from 'src/shared/ui/ComponentFetchList/ComponentFetchList';
+import EditOrderItem from 'src/entities/Order/ui/EditOrderItem/EditOrderItem';
+import { getPartOrders, updatePartOrder } from 'src/entities/Order/model/thunks';
 
-const UserOrdersScreen: React.FC = () => {
+const OrdersEditScreen: React.FC = () => {
   const { t } = useTranslation();
   const dispatch: AppDispatch = useDispatch();
 
   const userId = useSelector((state: RootState) => state.user.currentUser?.id);
 
-  const itemsEmpty = useSelector((state: RootState) => state.user.currentOrders.orders).length === 0;
+  const itemsEmpty = useSelector((state: RootState) => state.orders.orders).length === 0;
   const firstRender = useRef(true);
 
   useEffect(() => {
@@ -24,16 +24,16 @@ const UserOrdersScreen: React.FC = () => {
       console.log('useEffect');
       if (itemsEmpty && firstRender.current) {
         console.log('useEffect dispatch');
-        dispatch(getUserOrders({ userId: userId, pagination: { pageSize: 10, pageNumber: 1 } }));
+        dispatch(getPartOrders({ pagination: { pageSize: 10, pageNumber: 1 } }));
       }
       firstRender.current = false;
     }
   }, [userId]);
 
-  const items = useSelector((state: RootState) => state.user.currentOrders.orders);
-  const currentOrderStatus = useSelector((state: RootState) => state.user.currentOrders.status);
-  const currentOrdreError = useSelector((state: RootState) => state.user.currentOrders.error);
-  const pagination = useSelector((state: RootState) => state.user.currentOrders.pagination);
+  const items = useSelector((state: RootState) => state.orders.orders);
+  const currentOrderStatus = useSelector((state: RootState) => state.orders.status);
+  const currentOrderError = useSelector((state: RootState) => state.orders.error);
+  const pagination = useSelector((state: RootState) => state.orders.pagination);
   const [currentOrder, setCurrentOrder] = useState<Order | null>(null);
 
   const pageTotal = Math.ceil(pagination.total / pagination.pageSize);
@@ -45,9 +45,13 @@ const UserOrdersScreen: React.FC = () => {
       currentOrderStatus !== 'loading' &&
       currentOrderStatus !== 'failed'
     ) {
-      dispatch(getUserOrders({ userId: userId, pagination: { pageSize: 10, pageNumber: pagination.pageNumber + 1 } }));
+      dispatch(getPartOrders({ pagination: { pageSize: 10, pageNumber: pagination.pageNumber + 1 } }));
     }
   }, [dispatch, pagination, pageTotal, currentOrderStatus]);
+
+  const handleStatusChange = useCallback((status: OrderStatus, item: Order) => {
+    dispatch(updatePartOrder({ id: item.id, body: { status: status } }));
+  }, []);
 
   const renderCallback = useCallback(
     (item: Order) => (
@@ -56,11 +60,14 @@ const UserOrdersScreen: React.FC = () => {
         key={item.id}
         onClick={() => handleClick(item)}
       >
-        <OrderItem
+        <EditOrderItem
           createdAt={item.createdAt}
           updatedAt={item.updatedAt}
           status={item.status}
           totalPrice={item.products.reduce((total, product) => total + product.product.price * product.quantity, 0)}
+          id={item.id}
+          email={item.user.name}
+          onStatusChange={(status: OrderStatus) => handleStatusChange(status, item)}
         />
       </div>
     ),
@@ -100,7 +107,7 @@ const UserOrdersScreen: React.FC = () => {
         </div>
         <div className={cn(styles.footer)}>
           <div className={styles.error}>
-            {currentOrdreError && (currentOrdreError as string[]).map((str) => t(str)).join('\n')}
+            {currentOrderError && (currentOrderError as string[]).map((str) => t(str)).join('\n')}
           </div>
           {/* {currentOrderStatus === 'loading' && <div>{t('CartScreen.loading')}</div>} */}
         </div>
@@ -109,4 +116,4 @@ const UserOrdersScreen: React.FC = () => {
   );
 };
 
-export default UserOrdersScreen;
+export default OrdersEditScreen;

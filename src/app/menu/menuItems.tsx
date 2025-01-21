@@ -9,6 +9,7 @@ import CartScreen from '../../pages/CartScreen/CartScreen';
 import RootScreen from '../../pages/RootScreen/RootScreen';
 import CategoriesEditScreen from '../../pages/CategoriesScreen/CategoriesEditScreen';
 import UserOrdersScreen from '../../pages/UserOrdersScreen/UserOrdersScreen';
+import OrdersEditScreen from 'src/pages/OrderScreen/OrdersEditScreen';
 
 const homeMenuItems: NavItem[] = [{ label: 'Routes.Home.label', path: '/', element: <RootScreen /> }];
 
@@ -39,6 +40,12 @@ const editMenuItems: NavItem[] = [
         authenticationState: AuthenticationState.AdminAuthenticated,
         path: '/categories',
         element: <CategoriesEditScreen />,
+      },
+      {
+        label: 'Routes.Edit.Orders.label',
+        authenticationState: AuthenticationState.AdminAuthenticated,
+        path: '/orders',
+        element: <OrdersEditScreen />,
       },
     ],
   },

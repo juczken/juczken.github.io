@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { Order, PaginationWithTotal, Sorting } from '../../../shared/types/serverTypes';
 import { resetState } from '../../../shared/actions/actions';
-import { getPartOrders, updateOrder } from '../../../entities/Order/model/thunks';
+import { getPartOrders, updateOrder, updatePartOrder } from '../../../entities/Order/model/thunks';
 
 interface OrdersState {
   orders: Order[];
@@ -56,6 +56,21 @@ const ordersSlice = createSlice({
         }
       })
       .addCase(updateOrder.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.payload as string[];
+      })
+      .addCase(updatePartOrder.pending, (state) => {
+        state.status = 'loading';
+        state.error = null;
+      })
+      .addCase(updatePartOrder.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        const index = state.orders.findIndex((item) => item.id === action.payload.id);
+        if (index !== -1) {
+          state.orders[index] = action.payload;
+        }
+      })
+      .addCase(updatePartOrder.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.payload as string[];
       });
