@@ -74,7 +74,6 @@ const CartScreen: React.FC = () => {
 
   useEffect(() => {
     if (createOrderStatus === 'succeeded') {
-      console.log('cart createOrderStatus', createOrderStatus);
       dispatch(clearCart());
     }
   }, [createOrderStatus, dispatch]);

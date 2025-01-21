@@ -6,7 +6,6 @@ import productsReducer from '../../features/Products/model/slice';
 import cartReducer from '../../features/Cart/model/slice';
 import categoriesReducer from '../../features/Categories/model/slice';
 import ordersReducer from '../../features/Orders/model/slice';
-import logger from 'redux-logger';
 
 import { apiMiddleware, apiReducer } from '../api/api';
 
@@ -21,7 +20,7 @@ export const store = configureStore({
     categories: categoriesReducer,
     orders: ordersReducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiMiddleware).concat(logger),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiMiddleware) /*.concat(logger)*/,
   devTools: process.env.NODE_ENV !== 'production',
 });
 

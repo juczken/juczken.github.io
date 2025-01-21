@@ -90,7 +90,7 @@ export const getUserOrders = createAsyncThunk<GetPageResult<Order>, UserOrdersFi
   async (filters: UserOrdersFilters, thunkAPI) => {
     const token = getTokenFromLocalStorage();
     if (!token) throw new Error('No token');
-    console.log(new URLSearchParams(stringifyObject(filters)).toString());
+
     try {
       const response = await fetch(
         `${API_BASE_URL}/api/orders${!filters ? '' : `?${new URLSearchParams(stringifyObject(filters)).toString()}`}`,

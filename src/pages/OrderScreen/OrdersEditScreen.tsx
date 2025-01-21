@@ -21,9 +21,7 @@ const OrdersEditScreen: React.FC = () => {
 
   useEffect(() => {
     if (userId) {
-      console.log('useEffect');
       if (itemsEmpty && firstRender.current) {
-        console.log('useEffect dispatch');
         dispatch(getPartOrders({ pagination: { pageSize: 10, pageNumber: 1 } }));
       }
       firstRender.current = false;
