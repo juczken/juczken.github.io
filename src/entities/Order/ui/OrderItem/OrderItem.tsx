@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styles from './OrderItem.module.css';
 import { useTranslation } from 'react-i18next';
 
@@ -7,13 +7,17 @@ type OrderItemProps = {
   updatedAt: Date;
   status: string;
   totalPrice: number;
+  id: string;
 };
 
-const OrderItem: React.FC<OrderItemProps> = ({ createdAt, updatedAt, status, totalPrice }) => {
+const OrderItem: React.FC<OrderItemProps> = ({ createdAt, updatedAt, status, totalPrice, id }) => {
   const { t } = useTranslation();
 
   return (
     <div className={styles.orderItem}>
+      <div className={styles.row}>
+        <span>{id}</span>
+      </div>
       <div className={styles.row}>
         <span className={styles.label}>{t('OrderItem.createdAt', { createdAt })}</span>
         <span className={styles.value}>{t('OrderItem.totalPrice', { totalPrice })}</span>
@@ -26,4 +30,4 @@ const OrderItem: React.FC<OrderItemProps> = ({ createdAt, updatedAt, status, tot
   );
 };
 
-export default OrderItem;
+export default memo(OrderItem) as typeof OrderItem;

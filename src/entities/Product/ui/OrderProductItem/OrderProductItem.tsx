@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styles from './OrderProductItem.module.css';
 import { useTranslation } from 'react-i18next';
 
@@ -24,4 +24,4 @@ const OrderProductItem: React.FC<OrderProductItemProps> = ({ photo, name, price,
   );
 };
 
-export default OrderProductItem;
+export default memo(OrderProductItem) as typeof OrderProductItem;
