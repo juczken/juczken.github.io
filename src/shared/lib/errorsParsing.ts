@@ -22,5 +22,4 @@ export const getLocaleErrorMessage = (error: ServerError): string => {
     default:
       return `${error.name}:\t${error.message}`;
   }
-  // return '';
 };

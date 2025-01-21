@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import cn from 'clsx';
 import style from './App.css';
-import Layout from '../shared/ui/Layout/Layout';
+import Layout from './Layout/Layout';
 import './localization';
 import { Route, Routes } from 'react-router-dom';
 import { WithAuthenticationState } from '../shared/hocs/withAuthenticationState';

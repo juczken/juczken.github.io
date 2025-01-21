@@ -20,7 +20,7 @@ export const store = configureStore({
     categories: categoriesReducer,
     orders: ordersReducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiMiddleware) /*.concat(logger)*/,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiMiddleware),
   devTools: process.env.NODE_ENV !== 'production',
 });
 

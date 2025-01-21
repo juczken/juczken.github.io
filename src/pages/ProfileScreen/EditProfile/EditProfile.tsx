@@ -28,7 +28,6 @@ const EditProfile: React.FC<EditProfileProps> = ({ onSubmit, defaultValues }) =>
       <div>
         <label className={cn(styles.label)}>{t('EditProfile.userName')}</label>
         <input
-          // className={cn(styles.input)}
           className={cn(styles.input, { [styles.error]: errors.userName })}
           {...register('userName', { required: t('EditProfile.errors.userNameRequired') })}
           placeholder={t('EditProfile.userNamePlaceholder')}

@@ -120,7 +120,6 @@ const ProductsEditScreen: React.FC = () => {
             doFetch={handleFetchProducts}
             render={renderCallback}
             needObserve={pagination.pageNumber < pageTotal}
-            // needObserve={pagination.pageNumber < pagination.total}
           />
         </div>
         {productError && (

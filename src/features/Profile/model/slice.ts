@@ -26,7 +26,6 @@ const ProfileSlice = createSlice({
       })
       .addCase(getProfile.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        // state.user = { ...state.user, ...action.payload.user };
       })
       .addCase(getProfile.rejected, (state, action) => {
         state.status = 'failed';
@@ -38,7 +37,6 @@ const ProfileSlice = createSlice({
       })
       .addCase(updateProfile.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        // state.user = { ...state.user, ...action.payload.user };
       })
       .addCase(updateProfile.rejected, (state, action) => {
         state.status = 'failed';
@@ -50,7 +48,6 @@ const ProfileSlice = createSlice({
       })
       .addCase(changePassword.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        // state.user = { ...state.user, ...action.payload.user };
       })
       .addCase(changePassword.rejected, (state, action) => {
         state.status = 'failed';
@@ -63,10 +60,6 @@ const ProfileSlice = createSlice({
         state.status = 'idle';
         state.error = null;
       });
-    // .addCase(signout.fulfilled, (state) => {
-    //   state.status = 'idle';
-    //   state.error = null;
-    // });
   },
 });
 

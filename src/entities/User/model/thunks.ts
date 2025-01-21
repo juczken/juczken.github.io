@@ -1,5 +1,4 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-// import { fetch } from '../../../shared/lib/fakeGenerators/fakeFetch';
 import { getTokenFromLocalStorage } from '../../../shared/lib/localStorage';
 import { setCurrentUser, updateCurrentUser } from './slice';
 import { API_BASE_URL } from '../../../shared/configs/api';

@@ -4,10 +4,6 @@ import style from './ProductDetail.module.css';
 import { useTranslation } from 'react-i18next';
 import { Category, Product } from '../../../../shared/types/serverTypes';
 
-// type ProductDetailProps = Pick<
-//   Product& MutatePropertyToArray<Product> & AddPropertyPrefix<Category, 'category'>,
-//   'categoryName' | 'desc' | 'name' | 'photos' | 'price'
-// >;
 type ProductDetailProps = Pick<Product, 'desc' | 'name' | 'price' | 'photo'> & {
   categoryName: Category['name'];
 };

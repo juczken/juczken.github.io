@@ -84,8 +84,6 @@ const CategoryEditForm: React.FC<CategoryEditFormProps> = ({ onSubmit, defaultVa
         <div style={{ display: 'flex', width: '100%', alignItems: 'center', gap: '10px' }}>
           <input
             className={cn(styles.input, { [styles.error]: errors.photo })}
-            // style={{ paddingTop: '20px' }}
-            // style={{ paddingBottom: '20px' }}
             type="text"
             {...register('photo.url', {
               validate: (value) =>

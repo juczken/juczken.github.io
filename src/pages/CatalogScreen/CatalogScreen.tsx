@@ -25,7 +25,7 @@ const CatalogScreen: React.FC = () => {
   }, []);
 
   const items = useSelector((state: RootState) => state.products.products);
-  const currentCart = useSelector((state: RootState) => state.cart.currentCartEntry);
+  const currentCart = useSelector((state: RootState) => state.cart.currentCartEntries);
   const pagination = useSelector((state: RootState) => state.products.pagination);
 
   const pageTotal = Math.ceil(pagination.total / pagination.pageSize);

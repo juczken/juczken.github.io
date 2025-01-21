@@ -13,7 +13,6 @@ i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    // resources,
     resources: {
       en: { translation: resources.en },
       ru: { translation: resources.ru },

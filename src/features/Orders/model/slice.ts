@@ -22,11 +22,7 @@ const initialState: OrdersState = {
 const ordersSlice = createSlice({
   name: 'Orders',
   initialState,
-  reducers: {
-    // setCategories: (state, action) => {
-    //     state.categories = action.payload;
-    // }
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(resetState, () => initialState)
