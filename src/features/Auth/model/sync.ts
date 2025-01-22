@@ -1,4 +1,4 @@
-import { store } from '../../../app/store/store'; // Импорт стора из файла store.ts
+import { store } from '../../../app/store/store';
 import { getTokenFromLocalStorage, TOKEN_KEY } from '../../../shared/lib/localStorage';
 import { getProfile } from '../../../entities/User/model/thunks';
 import { setAuthenticated } from './slice';

@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Layout from './Layout';
-import ThemeProvider from '../../providers/ThemeProvider/ThemeProvider';
+import ThemeProvider from '../../shared/providers/ThemeProvider/ThemeProvider';
 import React from 'react';
-import { LanguageProvider } from '../../providers/LanguageProvider/LanguageProvider';
+import { LanguageProvider } from '../../shared/providers/LanguageProvider/LanguageProvider';
 
 const meta: Meta<typeof Layout> = {
   title: 'Shared/Layout',

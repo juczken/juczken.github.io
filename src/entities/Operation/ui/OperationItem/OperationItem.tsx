@@ -6,7 +6,6 @@ import { useTranslation } from 'react-i18next';
 import { Category } from '../../../../shared/types/serverTypes';
 import { Operation } from '../../models/types/operation';
 
-// type OperationItemProps = Pick<Operation&AddPropertyPrefix<Category,'category'>,'amount'|'categoryName'|'desc'|'name'>
 type OperationItemProps = Pick<Operation, 'amount' | 'desc' | 'name'> & {
   categoryName: Category['name'];
 };

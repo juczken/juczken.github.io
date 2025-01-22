@@ -14,7 +14,7 @@ import { createOrder } from '../../entities/Order/model/thunks';
 
 const CartScreen: React.FC = () => {
   const { t } = useTranslation();
-  const items = useSelector((state: RootState) => state.cart.currentCartEntry);
+  const items = useSelector((state: RootState) => state.cart.currentCartEntries);
   const createOrderStatus = useSelector((state: RootState) => state.cart.createOrderStatus);
   const createOrdreError = useSelector((state: RootState) => state.cart.createOrdreError);
   const dispatch: AppDispatch = useDispatch();
@@ -74,7 +74,6 @@ const CartScreen: React.FC = () => {
 
   useEffect(() => {
     if (createOrderStatus === 'succeeded') {
-      console.log('cart createOrderStatus', createOrderStatus);
       dispatch(clearCart());
     }
   }, [createOrderStatus, dispatch]);

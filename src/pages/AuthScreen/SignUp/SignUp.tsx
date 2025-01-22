@@ -34,11 +34,11 @@ export const SingUp: React.FC<SignUpProps> = ({ onSubmit }) => {
           className={cn(styles.input, { [styles.error]: errors.email })}
           type="email"
           {...register('email', {
-            // required: t('SignUp.errors.emailRequired'),
-            // pattern: {
-            //   value: /^\S+@\S+$/i,
-            //   message: t('SignUp.errors.invalidEmail'),
-            // },
+            required: t('SignUp.errors.emailRequired'),
+            pattern: {
+              value: /^\S+@\S+$/i,
+              message: t('SignUp.errors.invalidEmail'),
+            },
           })}
           placeholder={t('SignUp.emailPlaceholder')}
         />
@@ -50,11 +50,11 @@ export const SingUp: React.FC<SignUpProps> = ({ onSubmit }) => {
           className={cn(styles.input, { [styles.error]: errors.password })}
           type="password"
           {...register('password', {
-            // required: t('SignUp.errors.passwordRequired'),
-            // minLength: {
-            //   value: passwordLength,
-            //   message: t('SignUp.errors.passwordLength', { passwordLength }),
-            // },
+            required: t('SignUp.errors.passwordRequired'),
+            minLength: {
+              value: passwordLength,
+              message: t('SignUp.errors.passwordLength', { passwordLength }),
+            },
           })}
           placeholder={t('SignUp.passwordPlaceholder')}
         />
@@ -66,8 +66,8 @@ export const SingUp: React.FC<SignUpProps> = ({ onSubmit }) => {
           className={cn(styles.input, { [styles.error]: errors.confirmPassword })}
           type="password"
           {...register('confirmPassword', {
-            // required: t('SignUp.errors.confirmPasswordRequired'),
-            // validate: (value) => value === password || t('SignUp.errors.confirmPasswordMatch'),
+            required: t('SignUp.errors.confirmPasswordRequired'),
+            validate: (value) => value === password || t('SignUp.errors.confirmPasswordMatch'),
           })}
           placeholder={t('SignUp.confirmPasswordPlaceholder')}
         />

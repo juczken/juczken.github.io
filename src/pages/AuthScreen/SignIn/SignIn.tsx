@@ -31,11 +31,11 @@ export const SingIn: React.FC<SignInProps> = ({ onSubmit }) => {
           className={cn(styles.input, { [styles.error]: errors.email })}
           type="email"
           {...register('email', {
-            // required: t('SignIn.errors.emailRequired'),
-            // pattern: {
-            // value: /^\S+@\S+$/i,
-            // message: t('SignIn.errors.invalidEmail'),
-            // },
+            required: t('SignIn.errors.emailRequired'),
+            pattern: {
+              value: /^\S+@\S+$/i,
+              message: t('SignIn.errors.invalidEmail'),
+            },
           })}
           placeholder={t('SignIn.emailPlaceholder')}
         />
@@ -47,7 +47,7 @@ export const SingIn: React.FC<SignInProps> = ({ onSubmit }) => {
           className={cn(styles.input, { [styles.error]: errors.password })}
           type="password"
           {...register('password', {
-            // required: t('SignIn.errors.passwordRequired'),
+            required: t('SignIn.errors.passwordRequired'),
           })}
           placeholder={t('SignIn.passwordPlaceholder')}
         />

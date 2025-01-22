@@ -7,10 +7,9 @@ const useResizeObserver = <T extends HTMLElement>(
   onResize: () => void
 ) => {
   useLayoutEffect(() => {
-    const prevWidth = element.current.clientWidth; //.getBoundingClientRect().width;
-    const prevHeight = element.current.clientHeight; //.getBoundingClientRect().width;
+    const prevWidth = element.current.clientWidth;
+    const prevHeight = element.current.clientHeight;
     const observer = new ResizeObserver(([entry]) => {
-      // if (prevWidth !== entry.contentBoxSize[0].inlineSize) {
       if (
         (observeWidth && prevWidth !== entry.contentRect.width) ||
         (observeHeight && prevHeight !== entry.contentRect.height)

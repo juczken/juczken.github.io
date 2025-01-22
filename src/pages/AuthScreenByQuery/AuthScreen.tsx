@@ -34,11 +34,9 @@ const AuthScreen: React.FC<AuthScreenProps> = ({ authAction }) => {
 
   const handleSignInSubmit = async (data: SignInFields) => {
     await Signin({ email: data.email, password: data.password });
-    // dispatch(signin({ email: data.email, password: data.password }));
   };
   const handleSignUpSubmit = async (data: SignUpFields) => {
     await Signup({ email: data.email, password: data.password, commandId: COMMAND_ID });
-    // dispatch(signup({ email: data.email, password: data.password, commandId: COMMAND_ID }));
   };
 
   const handleSignOut = () => dispatch(signout());

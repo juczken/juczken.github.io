@@ -6,7 +6,6 @@ import { useTranslation } from 'react-i18next';
 import { Product } from '../../../../shared/types/serverTypes';
 
 type CartItemProps = Pick<Product, 'price' | 'name' | 'photo'> & {
-  // photo?: Product['photos'] extends (infer T)[] ? T : undefined;
   count: number;
   onIncrement: () => void;
   onDecrement: () => void;

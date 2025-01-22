@@ -1,11 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { User } from './types';
 import { resetState } from '../../../shared/actions/actions';
-import { Order } from 'src/shared/types/serverTypes';
+import { Order, PaginationWithTotal, Sorting } from 'src/shared/types/serverTypes';
 import { getUserOrders } from './thunks';
 
 interface OrdersState {
   orders: Order[];
+  pagination: PaginationWithTotal;
+  sorting: Sorting;
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null | string[];
 }
@@ -19,6 +21,8 @@ const initialState: UserState = {
   currentUser: null,
   currentOrders: {
     orders: [],
+    pagination: { pageSize: 10, pageNumber: 0, total: 1 },
+    sorting: { type: 'ASC', field: 'updatedAt' },
     error: null,
     status: 'idle',
   },
@@ -50,7 +54,9 @@ const userSlice = createSlice({
       })
       .addCase(getUserOrders.fulfilled, (state, action) => {
         state.currentOrders.status = 'succeeded';
-        state.currentOrders.orders = [...action.payload.data];
+        state.currentOrders.orders = [...state.currentOrders.orders, ...action.payload.data];
+        state.currentOrders.pagination = action.payload.pagination;
+        state.currentOrders.sorting = action.payload.sorting;
       })
       .addCase(getUserOrders.rejected, (state, action) => {
         state.currentOrders.status = 'failed';

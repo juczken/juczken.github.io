@@ -32,7 +32,6 @@ const ChangePassword: React.FC<ChangePasswordProps> = ({ onSubmit }) => {
         <label className={cn(styles.label)}>{t('ChangePassword.oldPassword')}</label>
         <input
           className={cn(styles.input, { [styles.error]: errors.oldPassword })}
-          // className={cn(styles.input)}
           type="password"
           {...register('oldPassword', { required: t('ChangePassword.errors.oldPasswordRequired') })}
           placeholder={t('ChangePassword.oldPasswordPlaceholder')}
@@ -45,7 +44,6 @@ const ChangePassword: React.FC<ChangePasswordProps> = ({ onSubmit }) => {
         <label className={cn(styles.label)}>{t('ChangePassword.newPassword')}</label>
         <input
           className={cn(styles.input, { [styles.error]: errors.newPassword })}
-          // className={cn(styles.input)}
           type="password"
           {...register('newPassword', { required: t('ChangePassword.errors.newPasswordRequired') })}
           placeholder={t('ChangePassword.newPasswordPlaceholder')}
@@ -58,7 +56,6 @@ const ChangePassword: React.FC<ChangePasswordProps> = ({ onSubmit }) => {
         <label className={cn(styles.label)}>{t('ChangePassword.confirmPassword')}</label>
         <input
           className={cn(styles.input, { [styles.error]: errors.confirmPassword })}
-          // className={cn(styles.input)}
           type="password"
           {...register('confirmPassword', {
             required: t('ChangePassword.errors.confirmPasswordRequired'),

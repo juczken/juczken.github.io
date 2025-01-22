@@ -1,6 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { saveTokenToLocalStorage, removeTokenFromLocalStorage } from '../../../shared/lib/localStorage';
-// import { fetch } from '../../../shared/lib/fakeGenerators/fakeFetch';
 import { getProfile } from '../../../entities/User/model/thunks';
 import { API_BASE_URL } from '../../../shared/configs/api';
 import { ServerErrors } from '../../../shared/types/serverTypes';
@@ -26,7 +25,7 @@ export const signin = createAsyncThunk(
 
       saveTokenToLocalStorage(data.token);
 
-      const profile = await thunkAPI.dispatch(getProfile()); //.unwrap();// thunkAPI.dispatch(setCurrentUser(data.user));
+      const profile = await thunkAPI.dispatch(getProfile());
       if (getProfile.rejected.match(profile)) {
         thunkAPI.rejectWithValue([profile.payload as string]);
       }
@@ -57,7 +56,7 @@ export const signup = createAsyncThunk(
 
       saveTokenToLocalStorage(data.token);
 
-      const profile = await thunkAPI.dispatch(getProfile()).unwrap(); // thunkAPI.dispatch(setCurrentUser(data.user));
+      const profile = await thunkAPI.dispatch(getProfile()).unwrap();
       if (getProfile.rejected.match(profile)) {
         thunkAPI.rejectWithValue([profile.payload as string]);
       }
@@ -72,7 +71,6 @@ export const signup = createAsyncThunk(
 export const signout = createAsyncThunk('auth/signout', async (_, thunkAPI) => {
   try {
     removeTokenFromLocalStorage();
-    // thunkAPI.dispatch(clearCurrentUser());
     thunkAPI.dispatch(resetState());
 
     return null;

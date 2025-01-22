@@ -17,14 +17,21 @@
 
 .details {
     display: flex;
-    flex-direction: column;
+    flex-grow: 1;
+    flex-wrap:wrap;
+    flex-direction: row;
+    justify-content: space-around;
 }
 
 .name {
+    flex: 1;
     font-weight: bold;
+    white-space: nowrap;
 }
 
 .price,
 .quantity {
+    flex: 1;
     color: var(--secondary-color);
+    white-space: nowrap;
 }

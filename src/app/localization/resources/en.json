@@ -171,6 +171,9 @@
       },
       "Categories": {
         "label": "Categories"
+      },
+      "Orders": {
+        "label": "Orders"
       }
     },
     "Home": {
@@ -207,5 +210,15 @@
   "OrderProductItem": {
     "price": "Price: {{price, currency}}",
     "quantity": "Quantity: {{quantity}}"
+  },
+  "OrderStatus": {
+    "pending_confirmation": " pending confirmation",
+    "processing": " processing",
+    "packaging": " packaging",
+    "waiting_for_delivery": " waiting for delivery",
+    "in_transit": " in transit",
+    "delivered": " delivered",
+    "return_requested": " return requested",
+    "order_cancelled": " order cancelled"
   }
 }

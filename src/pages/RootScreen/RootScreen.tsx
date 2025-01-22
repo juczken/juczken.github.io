@@ -5,17 +5,14 @@ import style from './RootScreen.module.css';
 const RootScreen: React.FC = () => {
   return (
     <>
-      <p>
-        Реализована система регистрации и авторизации пользователей и редактирования профиля через redux thunk и rtk
-        query. Есть два (минимум) зарегистрированных ползователя.
-      </p>
-      <div className={cn(style.tabItem)}>
-        <span>user68@example.com</span>
-        <span>qqqqqqqq</span>
+      <p>Есть два (минимум) зарегистрированных ползователя.</p>
+      <div className={cn(style.tab)}>
+        <span className={cn(style.tabItem)}>user68@example.com</span>
+        <span className={cn(style.tabItem)}>qqqqqqqq</span>
       </div>
-      <div className={cn(style.tabItem)}>
-        <span>qwerty@qwerty.com</span>
-        <span>qqqqqqqq</span>
+      <div className={cn(style.tab)}>
+        <span className={cn(style.tabItem)}>qwerty@qwerty.com</span>
+        <span className={cn(style.tabItem)}>qqqqqqqq</span>
       </div>
     </>
   );
