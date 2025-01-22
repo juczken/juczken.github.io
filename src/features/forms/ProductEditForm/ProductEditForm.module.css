@@ -24,7 +24,12 @@
   width: 100%;
   padding: 8px;
   margin-bottom: 10px;
-  border: 1px solid;
+  border: none;
+  outline: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--text-color);
+  background-color: var(--background-color);
 }
 
 .button {

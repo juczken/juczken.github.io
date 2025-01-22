@@ -60,14 +60,14 @@ const CatalogScreen: React.FC = () => {
   );
 
   return (
-    <>
+    <div className={cn(styles.list)}>
       <ComponentFetchList
         items={items}
         doFetch={handleFetchProducts}
         render={renderCallback}
         needObserve={pagination.pageNumber < pageTotal}
       />
-    </>
+    </div>
   );
 };
 
