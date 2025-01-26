@@ -1,21 +1,22 @@
 .wrapper {
     display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    gap: 5%;
-    color: var(--text-color);
+    align-items: center;
     background-color: var(--background-color);
-    border-color: var(--border-color);
-    padding: 5px;
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    padding: 16px;
+    max-width: 100%;
 }
 
 .imageWrapper {
-    display: flex;
-    align-items: center;
+
+    object-fit: cover;
+    margin-right: 16px;
 }
 
 .image {
-    max-height: 10rem;
+    width: 50px;
+    height: 50px;
 }
 
 .infoWrapper {

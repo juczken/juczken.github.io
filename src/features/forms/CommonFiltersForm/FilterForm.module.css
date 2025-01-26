@@ -18,25 +18,21 @@
 .input,
 .textarea,
 .select {
-  /* border-color: var(--border-color); */
-    color: var(--text-color);
-    background-color: var(--background-color);
-    background: transparent;
+    /* color: var(--text-color);
+            background-color: var(--background-color);
+            border-color: var(--border-color); */
     width: 100%;
     padding: 8px;
     margin-bottom: 10px;
-    border: 1px solid;
+    border: none;
+    outline: none;
+    background: transparent;
+    cursor: pointer;
+    color: var(--text-color);
+    background-color: var(--background-color);
 }
 
 .button {
-    /* color: var(--text-color);
-      background-color: lightblue; */
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-}
-
-.customFileButton {
     color: var(--text-color);
     background-color: var(--secondary-color);
     padding: 10px 20px;
@@ -44,8 +40,7 @@
     cursor: pointer;
 }
 
-
-.customFileButton:active {
+.button:active {
     background: var(--active-color);
     /* outline: none; */
 }

@@ -114,7 +114,7 @@ export type DateInterval = {
   lte?: string; // до - дата в виде строки new Date().toISOString() 2023-09-19T10:37:16.389+00:00
 };
 
-type CommonFilters = {
+export type CommonFilters = {
   pagination?: Pagination;
   createdAt?: DateInterval;
   updatedAt?: DateInterval;
