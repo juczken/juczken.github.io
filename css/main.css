@@ -272,44 +272,45 @@ code {
   text-align: center;
 }
 .SignIn-module_form-XQzrw {
-    color: var(--text-color);
-    background-color: var(--background-color);
-    border-color: var(--border-color);
-    padding: 20px;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  border-color: var(--border-color);
+  padding: 20px;
 }
 
 .SignIn-module_title-r6eKl {
-    font-size: 1.25rem;
-    margin-bottom: 10px;
+  font-size: 1.25rem;
+  margin-bottom: 10px;
 }
 
 .SignIn-module_label-T0HeJ {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
 }
 
 .SignIn-module_error-UDexf {
-    color: red;
+  color: red;
 }
 
 .SignIn-module_input-xtSrJ,
 .SignIn-module_textarea-H8Zay {
-    /* color: var(--text-color);
-      background-color: var(--background-color);
-      border-color: var(--border-color); */
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid;
+  /* border-color: var(--border-color); */
+  color: var(--text-color);
+  background-color: var(--background-color);
+  background: transparent;
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid;
 }
 
 .SignIn-module_button-LFa57 {
-    /* color: var(--text-color);
-    background-color: lightblue; */
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
+  /* color: var(--text-color);
+  background-color: lightblue; */
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
 }
 .Button-module_wrapper-wEP3r {
     text-align: center;
@@ -340,44 +341,45 @@ code {
     outline: none;
 }
 .SignUp-module_form-OfgtB {
-    color: var(--text-color);
-    background-color: var(--background-color);
-    border-color: var(--border-color);
-    padding: 20px;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  border-color: var(--border-color);
+  padding: 20px;
 }
 
 .SignUp-module_title-FJgbr {
-    font-size: 1.25rem;
-    margin-bottom: 10px;
+  font-size: 1.25rem;
+  margin-bottom: 10px;
 }
 
 .SignUp-module_label-jJGXc {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
 }
 
 .SignUp-module_error-FKStZ {
-    color: red;
+  color: red;
 }
 
 .SignUp-module_input-NY2kW,
 .SignUp-module_textarea-LAtU3 {
-    /* color: var(--text-color);
-      background-color: var(--background-color);
-      border-color: var(--border-color); */
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid;
+  /* border-color: var(--border-color); */
+  color: var(--text-color);
+  background-color: var(--background-color);
+  background: transparent;
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid;
 }
 
 .SignUp-module_button-EUnVF {
-    /* color: var(--text-color);
-    background-color: lightblue; */
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
+  /* color: var(--text-color);
+  background-color: lightblue; */
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
 }
 .AuthScreen-module_page-GsboW {
   text-align: left;
@@ -414,9 +416,10 @@ code {
 
 .EditProfile-module_input-M76ei,
 .EditProfile-module_textarea-f44E0 {
-  /* color: var(--text-color);
-    background-color: var(--background-color);
-    border-color: var(--border-color); */
+  /* border-color: var(--border-color); */
+  color: var(--text-color);
+  background-color: var(--background-color);
+  background: transparent;
   width: 100%;
   padding: 8px;
   margin-bottom: 10px;
@@ -454,9 +457,10 @@ code {
 
 .ChangePassword-module_input-bKg4e,
 .ChangePassword-module_textarea-hfoDt {
-  /* color: var(--text-color);
-    background-color: var(--background-color);
-    border-color: var(--border-color); */
+  /* border-color: var(--border-color); */
+  color: var(--text-color);
+  background-color: var(--background-color);
+  background: transparent;
   width: 100%;
   padding: 8px;
   margin-bottom: 10px;
@@ -691,6 +695,7 @@ input[type="number"] {
     background-color: var(--active-color);
     /* transform: scale(0.95); */
 }
+
 .Modal-module_modal_overlay-ZS_YJ {
   z-index: 9999;
   width: 100%;
@@ -885,22 +890,23 @@ input[type="number"] {
 }
 .CartItem-module_wrapper-J0LMv {
     display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    gap: 5%;
-    color: var(--text-color);
+    align-items: center;
     background-color: var(--background-color);
-    border-color: var(--border-color);
-    padding: 5px;
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    padding: 16px;
+    max-width: 100%;
 }
 
 .CartItem-module_imageWrapper-lk0rC {
-    display: flex;
-    align-items: center;
+
+    object-fit: cover;
+    margin-right: 16px;
 }
 
 .CartItem-module_image-Vp9RZ {
-    max-height: 10rem;
+    width: 50px;
+    height: 50px;
 }
 
 .CartItem-module_infoWrapper-XM2xi {
@@ -1054,9 +1060,10 @@ input[type="number"] {
 .CategoryEditForm-module_input-I0WLF,
 .CategoryEditForm-module_textarea-vM7r4,
 .CategoryEditForm-module_select-IjT0E {
-    /* color: var(--text-color);
-          background-color: var(--background-color);
-          border-color: var(--border-color); */
+  /* border-color: var(--border-color); */
+    color: var(--text-color);
+    background-color: var(--background-color);
+    background: transparent;
     width: 100%;
     padding: 8px;
     margin-bottom: 10px;
