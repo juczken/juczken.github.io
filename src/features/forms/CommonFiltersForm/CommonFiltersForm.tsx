@@ -1,23 +1,33 @@
 import React, { ReactNode, useState } from 'react';
 import * as yup from 'yup';
 import cn from 'clsx';
-import { filterFormSchema } from './FilterFormSchema';
-import styles from './FilterForm.module.css';
+import styles from './CommonFiltersForm.module.css';
+import { commonFiltersSchema } from './CommonFiltersFormSchema';
+// import { getSchema } from './CommonFiltersFormSchema';
 import { CommonFilters, Sorting } from '../../../shared/types/serverTypes';
 
-interface CommonFilterFormProps<T extends CommonFilters> {
+type CommonFilterFormProps<T extends CommonFilters> = {
   filters: T;
   onChange: (filters: T) => void;
   initialFilters: T;
-  children?: ReactNode;
-}
+  // childrenSchemas?: yup.ObjectSchema<any>
+  childrenSchema?: yup.ObjectSchema<Omit<T, keyof CommonFilters>>;
+  children?: ReactNode | ((errors: Record<string, string>, filters: T, setFilters: (filters: T) => void) => ReactNode);
+};
 
-export const CommonFilterForm = <T extends CommonFilters>({
+export const CommonFiltersForm = <T extends CommonFilters>({
   filters,
   onChange,
   initialFilters,
+  childrenSchema: childrenSchemas,
   children,
 }: CommonFilterFormProps<T>) => {
+  const isFunction = (
+    value: unknown
+  ): value is (errors: Record<string, string>, filters: T, setFilters: (filters: T) => void) => ReactNode =>
+    typeof value === 'function';
+  const filterFormSchema = childrenSchemas ? commonFiltersSchema.concat(childrenSchemas) : commonFiltersSchema;
+  // const filterFormSchema = getSchema(childrenSchemas);
   const [localFilters, setLocalFilters] = useState<T>(initialFilters);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -44,7 +54,6 @@ export const CommonFilterForm = <T extends CommonFilters>({
         if (err instanceof yup.ValidationError) {
           const validationErrors: Record<string, string> = {};
 
-          // Обходим все ошибки и сохраняем их в виде 'field.subfield'
           err.inner.forEach((error) => {
             if (error.path) {
               validationErrors[error.path] = error.message;
@@ -114,14 +123,14 @@ export const CommonFilterForm = <T extends CommonFilters>({
         <label className={cn(styles.label)}>Sorting:</label>
         <select
           className={cn(styles.select)}
-          value={filters.sorting?.field || ''}
+          value={localFilters?.sorting?.field || ''}
           onChange={(e) =>
             handleChange(
               'sorting',
               e.target.value
                 ? {
                     field: e.target.value as Sorting['field'],
-                    type: filters.sorting?.type || 'ASC',
+                    type: localFilters?.sorting?.type || 'ASC',
                   }
                 : undefined
             )
@@ -148,7 +157,7 @@ export const CommonFilterForm = <T extends CommonFilters>({
         </select>
       </div>
 
-      {children}
+      {isFunction(children) ? children(errors, localFilters, setLocalFilters) : children}
 
       <button className={cn(styles.button)} type="button" onClick={handleReset}>
         Сбросить фильтры
