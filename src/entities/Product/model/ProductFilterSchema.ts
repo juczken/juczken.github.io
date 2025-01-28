@@ -1,7 +1,7 @@
 import * as yup from 'yup';
 import { CommonFilters, ProductsFilters } from '../../../shared/types/serverTypes';
 
-const productFilterSchema: yup.ObjectSchema<Omit<ProductsFilters, keyof CommonFilters>> = yup.object({
+export const productFilterSchema: yup.ObjectSchema<Omit<ProductsFilters, keyof CommonFilters>> = yup.object({
   name: yup.string().optional(),
   ids: yup
     .array()

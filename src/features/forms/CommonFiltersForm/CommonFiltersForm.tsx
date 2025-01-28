@@ -7,7 +7,7 @@ import { commonFiltersSchema } from './CommonFiltersFormSchema';
 import { CommonFilters, Sorting } from '../../../shared/types/serverTypes';
 
 type CommonFilterFormProps<T extends CommonFilters> = {
-  filters: T;
+  // filters: T;
   onChange: (filters: T) => void;
   initialFilters: T;
   // childrenSchemas?: yup.ObjectSchema<any>
@@ -16,7 +16,7 @@ type CommonFilterFormProps<T extends CommonFilters> = {
 };
 
 export const CommonFiltersForm = <T extends CommonFilters>({
-  filters,
+  // filters,
   onChange,
   initialFilters,
   childrenSchema: childrenSchemas,

@@ -25,7 +25,12 @@ const initialState: ProductsState = {
 const productsSlice = createSlice({
   name: 'Products',
   initialState,
-  reducers: {},
+  reducers: {
+    clearCurrentProducts: (state) => {
+      state.products = [];
+      state.pagination = { pageSize: 10, pageNumber: 0, total: 1 };
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(resetState, () => initialState)
@@ -73,4 +78,5 @@ const productsSlice = createSlice({
   },
 });
 
+export const { clearCurrentProducts } = productsSlice.actions;
 export default productsSlice.reducer;

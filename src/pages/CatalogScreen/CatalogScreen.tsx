@@ -1,21 +1,31 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import cn from 'clsx';
 import styles from './CatalogScreen.module.css';
 import ProductItem from '../../entities/Product/ui/ProductItem/ProductItem';
 import ComponentFetchList from '../../shared/ui/ComponentFetchList/ComponentFetchList';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../app/store/store';
-import { Product } from '../../shared/types/serverTypes';
+import { Product, ProductsFilters } from '../../shared/types/serverTypes';
 import { getPartProducts } from '../../features/Products/model/thunks';
 import { setQuantity } from '../../features/Cart/model/slice';
+import PageLayout from '../../shared/ui/PageLayout/PageLayout';
+import CatalogFiltersForm from './CatalogFiltersForm/CatalogFiltersForm';
+import { clearCurrentProducts } from '../../features/Products/model/slice';
 
 const CatalogScreen: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
 
+  const firstRender = useRef(true);
+
+  const [currentFilters, setCurrentFilters] = useState<ProductsFilters>({});
+
+  useEffect(() => {
+    dispatch(clearCurrentProducts());
+  }, [currentFilters]);
+
   const productState = useSelector((state: RootState) => state.products);
 
   const itemsEmpty = useSelector((state: RootState) => state.products.products).length === 0;
-  const firstRender = useRef(true);
 
   useEffect(() => {
     if (itemsEmpty && firstRender.current) {
@@ -32,9 +42,14 @@ const CatalogScreen: React.FC = () => {
 
   const handleFetchProducts = useCallback(() => {
     if (pagination.pageNumber !== pageTotal && pagination.pageNumber !== 0 && productState.status !== 'loading') {
-      dispatch(getPartProducts({ pagination: { pageSize: 10, pageNumber: pagination.pageNumber + 1 } }));
+      dispatch(
+        getPartProducts({
+          ...currentFilters,
+          ...{ pagination: { pageSize: 10, pageNumber: pagination.pageNumber + 1 } },
+        })
+      );
     }
-  }, [dispatch, pagination, pageTotal, productState.status]);
+  }, [dispatch, pagination, pageTotal, productState.status, currentFilters]);
 
   const hanleSetQuantity = useCallback(
     (product: Product, quantity: number) => {
@@ -60,14 +75,20 @@ const CatalogScreen: React.FC = () => {
   );
 
   return (
-    <div className={cn(styles.list)}>
-      <ComponentFetchList
-        items={items}
-        doFetch={handleFetchProducts}
-        render={renderCallback}
-        needObserve={pagination.pageNumber < pageTotal}
-      />
-    </div>
+    <PageLayout
+      footer={<>{JSON.stringify(pagination)}</>}
+      header={<></>}
+      sidebar={<CatalogFiltersForm initialFilters={currentFilters} onChange={setCurrentFilters} />}
+    >
+      <div className={cn(styles.list)}>
+        <ComponentFetchList
+          items={items}
+          doFetch={handleFetchProducts}
+          render={renderCallback}
+          needObserve={pagination.pageNumber < pageTotal}
+        />
+      </div>
+    </PageLayout>
   );
 };
 
